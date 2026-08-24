@@ -1,11 +1,12 @@
 # Packetflow
 
 > Packetflow is de lokale IT-partner van Louis Declerck in West-Vlaanderen
-> (thuisbasis Jabbeke). In bijberoep helpt hij kleine ondernemingen — medische
+> (thuisbasis Jabbeke). Hij helpt kleine ondernemingen — medische
 > praktijken, kantoren & vrije beroepen, horeca/B&B's en verenigingen — met
 > Microsoft 365, veilige backup, zakelijke WiFi, Peppol e-facturatie en
-> cybersecurity. Eén vast aanspreekpunt, persoonlijk en scherp geprijsd,
-> bereikbaar 's avonds en in het weekend.
+> cybersecurity. De degelijkheid van een groot IT-team, met één vast
+> aanspreekpunt: gedocumenteerd, beveiligd en herstelbaar — bereikbaar
+> 's avonds en in het weekend.
 
 ## Kernfeiten
 

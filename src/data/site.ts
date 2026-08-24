@@ -7,9 +7,9 @@ export const site = {
   // Keyword-bearing homepage <title> (geo + audience). Inner pages use the
   // "{title} | Packetflow" pattern instead — see BaseLayout.
   homeTitle: "IT-partner voor praktijken & kantoren in West-Vlaanderen | Packetflow",
-  pillars: "Lokaal · Persoonlijk · Scherp geprijsd",
+  pillars: "Gedocumenteerd · Beveiligd · Herstelbaar",
   description:
-    "Packetflow is uw lokale IT-partner in West-Vlaanderen. In bijberoep help ik medische praktijken en professionele kantoren — apotheken, tandartsen, advocaten, architecten en makelaars — met Microsoft 365, veilige backup, Peppol en cybersecurity. Eén aanspreekpunt, proactief en scherp geprijsd.",
+    "Packetflow is uw lokale IT-partner in West-Vlaanderen. Ik help medische praktijken en professionele kantoren — apotheken, tandartsen, advocaten, architecten en makelaars — met Microsoft 365, veilige backup, Peppol en cybersecurity. De degelijkheid van een groot IT-team, met één vast aanspreekpunt: gedocumenteerd, beveiligd en herstelbaar.",
   email: "louis@packetflow.be",
   phone: "0468 22 72 12",
   phoneIntl: "+32 468 22 72 12",
