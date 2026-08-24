@@ -23,11 +23,12 @@ const status = [
   ["Werkstation — balie", "monitor", "warning", "Update gepland"],
 ];
 
-// Warmer "why" blocks, restored from the previous site.
+// Selling-point pillars — repositioned to match the design system
+// ("enterprise engineering for SMBs — sell up, not down"). See pf-design-system.
 const pillars = [
-  ["clock", "Ondersteuning buiten de 9-to-5", "Uw zaak beheren stopt niet om 17u. Ik ook niet. Beschikbaar 's avonds en in het weekend om uw systemen draaiende te houden."],
-  ["map-pin", "Lokaal in Jabbeke", "Snelle ondersteuning ter plaatse voor lokale bedrijven in West- en Oost-Vlaanderen."],
-  ["award", "Kwaliteit & flexibiliteit", "Professionele IT-standaarden, met de flexibiliteit om te ondersteunen wanneer het er echt toe doet."],
+  ["clipboard-check", "Doordacht opgebouwd", "Uw IT als een doordacht plan: gedocumenteerd, beveiligd en herstelbaar — niet een losse verzameling toestellen."],
+  ["radar", "Proactieve monitoring", "Ik bewaak uw systemen op de achtergrond en grijp in vóór er iets stilvalt."],
+  ["handshake", "Eén aanspreekpunt", "Altijd dezelfde persoon, die uw zaak en uw dossiers kent. Geen wachtrij, geen ticketnummer."],
 ];
 
 // Flatten the hubs into a single services grid for the homepage teaser.
@@ -50,7 +51,7 @@ const posture = [
 
 <BaseLayout
   title={site.name}
-  description="Lokale IT-partner in West-Vlaanderen voor praktijken en kantoren. Microsoft 365, backup, Peppol en cybersecurity — één aanspreekpunt, scherp geprijsd."
+  description="Lokale IT-partner in West-Vlaanderen voor praktijken en kantoren. Microsoft 365, backup, Peppol en cybersecurity — de degelijkheid van een groot IT-team, met één vast aanspreekpunt."
 >
   {/* ---- Hero ---- */}
   <section class="hero">
@@ -63,8 +64,9 @@ const posture = [
         </h1>
         <span class="rule hero__rule"></span>
         <p class="lead hero__lead">
-          Geen groot IT-bedrijf, geen wachtrij, geen wisselende technici bij uw
-          dossiers. Eén aanspreekpunt dat uw zaak kent — scherp geprijsd.
+          Geen wachtrij, geen wisselende technici bij uw dossiers. Eén vast
+          aanspreekpunt dat uw zaak kent — met de degelijkheid van een groot
+          IT-team: gedocumenteerd, beveiligd, herstelbaar.
         </p>
         <div class="hero__actions">
           <Button href="/contact" variant="primary" size="lg" iconRight="arrow-right">
@@ -107,7 +109,7 @@ const posture = [
   <section class="section pillars">
     <div class="container">
       <Kicker>Waarom Packetflow</Kicker>
-      <h2 class="section__title">Lokale IT zonder het gedoe van een groot bedrijf</h2>
+      <h2 class="section__title">De degelijkheid van een groot IT-team, met de nabijheid van een lokale partner</h2>
       <div class="grid-3">
         {
           pillars.map(([icon, title, body], i) => (
@@ -221,8 +223,9 @@ const posture = [
     <div class="container about__inner">
       <Kicker color="var(--orange-300)">Over mij</Kicker>
       <blockquote class="about__quote">
-        “Ik ben Louis Declerck uit Jabbeke. In bijberoep help ik kleine kantoren
-        met hun IT — zodat techniek nooit in de weg staat van uw échte werk.”
+        “Ik ben Louis Declerck uit Jabbeke. Ik geef kleine kantoren IT die klopt
+        — gedocumenteerd, beveiligd en herstelbaar — zodat techniek nooit in de
+        weg staat van uw échte werk.”
       </blockquote>
       <div class="about__person">
         <Portrait src="/images/louis.jpg" alt="Louis Declerck" class="about__avatar" />

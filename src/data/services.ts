@@ -102,9 +102,9 @@ export const services: ServiceHub[] = [
         body: "Updates en onderhoud gebeuren 's avonds en in het weekend — zonder uw werk te onderbreken.",
       },
       {
-        icon: "wallet",
-        title: "Scherp geprijsd",
-        body: "Geen overhead van een groot bedrijf. U betaalt voor het werk, niet voor de kantoren errond.",
+        icon: "clipboard-check",
+        title: "Doordacht opgebouwd",
+        body: "Uw IT als een doordacht geheel: gedocumenteerd, beveiligd en herstelbaar — en transparant op de factuur, u betaalt voor het werk.",
       },
     ],
     ladder: {
