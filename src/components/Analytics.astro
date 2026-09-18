@@ -1,0 +1,46 @@
+---
+// Google Analytics 4 (gtag.js).
+//
+// Loaded on production builds only. Two guards, both needed:
+//   - import.meta.env.PROD  -> false during `astro dev`, so local browsing
+//     never lands in the property (Astro.site defaults to the production URL
+//     in dev, so the hostname check alone would not catch it).
+//   - the hostname check    -> the same rule BaseLayout uses for `noindex`.
+//     GitHub Pages staging builds resolve to a *.github.io host and are
+//     excluded; only the Cloudflare production build (SITE_URL pinned to
+//     www.packetflow.be in deploy.yml) reports.
+//
+// NOTE: gtag.js sets first-party cookies (_ga, _ga_<container>) for analytics.
+// Under GDPR/ePrivacy those need prior consent from the visitor; there is no
+// consent banner on this site yet, so this currently loads unconditionally.
+// Adding Consent Mode v2 + a banner is the follow-up — see the privacy page.
+import { site } from "@/data/site";
+
+const isProductionHost = (Astro.site?.hostname ?? "") === "www.packetflow.be";
+const enabled =
+  import.meta.env.PROD && isProductionHost && Boolean(site.gaMeasurementId);
+const gaId = site.gaMeasurementId;
+---
+
+{
+  enabled && (
+    <>
+      {/* `is:inline` keeps both tags verbatim: Astro must not bundle, hoist or
+          defer a third-party snippet that relies on load order. */}
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+      {/* `define:vars` wraps the body in an IIFE, so `gtag` is assigned to
+          `window` explicitly — the stock Google snippet relies on a hoisted
+          global function declaration, which would not survive that wrapper.
+          Anything added later (event tracking on the contact form, say) needs
+          `gtag` to be callable from global scope. */}
+      <script is:inline define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function gtag() {
+          window.dataLayer.push(arguments);
+        };
+        gtag("js", new Date());
+        gtag("config", gaId);
+      </script>
+    </>
+  )
+}
