@@ -60,6 +60,7 @@ const year = new Date().getFullYear();
         <a href={url("/tarieven")}>Tarieven</a>
         <a href={url("/privacy")}>Privacy</a>
         <a href={url("/contact")}>Contact</a>
+        <button type="button" data-cookie-settings>Cookievoorkeuren</button>
       </nav>
     </div>
   </div>
@@ -142,8 +143,23 @@ const year = new Date().getFullYear();
   }
   .site-footer__bar-in nav {
     display: flex;
-    gap: var(--space-5);
+    /* Wraps, so the legal row stays inside the viewport on a phone instead of
+       forcing the page to scroll sideways. */
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
   }
+  /* The consent control is a button, not a link — it opens the banner rather
+     than navigating. Styled to sit in the same row without looking different. */
+  .site-footer__bar-in nav button {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  .site-footer__bar-in nav button:hover,
   .site-footer__bar-in nav a:hover {
     color: var(--cream);
   }

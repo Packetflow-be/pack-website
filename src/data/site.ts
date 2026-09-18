@@ -38,6 +38,11 @@ export const site = {
   // migration, and configure CORS + the website_form allowlist on Odoo (see
   // the contact-form PR for the exact Odoo-side steps).
   odooBaseUrl: import.meta.env.PUBLIC_ODOO_URL ?? "https://louisdeclerck.odoo.com",
+  // Google Analytics 4 measurement ID (gtag.js). Carried over from the Odoo
+  // site so the property keeps one continuous history across the migration.
+  // Only used on production builds — see src/components/Analytics.astro.
+  // Override at build time with PUBLIC_GA_ID; set it empty to disable.
+  gaMeasurementId: import.meta.env.PUBLIC_GA_ID ?? "G-1LEBRDRV2M",
 } as const;
 
 // Top navigation. Lean by design: the service hubs live under /diensten, the

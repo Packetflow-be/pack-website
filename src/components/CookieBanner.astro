@@ -1,0 +1,170 @@
+---
+// Consent bar for the analytics cookie. Renders wherever a measurement ID is
+// configured — dev and the GitHub Pages staging deploy included, so the bar
+// stays reviewable on staging even though `Analytics.astro` only loads the
+// tag on production. Where there is no tag, answering the bar simply records
+// the choice and there is nothing to enable.
+//
+// Starts `hidden`; the inline script below reveals it only when no choice is
+// stored yet, so a visitor who already answered never sees it again and there
+// is no flash of a bar that is about to hide itself.
+import Button from "./Button.astro";
+import { site } from "@/data/site";
+import { url } from "@/lib/url";
+import { CONSENT_KEY, CONSENT_GRANTED, CONSENT_DENIED } from "@/lib/consent";
+---
+
+{
+  site.gaMeasurementId && (
+    <>
+      <div
+        id="cookie-banner"
+        class="cookie-banner"
+        role="dialog"
+        aria-labelledby="cookie-banner-title"
+        aria-describedby="cookie-banner-text"
+        hidden
+      >
+        <div class="container cookie-banner__in">
+          <div class="cookie-banner__copy">
+            <p class="cookie-banner__title" id="cookie-banner-title">
+              Cookies voor websitestatistieken
+            </p>
+            <p class="cookie-banner__text" id="cookie-banner-text">
+              Ik gebruik Google Analytics om te zien welke pagina's bezocht
+              worden, zodat ik de site kan verbeteren. Dat plaatst één cookie,
+              enkel met uw toestemming. Weigeren kan zonder gevolgen. Meer in
+              het <a href={url("/privacy")}>privacybeleid</a>.
+            </p>
+          </div>
+          <div class="cookie-banner__actions">
+            <Button variant="secondary" size="sm" class="cookie-banner__deny">
+              Weigeren
+            </Button>
+            <Button variant="primary" size="sm" class="cookie-banner__accept">
+              Accepteren
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* `is:inline` so the bar resolves during parse rather than after a
+          module round-trip — a consent bar that pops in late is worse than
+          one that is simply there. */}
+      <script is:inline define:vars={{ CONSENT_KEY, CONSENT_GRANTED, CONSENT_DENIED }}>
+        (function () {
+          var banner = document.getElementById("cookie-banner");
+          if (!banner) return;
+
+          var accept = banner.querySelector(".cookie-banner__accept");
+          var deny = banner.querySelector(".cookie-banner__deny");
+
+          function read() {
+            try {
+              return localStorage.getItem(CONSENT_KEY);
+            } catch (error) {
+              return null;
+            }
+          }
+
+          function choose(value) {
+            try {
+              localStorage.setItem(CONSENT_KEY, value);
+            } catch (error) {
+              /* storage blocked — the choice holds for this page view only */
+            }
+            // These exist only where Analytics.astro rendered (production).
+            if (value === CONSENT_GRANTED) {
+              if (typeof window.pfEnableAnalytics === "function") {
+                window.pfEnableAnalytics();
+              }
+            } else if (typeof window.pfDisableAnalytics === "function") {
+              window.pfDisableAnalytics();
+            }
+            banner.hidden = true;
+          }
+
+          accept.addEventListener("click", function () {
+            choose(CONSENT_GRANTED);
+          });
+          deny.addEventListener("click", function () {
+            choose(CONSENT_DENIED);
+          });
+
+          // Re-open from anywhere: the footer button and the privacy page both
+          // carry [data-cookie-settings]. Withdrawing stays one click away,
+          // which the GDPR requires of a consent that was given.
+          document.addEventListener("click", function (event) {
+            var target = event.target;
+            if (!(target instanceof Element)) return;
+            if (!target.closest("[data-cookie-settings]")) return;
+            event.preventDefault();
+            banner.hidden = false;
+            accept.focus();
+          });
+
+          if (read() === null) banner.hidden = false;
+        })();
+      </script>
+    </>
+  )
+}
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    inset: auto 0 0 0;
+    /* Above the sticky header (z-index 30) and the skip link's stacking
+       context, below nothing else on the page. */
+    z-index: 120;
+    background: var(--surface-card);
+    border-top: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-lg);
+  }
+  .cookie-banner__in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-6);
+    padding-block: var(--space-4);
+  }
+  .cookie-banner__copy {
+    flex: 1 1 28rem;
+  }
+  .cookie-banner__title {
+    margin: 0 0 var(--space-1);
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    color: var(--text-strong);
+  }
+  .cookie-banner__text {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-body);
+    max-width: 62ch;
+  }
+  .cookie-banner__text a {
+    color: var(--text-link);
+    text-decoration: underline;
+  }
+  .cookie-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  /* The buttons are rendered by <Button>, so they carry that component's
+     scope rather than this one — reach them with :global. */
+  @media (max-width: 40rem) {
+    .cookie-banner__actions {
+      width: 100%;
+    }
+    .cookie-banner__actions :global(.btn) {
+      flex: 1 1 0;
+    }
+  }
+</style>

@@ -14,10 +14,10 @@
     "@astrojs/sitemap": "^3.2.1",
     "@fontsource/lora": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
-    "astro": "^7.1.1",
+    "astro": "^7.3.3",
     "lucide-static": "^1.21.0"
   },
   "devDependencies": {
-    "wrangler": "^4.121.0"
+    "wrangler": "^4.134.0"
   }
 }

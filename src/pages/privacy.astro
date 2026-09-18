@@ -40,6 +40,32 @@ const jsonLd = breadcrumbs(crumbs);
           dienstverlening te bezorgen.
         </p>
 
+        <h2>Cookies en websitestatistieken</h2>
+        <p>
+          Deze website plaatst standaard <strong>geen</strong> cookies en laadt
+          standaard <strong>niets</strong> van Google. Pas als u daar
+          uitdrukkelijk mee instemt via de cookiemelding, wordt Google
+          Analytics 4 geladen om te meten hoeveel bezoekers er zijn en welke
+          pagina's zij bekijken. Weigert u, dan gebeurt er niets — de site
+          blijft volledig werken.
+        </p>
+        <p>
+          Geeft u wel toestemming, dan plaatst Google een cookie in uw browser
+          (<code>_ga</code>) en verwerkt het gegevens zoals de bezochte
+          pagina's, het tijdstip, uw browser en apparaat, en een bij benadering
+          bepaalde locatie. Google Analytics 4 bewaart uw IP-adres niet.
+          Verwerker is Google Ireland Limited. Ik gebruik deze statistieken
+          enkel om de website te verbeteren — niet voor advertenties, en ik
+          verkoop ze niet.
+        </p>
+        <p>
+          U kan uw keuze op elk moment herzien, even makkelijk als u ze gaf:
+          <button type="button" class="privacy__consent" data-cookie-settings
+            >open de cookievoorkeuren</button
+          > (ook onderaan elke pagina). Trekt u uw toestemming in, dan worden de
+          reeds geplaatste <code>_ga</code>-cookies meteen verwijderd.
+        </p>
+
         <h2>Hoe lang bewaar ik ze?</h2>
         <p>
           Ik bewaar uw gegevens niet langer dan nodig voor het doel waarvoor ze
@@ -71,6 +97,17 @@ const jsonLd = breadcrumbs(crumbs);
 <style>
   .privacy {
     max-width: var(--container-md);
+  }
+  /* Inline consent control — reads as a link inside the prose, but it opens
+     the cookie banner rather than navigating anywhere. */
+  .privacy__consent {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: var(--text-link);
+    text-decoration: underline;
+    cursor: pointer;
   }
   .privacy__title {
     font-size: var(--text-2xl);
