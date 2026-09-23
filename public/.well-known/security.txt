@@ -1,6 +1,6 @@
 # Packetflow security contact — RFC 9116 (https://securitytxt.org).
 # Found a vulnerability? Please report it to the address below.
-Contact: mailto:soc@packetflow.be
+Contact: mailto:security@packetflow.be
 Expires: 2027-06-25T00:00:00.000Z
 Preferred-Languages: nl, en
 Canonical: https://www.packetflow.be/.well-known/security.txt
