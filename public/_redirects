@@ -16,15 +16,23 @@ https://packetflow.be/*   https://www.packetflow.be/:splat   301!
 # ---- Old Odoo paths → new equivalents (from GSC) ----
 # /diensten/it-beheer — 493 impressions
 /diensten/it-beheer        /diensten/it-beheer-support           301
-# /kmo-pakket — 377 impressions (old Odoo path → new pricing page)
-/kmo-pakket                /prijzen                              301
-# /pakket → /prijzen: the old KMO-Pakket page is retired; keep its link equity.
-/pakket                    /prijzen                              301!
+# /kmo-pakket — 377 impressions (old Odoo path). The KMO-Pakket and the later
+# /prijzen page are both retired: no prices are published (2026-09-23). The
+# page that explains how a price is built is /werkwijze.
+/kmo-pakket                /werkwijze                            301
+/pakket                    /werkwijze                            301!
 /diensten/wifi-netwerk     /diensten/zakelijke-wifi-netwerken    301
 /sectoren/vrije-beroepen   /sectoren/kantoren-vrije-beroepen     301
 /contactus                 /contact                              301
 # /cookie-policy (Odoo) → privacy page
 /cookie-policy             /privacy                              301
+# ---- Retired on 2026-09-23 (site audit against the vault) ----
+# Price pages → how a price is built.
+/prijzen                   /werkwijze                            301
+/tarieven                  /werkwijze                            301
+# Guesty/PMS page: not part of the offer → the horeca & B&B sector.
+/guesty-pms-ondersteuning-bnb  /sectoren/horeca-bnb             301
+
 # /appointment/1 — Odoo appointment page
 /appointment/1             /contact                              301
 

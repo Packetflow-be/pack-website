@@ -30,7 +30,7 @@ export function localBusiness() {
     "@type": "ProfessionalService",
     "@id": ORG_ID,
     name: site.legalName,
-    description: site.description,
+    description: site.boilerplate,
     url: SITE_URL,
     logo: `${SITE_URL}/images/og-image.png`,
     image: `${SITE_URL}/images/louis.webp`,
@@ -54,19 +54,20 @@ export function localBusiness() {
       latitude: geo.latitude,
       longitude: geo.longitude,
     },
-    // Explicitly encodes the brand's "'s avonds en in het weekend" promise.
+    // The service window from site.hours (vault: pf-service-terms). Sundays
+    // and public holidays are not working days, so they are simply absent.
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "17:00",
-        closes: "22:00",
+        opens: site.hours.weekdays.opens,
+        closes: site.hours.weekdays.closes,
       },
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Saturday", "Sunday"],
-        opens: "09:00",
-        closes: "20:00",
+        dayOfWeek: ["Saturday"],
+        opens: site.hours.saturday.opens,
+        closes: site.hours.saturday.closes,
       },
     ],
   };

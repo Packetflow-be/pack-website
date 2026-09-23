@@ -1,216 +1,149 @@
 ---
-title: "Wat kost IT-beheer voor een kleine onderneming in België?"
-description: "Wat kost IT-beheer voor een kleine Belgische onderneming? Eerlijk overzicht met €60/uur, een urenkaart van 10u voor €550 en beheer per module vanaf €15/toestel."
+title: "Wat kost IT-beheer voor een kleine onderneming?"
+description: "Waar de kost van IT-beheer voor een kleine onderneming van afhangt, wat er in een maandprijs hoort te zitten en hoe u twee offertes eerlijk vergelijkt."
 pubDate: 2026-06-23
-updatedDate: 2026-07-30
-tags: ["IT-beheer", "Prijzen"]
+updatedDate: 2026-09-23
+tags: ["IT-beheer", "Offertes"]
 image: "/images/blog/wat-kost-it-beheer.png"
 leadForm: true
 leadCampaign: "blog-wat-kost-it-beheer"
 faqs:
   - question: "Wat kost IT-beheer bij Packetflow?"
-    answer: "U werkt aan €60 per uur (excl. btw) voor losse hulp, met een urenkaart van 10 uur voor €550 (€55/u), of via beheer per module vanaf €15 per toestel per maand. Projecten en installaties krijgen een vaste prijs na een gratis scoping-bezoek."
-  - question: "Wat is beheer per module?"
-    answer: "Bij beheer kiest u per module wat u nodig heeft en betaalt u per toestel of per gebruiker — geen groot pakket dat u half gebruikt. De basis is PacketFlow Secure (€15 per toestel per maand): automatische updates en beveiliging met 24/7 detectie. Daarnaast zijn er modules voor Microsoft 365-bescherming, back-up en netwerk. Beheer is maandelijks opzegbaar."
-  - question: "Zijn de Microsoft 365-licenties inbegrepen in de prijs?"
-    answer: "Nee. Die reken ik apart aan, aan de normale Microsoft-prijs en als aparte lijn op uw factuur. Zo betaalt u niet meer dan wanneer u rechtstreeks bij Microsoft zou afnemen, en ziet u exact wat de licentie kost."
-  - question: "Reken je verplaatsingskosten aan?"
-    answer: "Een eerste kennismaking en het scoping-bezoek zijn altijd gratis. Voor betaald werk ter plaatse geldt een transparant tarief volgens de afstand vanuit Jabbeke. Beheerklanten hebben verplaatsing inbegrepen in zone 1 en 2."
-  - question: "Hoe worden projecten en installaties geprijsd?"
-    answer: "Met een vaste prijs (forfait) na een gratis scoping-bezoek ter plaatse, zodat u vooraf weet wat het kost. Voor klein of moeilijk in te schatten werk geldt €60 per uur (excl. btw)."
+    answer: "Dat hangt af van hoeveel toestellen, gebruikers en vestigingen u heeft, van hoe uw omgeving er vandaag bij ligt en van de diensten die u kiest. Na een gratis kennismaking en een bezoek ter plaatse krijgt u een offerte: een vaste prijs voor de overname van uw omgeving en een maandprijs per eenheid voor het beheer."
+  - question: "Waarom staan er geen prijzen op de website?"
+    answer: "Omdat twee kantoren met evenveel toestellen zelden hetzelfde nodig hebben. Een prijs zonder bezoek is een gok, en meestal een gok die later wordt bijgestuurd. Na het bezoek krijgt u een offerte met per dienst wat erin zit, wat niet en wat het kost."
+  - question: "Zijn de Microsoft 365-licenties inbegrepen?"
+    answer: "Nee. Die staan als aparte lijn op de factuur, zodat u ziet wat de licentie kost en wat het beheer. Voor tweestapsverificatie met toegangsregels en voor toestelbeheer is Microsoft 365 Business Premium nodig. Dat controleer ik voor de offerte."
+  - question: "Hoe worden projecten geprijsd?"
+    answer: "Met een vaste prijs, na een gratis bezoek ter plaatse. Een verhuizing, een migratie of de overname van uw omgeving krijgt zo een bedrag vooraf, geen open teller."
+  - question: "Wat hoort er in een maandprijs voor IT-beheer te zitten?"
+    answer: "Per dienst: wat er bewaakt wordt, welke updates gebeuren, welke aanvragen inbegrepen zijn en wat er uitdrukkelijk niet in zit. Daarnaast een back-up die getest wordt, een rapport waarin u dat terugziet, en duidelijke afspraken over bereikbaarheid, looptijd en opzeg."
 ---
 
 "Wat kost IT-beheer nu eigenlijk?" Het is de eerste vraag die ik krijg, en
 tegelijk de moeilijkste om in één cijfer te beantwoorden. Niet omdat ik het wil
 ontwijken, maar omdat een eerlijk antwoord afhangt van hoe groot uw team is, hoe
-uw systemen er vandaag bijliggen en hoeveel u écht wil uitbesteden.
+uw systemen er vandaag bijliggen en wat u echt wil uitbesteden.
 
-Wat ik wél kan doen, is volledig open zijn. Ook over mijn eigen tarieven, iets
-waar de meeste IT-bedrijven liever omheen draaien. U kan bij mij op drie
-manieren terecht: per uur, met een urenkaart die u vooraf koopt, of via beheer
-waarbij u per module kiest wat u nodig heeft. Hieronder leg ik uit wat dat
-concreet betekent en waar bij andere aanbieders de verborgen kosten zich
-verstoppen.
+Daarom staat er op mijn website geen prijslijst. Wat ik wél kan doen: uitleggen
+waar de prijs van afhangt, wat er in een goede maandprijs hoort te zitten en
+waar de verborgen kosten zich meestal verstoppen. Zo kan u elke offerte, ook die
+van een ander, naast elkaar leggen.
 
 ## Eerst dit: "IT-beheer" dekt veel ladingen
 
 Voor de ene betekent IT-beheer "iemand bellen als de printer vastloopt". Voor de
 andere is het de volledige ruggengraat: e-mail, beveiliging, back-up, updates,
-licenties en een aanspreekpunt dat proactief meekijkt. Die twee kosten
+licenties en een aanspreekpunt dat de hele tijd meekijkt. Die twee kosten
 uiteraard niet hetzelfde.
 
-Een zinvolle prijsvergelijking begint dus niet bij het bedrag, maar bij de
-scope. Vraag elke partij even concreet: wat zit er in, en wat niet?
+Een zinvolle vergelijking begint dus niet bij het bedrag, maar bij de scope.
+Vraag elke partij concreet: wat zit erin, en wat niet?
 
-## Hoe u met mij kunt werken
+## Waar de prijs van afhangt
 
-Ik hou het bewust eenvoudig. U kiest wat bij uw situatie past — u hoeft niet in
-een abonnement te stappen als u dat niet wil.
+### 1. Wat u zelf kan tellen
 
-### 1. Per uur: €60 per uur (excl. btw)
+Goed IT-beheer wordt aangerekend per eenheid die u zelf kan tellen: een
+toestel, een gebruiker, uw Microsoft 365-omgeving of een vestiging. Dat is geen
+detail. Kan u de eenheid niet zelf tellen, dan wordt elke factuur een
+maandelijks gesprek.
 
-U betaalt voor de tijd die ik effectief werk, aan een vast tarief van €60 per uur
-(excl. btw). Geen abonnement en geen verborgen kosten: u weet vooraf wat een
-ingreep kost. Voor verplaatsing geldt een transparant tarief volgens afstand
-(zie [tarieven](/tarieven#verplaatsingskosten)). Ideaal voor een eenmalige
-opkuis of incidentele hulp.
+Een kantoor met zes medewerkers, zes laptops en één vestiging betaalt dus
+anders dan een praktijk met drie gebruikers en vijf toestellen aan de balie en
+in de spreekkamers. Niet omdat de ene klant meer waard is, maar omdat er meer
+te bewaken valt.
 
-Ter vergelijking: in de Belgische markt liggen uurtarieven voor
-IT-ondersteuning doorgaans tussen €75 en €120 per uur. Dat ik daar merkbaar onder
-zit, heeft een eenvoudige reden. Ik werk lokaal, in bijberoep, zonder dure
-overhead of verkoopslaag. Dat voordeel geef ik gewoon door.
+### 2. Hoe uw omgeving er vandaag bij ligt
 
-### 2. Urenkaart: 10 uur voor €550 (€55/u)
+Een propere omgeving is goedkoper te beheren dan een omgeving die jaren
+gegroeid is. Denk aan een beheerdersaccount dat niemand nog kent, laptops met
+drie verschillende antivirusprogramma's, of een netwerk waar alles op hetzelfde
+segment hangt.
 
-Wilt u af en toe hulp zonder vaste maandprijs, dan koopt u een blok uren vooraf.
-Een urenkaart van tien uur kost €550 (€55/u, excl. btw) en blijft twaalf maanden
-geldig. U gebruikt de uren wanneer het uitkomt en betaalt iets minder dan het
-losse uurtarief. Ideaal om mee te starten; wilt u later toch alles uit handen
-geven, dan schakelt u eenvoudig over naar beheer.
+Het opruimen daarvan, de overname, is werk. Bij mij is dat een apart project
+met een vaste prijs in de offerte. Zo weet u vooraf wat het kost, en zit die
+kost niet verstopt in een maandprijs of in een contract van drie jaar.
 
-### 3. Beheer: per module, vanaf €15 per toestel per maand
+### 3. Welke diensten u echt nodig heeft
 
-Wil u voorspelbaarheid in plaats van losse facturen, en uw IT liever niet meer
-zien, dan is er [beheer](/prijzen). Anders dan één groot pakket dat u half
-gebruikt, kiest u per module wat u nodig heeft en betaalt u per toestel of per
-gebruiker. Zo groeit de prijs netjes mee met uw kantoor.
+Niet elk bedrijf heeft alles nodig. Een kantoor dat volledig in Microsoft 365
+werkt, heeft een back-up van mail en bestanden nodig. Een praktijk met
+gegevens op de toestellen zelf, heeft een back-up van die toestellen nodig. Een
+horecazaak heeft vooral een netwerk nodig dat overeind blijft.
 
-De modules op een rij:
+Twee dingen zijn wel altijd nodig op wat iemand beheert. Elk beheerd toestel
+hoort beveiligd en bewaakt te zijn: het onbeschermde toestel is precies waar het
+incident gebeurt. En er hoort een back-up te zijn die getest wordt. Een beheerde
+omgeving zonder geteste back-up is geen beheerde omgeving.
 
-- **PacketFlow Secure** — €15 per toestel/maand. Automatische updates en
-  EDR-beveiliging met 24/7 detectie en respons. De basis op elk beheerd toestel.
-- **PacketFlow Identity** — €9 per gebruiker/maand. Beveiliging van uw Microsoft
-  365-account: detectie van verdachte aanmeldingen, MFA-beheer en mailbeveiliging.
-- **PacketFlow Backup – Microsoft 365** — €6 per gebruiker/maand. Back-up van
-  e-mail, OneDrive, SharePoint en Teams. Getest, niet gehoopt.
-- **PacketFlow Backup – Lokaal** — €20 per toestel/maand. Back-up van wat lokaal
-  op uw toestel staat, 300 GB inbegrepen.
-- **PacketFlow Network** — €40 per locatie/maand. Beheerde firewall,
-  netwerkmonitoring en beheer van wifi en VLAN's.
+### 4. Licenties en hardware
 
-Het grote voordeel: de belangen lopen gelijk. Ik word niet betaald per brand die
-ik blus, maar om te zorgen dat er geen branden zijn. Beheer is maandelijks
-opzegbaar, zonder langlopend contract. Heeft u zelf nog werk buiten het beheer
-nodig, dan reken ik dat aan het uurtarief of trek ik het van uw urenkaart.
+Microsoft-licenties en hardware zijn geen beheer. Ze horen als aparte lijn op de
+factuur te staan, zodat u ziet wat een licentie kost en wat het werk.
 
-### 4. Projecten en installaties: een vaste prijs na een gratis scoping-bezoek
+Let wel op het licentieniveau. Voor tweestapsverificatie met toegangsregels en
+voor toestellen die zichzelf inrichten, is Microsoft 365 Business Premium nodig.
+Met een goedkopere licentie werken die instellingen gewoon niet, en dat merkt u
+pas als een regel stilletjes niet toegepast wordt. Een goede partij zegt u dat
+voor de offerte, niet erna.
 
-Naast los uurwerk, de urenkaart en beheer is er een vierde manier van werken, en
-die geldt voor de meeste installaties en projecten: een nieuwe e-mailomgeving,
-een data-migratie, het opzetten van een server, een netwerkinstallatie of het
-klaarzetten van Peppol-e-facturatie.
+### 5. Wat buiten de vaste lijst valt
 
-Zulk werk start altijd met een gratis scoping-bezoek ter plaatse. Ik bekijk wat
-er nodig is, en daarna krijgt u een van twee dingen:
+Elke beheerdienst hoort een vaste lijst aanvragen te hebben: een gebruiker
+toevoegen, een bestand terugzetten, een toestel inschrijven. Wat daar niet op
+staat, is extra werk. Bij mij wordt dat per uur op de maandfactuur gezet, en
+pas uitgevoerd nadat u akkoord ging. Projecten, zoals een verhuizing of een
+migratie, krijgen altijd een vaste prijs vooraf.
 
-- Een vaste prijs (forfait) voor het volledige project. U weet vooraf exact wat
-  het kost, ongeacht hoe lang het mij neemt. Dit is mijn standaard voor
-  migraties, serveropzet en grotere installaties.
-- Of, voor klein of moeilijk in te schatten werk, gewoon €60 per uur (excl. btw),
-  vooraf ingeschat.
+## Waar de verborgen kosten zitten
 
-Wat het wordt, spreek ik op voorhand met u af. Geen verrassingen achteraf.
+Bij elke aanbieder, ook bij mij, is het de moeite om naar deze zes dingen te
+kijken:
 
-## Welke past bij u?
+- **Een opstartkost verstopt in een looptijd.** Een lage maandprijs met een
+  contract van drie jaar betekent vaak dat de overname in die looptijd
+  terugverdiend wordt. Vraag wat de overname apart kost.
+- **"Onbeperkte support" die dat niet is.** Onbeperkt bestaat zelden. Vraag
+  welke aanvragen inbegrepen zijn, en wat er gebeurt met de rest.
+- **Bewaking als aparte lijn.** Bewaking hoort in elke beheerde dienst te zitten.
+  Staat ze apart op de offerte, vraag dan wat u krijgt als u die lijn schrapt.
+- **Een back-up die nooit getest wordt.** De kost van een slechte back-up ziet u
+  pas de dag dat u iets moet terugzetten. Vraag hoe vaak er een hersteltest
+  gebeurt, en of u het resultaat te zien krijgt.
+- **Lock-in.** Staat uw Microsoft 365-omgeving of de beheerderstoegang op naam
+  van uw IT-partner, dan wordt vertrekken duur. Vraag op wiens naam alles staat.
+- **Licenties zonder transparantie.** Zitten licenties verwerkt in één bedrag,
+  dan weet u niet wat u betaalt voor de licentie en wat voor het werk.
 
-Een vuistregel: heeft u zelden hulp nodig en draagt u het risico liever zelf,
-dan volstaat het uurtarief of een urenkaart. Belt u vaker, of wilt u gewoon niet
-meer wakker liggen van uw IT, dan verdient beheer zichzelf snel terug — u betaalt
-een voorspelbaar bedrag om de dure, onvoorspelbare ellende te vermijden, en u
-weet vooraf exact wat u betaalt.
+## Zo vergelijkt u twee offertes
 
-## Wat zit er níét in de prijs?
+Leg ze naast elkaar en stel bij elke offerte dezelfde vragen:
 
-Eén ding reken ik bewust apart: de Microsoft 365-licenties zelf. Die reken ik
-apart aan, aan de normale Microsoft-prijs en als aparte lijn op uw factuur. Zo
-betaalt u niet meer dan wanneer u rechtstreeks bij Microsoft zou afnemen, en ziet
-u exact wat de licentie kost. Ter referentie: richtprijs Business Standard rond
-€13 tot €14, Business Premium (met de extra beveiliging) rond €22 per gebruiker
-per maand. Microsoft-prijzen kunnen wijzigen.
+1. Staat er per dienst wat erin zit, en wat er uitdrukkelijk niet in zit?
+2. Per welke eenheid wordt er aangerekend, en kan ik die zelf tellen?
+3. Wordt de back-up getest, en hoe vaak? Zie ik het resultaat?
+4. Wanneer bereik ik iemand, en hoe snel krijg ik een antwoord? Is dat
+   realistisch voor de grootte van de partij?
+5. Is er een minimale looptijd? Hoe lang is de opzegtermijn?
+6. Wat kost de overname, en wat kost het vertrek?
+7. Staan mijn omgeving en de beheerderstoegang op mijn naam?
 
-Sommige aanbieders verstoppen die licentie in een ondoorzichtig "alles-in"-tarief.
-Bij mij staat ze los en transparant op de factuur.
+Een offerte die op al die vragen een duidelijk antwoord geeft, is meestal ook de
+offerte waar u achteraf geen verrassingen mee heeft.
 
-## Richtprijzen op een rij
+## Hoe het bij mij werkt
 
-Indicatief, voor een klein Belgisch kantoor of praktijk. De juiste prijs hangt af
-van uw situatie, maar dit is waar u op kunt rekenen.
+Het begint met een gratis kennismaking en een bezoek ter plaatse. Daarna krijgt
+u een offerte met twee delen: een vaste prijs voor de overname of het project,
+en een maandprijs per eenheid voor het beheer. Per dienst staat wat erin zit en
+wat niet. Er is geen minimale looptijd, u zegt op met één maand opzeg, en uw
+omgeving blijft op uw naam. Elke maand krijgt u één pagina rapport, met daarin
+ook het resultaat van de hersteltests.
 
-| Manier van werken | Prijs | Past bij |
-| --- | --- | --- |
-| Per uur | €60 / uur (excl. btw) | Incidentele hulp of een eenmalige opkuis |
-| Urenkaart | 10 uur voor €550 (€55/u), 12 maanden geldig | Wie af en toe hulp wil zonder maandprijs |
-| Beheer per module | vanaf €15 / toestel / maand | Wie voorspelbaarheid en preventie wil |
-| Project of installatie | Vaste prijs na gratis scoping-bezoek | Migraties, serveropzet, netwerkinstallatie |
-| Microsoft 365-licentie | richtprijs €13-14 (Standard) of €22 (Premium) | Apart en transparant op de factuur |
+Hoe dat van begin tot einde verloopt, leest u in de
+[werkwijze](/werkwijze). Welke diensten er zijn, staat bij
+[IT-beheer & support](/diensten/it-beheer-support).
 
-## Wat drijft de prijs omhoog of omlaag?
-
-Twee bedrijven met evenveel medewerkers kunnen toch een verschillende prijs
-krijgen. De voornaamste factoren:
-
-- **Aantal gebruikers en toestellen**, de basis van elke berekening.
-- **Gevoeligheid van uw data.** Een apotheek of advocatenkantoor met
-  patiënten- of dossiergegevens vraagt strengere beveiliging en back-up dan een
-  zaak zonder vertrouwelijke gegevens.
-- **Staat van uw huidige setup.** Een propere omgeving is goedkoper te beheren
-  dan een wildgroei van losse oplossingen die eerst opgekuist moet worden.
-- **Compliance-eisen** zoals GDPR of NIS2 die extra inrichting vragen.
-
-## De verborgen kosten waar u op moet letten
-
-Bij andere aanbieders is de maandprijs zelden het hele verhaal. Vraag expliciet
-na, en merk dat de antwoorden bij mij telkens "geen" of "transparant" zijn:
-
-- **Onboarding of setupkosten?** Een scoping-bezoek is gratis. De eigenlijke opzet
-  of opkuis schat ik vooraf in als vaste prijs of aan €60/uur, zodat u het bedrag
-  op voorhand kent. Geen verborgen instapkost bovenop.
-- **Licenties apart of inbegrepen?** Apart en transparant op de factuur, zie
-  hierboven.
-- **Betaal ik voor modules die ik niet gebruik?** Nee. Bij beheer kiest u per
-  module en betaalt u enkel wat u nodig heeft — per toestel of per gebruiker.
-- **Opzegtermijn?** Beheer is maandelijks opzegbaar, zonder contract van drie
-  jaar.
-
-Een eerlijke partner heeft geen moeite met deze vragen. Wie errond draait,
-vertelt u eigenlijk al wat u wil weten.
-
-## En wat kost géén IT-beheer?
-
-De omgekeerde rekening is minstens even belangrijk. Eén dag uitval aan de balie,
-een ransomware-besmetting of een datalek met GDPR-gevolgen kost al snel een
-veelvoud van een jaar degelijk beheer. Goed IT-beheer is grotendeels een
-verzekering: u betaalt een voorspelbaar bedrag om de dure, onvoorspelbare
-ellende te vermijden. De vraag is niet alleen "wat kost het?", maar "wat kost
-het als ik het níét doe?".
-
-## Een voorbeeld om het concreet te maken
-
-Stel: een advocatenkantoor met twee medewerkers en drie toestellen, dat volledig
-in Microsoft 365 werkt.
-
-- Beheer per module: PacketFlow Secure op drie toestellen (3 × €15), plus Identity
-  en Microsoft 365-back-up voor twee gebruikers (2 × €9 en 2 × €6). Samen €75 per
-  maand, maandelijks opzegbaar.
-- Microsoft 365 Business Premium: twee gebruikers aan de normale Microsoft-prijs,
-  apart op de factuur.
-- Eenmalig: een gratis scoping-bezoek, en als er opzet of migratie nodig is, een
-  vaste prijs die u vooraf kent.
-
-Reken zo op een voorspelbaar maandbedrag rond €120 (beheer plus licenties).
-Hardware en grotere projecten staan altijd apart en vooraf geprijsd. Dit is een
-voorbeeld, geen offerte: uw juiste prijs hangt af van uw team en uw huidige
-setup.
-
-## Concreet voor uw zaak
-
-Samengevat: u werkt met mij aan €60 per uur (excl. btw) voor losse hulp, met een
-urenkaart van 10 uur voor €550 als u af en toe hulp wil, via
-[beheer per module](/prijzen) vanaf €15 per toestel per maand als u liever alles
-uit handen geeft, of met een vaste projectprijs voor installaties en migraties.
-Microsoft-licenties staan altijd apart en transparant op de factuur.
-
-Wat het precies voor úw zaak wordt, hangt af van uw team en uw huidige setup. Dat
-zeg ik liever na een eerlijk gesprek dan met een cijfer uit de lucht. Vul
-hieronder kort in hoe uw situatie eruitziet, dan bezorg ik u vrijblijvend een
-realistische richtprijs.
+Benieuwd wat het voor uw zaak zou kosten? Vul hieronder kort in hoe uw zaak
+eruitziet, dan bezorg ik u een heldere richtprijs.

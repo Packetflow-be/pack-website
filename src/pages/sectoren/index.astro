@@ -18,8 +18,8 @@ const jsonLd = breadcrumbs(crumbs);
 ---
 
 <BaseLayout
-  title="Voor wie? — IT voor praktijken, horeca en verenigingen"
-  description="Packetflow werkt voor kleine kantoren en zaken in West-Vlaanderen: advocaten, architecten en makelaars, horeca en B&B's, en verenigingen en VZW's."
+  title="Voor wie? Productie, praktijken en kantoren"
+  description="Packetflow werkt voor bedrijven waar stilstand geld kost: productie en toeleveranciers, zorgpraktijken, kantoren en vrije beroepen, horeca en B&B's."
   jsonLd={jsonLd}
 >
   <section class="page-hero">
@@ -28,14 +28,15 @@ const jsonLd = breadcrumbs(crumbs);
       <Kicker>Voor wie?</Kicker>
       <h1>IT op maat van uw soort zaak</h1>
       <p class="lead page-hero__lead">
-        Ik werk vooral voor kleine kantoren en zaken die geen IT-afdeling
-        hebben, maar wél op hun IT moeten kunnen rekenen. Herkent u zich hierin?
+        Ik werk voor bedrijven van 2 tot 20 mensen die geen eigen IT-afdeling
+        hebben, maar waar stilstand wel geld kost. Herkent u zich hierin?
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container grid-cards">
+      <h2 class="sr-only">Sectoren</h2>
       {
         sectors.map((sector) => (
           <a href={url(`/sectoren/${sector.slug}`)} class="sector-link">

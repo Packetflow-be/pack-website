@@ -159,7 +159,9 @@ const rest = href ? { href: url(href) } : { type };
   }
   .btn--secondary {
     background: transparent;
-    color: var(--primary);
+    /* orange-800 keeps the label at AA on every surface it sits on, including
+       the darker cream CTA band (orange-700 there is only 4.2:1). */
+    color: var(--orange-800);
     border: 1px solid var(--border-strong);
   }
   .btn--secondary:hover {

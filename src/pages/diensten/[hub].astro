@@ -8,6 +8,7 @@ import Icon from "@/components/Icon.astro";
 import Button from "@/components/Button.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { services, type ServiceHub } from "@/data/services";
+import { site } from "@/data/site";
 import { service, breadcrumbs } from "@/lib/schema";
 import { url } from "@/lib/url";
 
@@ -18,6 +19,7 @@ interface Props {
   hub: ServiceHub;
 }
 const { hub } = Astro.props;
+const isBeheer = hub.slug === "it-beheer-support";
 
 const crumbs: [string, string][] = [
   ["Home", "/"],
@@ -26,12 +28,12 @@ const crumbs: [string, string][] = [
 ];
 
 const jsonLd = [
-  service({ name: hub.title, description: hub.description, serviceType: hub.title }),
+  service({ name: hub.solution, description: hub.description, serviceType: hub.navTitle }),
   breadcrumbs(crumbs),
 ];
 ---
 
-<BaseLayout title={hub.title} description={hub.metaDescription ?? hub.description} jsonLd={jsonLd}>
+<BaseLayout title={hub.metaTitle ?? hub.title} description={hub.metaDescription ?? hub.description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container page-hero__in">
       <Breadcrumbs items={crumbs} />
@@ -39,16 +41,32 @@ const jsonLd = [
       <h1>{hub.title}</h1>
       <p class="lead page-hero__lead">{hub.tagline}</p>
       <div class="page-hero__actions">
-        <Button href="/contact" variant="primary" iconRight="arrow-right">Vraag info aan</Button>
+        <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
+        <Button href="/werkwijze" variant="secondary">Hoe ik werk</Button>
       </div>
     </div>
   </section>
 
+  {/* The problem, then the answer */}
   <section class="section">
+    <div class="container problem">
+      <div>
+        <Kicker>Het probleem</Kicker>
+        <h2 class="problem__title">{hub.problem.title}</h2>
+        <p class="problem__body">{hub.problem.body}</p>
+      </div>
+      <div class="problem__answer">
+        <Kicker>{isBeheer ? "Wat Packetflow Beheer doet" : hub.solution}</Kicker>
+        <p>{hub.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
     <div class="container">
       <div class="section-head">
-        <Kicker>Wat ik voor u doe</Kicker>
-        <p>{hub.description}</p>
+        <Kicker>{isBeheer ? "Altijd inbegrepen" : "Wat ik voor u doe"}</Kicker>
+        <h2>{isBeheer ? "Wat er in elk beheercontract zit" : "Wat erin zit"}</h2>
       </div>
       <div class="grid-cards">
         {
@@ -65,11 +83,120 @@ const jsonLd = [
   </section>
 
   {
-    hub.locals.length > 0 && (
-      <section class="section locals-band">
+    hub.services && hub.services.length > 0 && (
+      <section class="section">
         <div class="container">
           <div class="section-head">
-            <Kicker>In jouw regio</Kicker>
+            <Kicker>Diensten</Kicker>
+            <h2>Uit welke diensten u kiest</h2>
+            <p>
+              Elke dienst hoort bij één eenheid die u zelf kan tellen, en u betaalt per
+              eenheid per maand. Sommige diensten hebben twee plannen: BASIS houdt alles
+              draaiende en veilig, COMPLEET heeft daarnaast de vaste lijst aanvragen
+              inbegrepen. De prijzen staan in de offerte.
+            </p>
+          </div>
+          <ul class="svc-list">
+            {hub.services.map((s) => (
+              <li class="svc-item">
+                <div class="svc-item__head">
+                  <h3 class="svc-item__name">{s.name}</h3>
+                  <span class="svc-item__unit">{s.unit}</span>
+                </div>
+                <p class="svc-item__body">{s.body}</p>
+                {s.note && <p class="svc-item__note">{s.note}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    hub.steps && hub.steps.length > 0 && (
+      <section class={`section ${hub.services ? "band" : ""}`}>
+        <div class="container">
+          <div class="section-head">
+            <Kicker>Zo verloopt het</Kicker>
+            <h2>Van eerste gesprek tot beheer</h2>
+          </div>
+          <ol class="steps steps--4">
+            {hub.steps.map((step, i) => (
+              <li class="step">
+                <span class="step__num">{i + 1}</span>
+                <div>
+                  <h3 class="step__title">{step.title}</h3>
+                  <p class="step__body">{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    (hub.requirement || hub.limits || hub.ongoing) && (
+      <section class="section notes-band">
+        <div class="container notes">
+          {hub.requirement && (
+            <div class="note">
+              <span class="note__icon"><Icon name="badge-check" size={18} /></span>
+              <div>
+                <h2 class="note__title">Goed om te weten</h2>
+                <p>{hub.requirement}</p>
+              </div>
+            </div>
+          )}
+          {hub.limits && (
+            <div class="note">
+              <span class="note__icon"><Icon name="scale" size={18} /></span>
+              <div>
+                <h2 class="note__title">{isBeheer ? "Wat er niet in zit" : "Eerlijk gezegd"}</h2>
+                <p>{hub.limits}</p>
+              </div>
+            </div>
+          )}
+          {hub.ongoing && (
+            <div class="note">
+              <span class="note__icon"><Icon name="radar" size={18} /></span>
+              <div>
+                <h2 class="note__title">Na de oplevering</h2>
+                <p>
+                  {hub.ongoing}{" "}
+                  <a href={url("/diensten/it-beheer-support")} class="text-link">Meer over het beheer</a>.
+                </p>
+              </div>
+            </div>
+          )}
+          {isBeheer && (
+            <div class="note">
+              <span class="note__icon"><Icon name="clock" size={18} /></span>
+              <div>
+                <h2 class="note__title">Wanneer u mij bereikt</h2>
+                <p>
+                  Klanten mailen naar <a href={`mailto:${site.supportEmail}`} class="text-link">{site.supportEmail}</a>.
+                  Elke melding wordt uiterlijk de volgende werkdag bevestigd, en ik werk
+                  {" "}{site.hours.phrase} ({site.hours.label}). Toestellen en
+                  Microsoft 365-accounts worden intussen dag en nacht bewaakt.{" "}
+                  <a href={url("/werkwijze")} class="text-link">Alles over de werkwijze</a>.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    hub.locals.length > 0 && (
+      <section class="section band">
+        <div class="container">
+          <div class="section-head">
+            <Kicker>In uw regio</Kicker>
             <h2>{hub.navTitle} dichtbij</h2>
             <p>Lokale aanpak met een vast aanspreekpunt. Bekijk de pagina voor uw gemeente of regio.</p>
           </div>
@@ -91,39 +218,11 @@ const jsonLd = [
   }
 
   {
-    hub.ladder && (
-      <section class="section ladder-band">
-        <div class="container">
-          <div class="section-head">
-            <Kicker>Twee niveaus</Kicker>
-            <h2>{hub.ladder.title}</h2>
-            {hub.ladder.intro && <p>{hub.ladder.intro}</p>}
-          </div>
-          <div class="ladder-grid">
-            {hub.ladder.tiers.map((t) => (
-              <Card class="ladder-tier">
-                <span class="ladder-tier__price">{t.price}</span>
-                <h3>{t.name}</h3>
-                <p>{t.body}</p>
-                {t.href && (
-                  <a href={url(t.href)} class="ladder-tier__more">
-                    Meer over de prijzen <Icon name="arrow-right" size={15} />
-                  </a>
-                )}
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  {
     hub.reading && hub.reading.length > 0 && (
-      <section class="section reading-band">
+      <section class={`section ${hub.locals.length > 0 ? "" : "band"}`}>
         <div class="container">
           <div class="section-head">
-            <Kicker>Uit de kennisbank</Kicker>
+            <Kicker>Uit de blog</Kicker>
             <h2>Verder lezen</h2>
           </div>
           <div class="grid-cards">
@@ -143,68 +242,146 @@ const jsonLd = [
     )
   }
 
-  {
-    hub.aftercare && (
-      <section class="aftercare">
-        <div class="container">
-          <p class="aftercare__line">
-            <span class="aftercare__icon"><Icon name="radar" size={18} /></span>
-            <span>{hub.aftercare}</span>
-          </p>
-        </div>
-      </section>
-    )
-  }
-
   <CtaSection />
 </BaseLayout>
 
 <style>
-  .locals-band {
-    background: var(--paper);
-    border-top: 1px solid var(--border-soft);
-  }
   .page-hero :global(.badge) {
     margin-bottom: var(--space-4);
   }
-  .local-link {
-    display: block;
+
+  /* Problem → answer */
+  .problem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: start;
   }
-  .local-link :global(.card) {
-    transition:
-      border-color var(--dur-base) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out);
+  .problem__title {
+    font-size: var(--text-2xl);
+    margin: var(--space-3) 0 var(--space-4);
   }
-  .local-link:hover :global(.card) {
-    border-color: var(--orange-300);
-    box-shadow: var(--shadow-md);
+  .problem__body {
+    color: var(--text-body);
+    line-height: var(--leading-relaxed);
   }
-  .local-link__more {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: var(--text-sm);
-    font-weight: var(--fw-medium);
-    color: var(--primary);
+  .problem__answer {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--orange-500);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  .problem__answer p {
+    margin-top: var(--space-4);
+    color: var(--text-body);
+    line-height: var(--leading-relaxed);
   }
 
-  /* Verder lezen — contextual links into the kennisbank */
-  .reading-band {
-    background: var(--paper);
-    border-top: 1px solid var(--border-soft);
+  /* Managed services list */
+  .svc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
   }
+  .svc-item {
+    padding: var(--space-5);
+    background: var(--surface-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+  }
+  .svc-item__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .svc-item__name {
+    font-size: var(--text-md);
+    margin: 0;
+  }
+  .svc-item__unit {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    color: var(--blue-700);
+    background: var(--blue-50);
+    border-radius: var(--radius-pill);
+    padding: 2px 10px;
+  }
+  .svc-item__body {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+  .svc-item__note {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  /* Notes: requirement, limits, what keeps it running. Always follows a
+     cream section (the services list or the steps), so it needs no top
+     padding of its own. */
+  .notes-band {
+    padding-top: 0;
+  }
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+  .note {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    background: var(--paper);
+  }
+  .note__icon {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--orange-50);
+    color: var(--orange-700);
+    display: grid;
+    place-content: center;
+  }
+  .note__title {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    margin: 4px 0 6px;
+  }
+  .note p {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+
+  .local-link,
   .reading-link {
     display: block;
   }
+  .local-link :global(.card),
   .reading-link :global(.card) {
     transition:
       border-color var(--dur-base) var(--ease-out),
       box-shadow var(--dur-base) var(--ease-out);
   }
+  .local-link:hover :global(.card),
   .reading-link:hover :global(.card) {
     border-color: var(--orange-300);
     box-shadow: var(--shadow-md);
   }
+  .local-link__more,
   .reading-link__more {
     display: inline-flex;
     align-items: center;
@@ -214,73 +391,11 @@ const jsonLd = [
     color: var(--primary);
   }
 
-  /* Pricing ladder — keeps the two levels visibly distinct */
-  .ladder-band {
-    background: var(--paper);
-    border-top: 1px solid var(--border-soft);
-  }
-  .ladder-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-5);
-  }
-  .ladder-tier {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-  .ladder-tier__price {
-    font-family: var(--font-display);
-    font-weight: var(--fw-semibold);
-    font-size: var(--text-lg);
-    color: var(--text-strong);
-    letter-spacing: -0.01em;
-  }
-  .ladder-tier h3 {
-    font-size: var(--text-md);
-    margin: 0;
-  }
-  .ladder-tier p {
-    font-size: var(--text-sm);
-    line-height: 1.6;
-    color: var(--text-muted);
-    margin: 0;
-  }
-  .ladder-tier__more {
-    margin-top: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: var(--text-sm);
-    font-weight: var(--fw-medium);
-    color: var(--primary);
-    padding-top: var(--space-2);
-  }
-
-  /* Post-oplevering line — understated, reads as a project-attach */
-  .aftercare {
-    padding-block: var(--space-6);
-  }
-  .aftercare__line {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0;
-    padding: var(--space-4) var(--space-5);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius-md);
-    background: var(--paper);
-    font-size: var(--text-sm);
-    color: var(--text-strong);
-  }
-  .aftercare__icon {
-    flex: none;
-    color: var(--primary);
-    display: inline-flex;
-  }
   /* keep in sync with --container-md in global.css */
   @media (max-width: 880px) {
-    .ladder-grid {
+    .problem,
+    .svc-list,
+    .notes {
       grid-template-columns: 1fr;
     }
   }

@@ -1,17 +1,21 @@
 # Packetflow website
 
-Marketing site for **Packetflow** — Louis Declerck's one-person managed-service
-practice (MSP) for small offices in West-Vlaanderen. Rebuilt on
+Marketing site for **Packetflow** — Louis Declerck's one-person IT practice in
+West-Vlaanderen: IT for businesses where downtime costs money, the office and
+the production floor under one plan. Rebuilt on
 [Astro](https://astro.build) to replace the previous Odoo site, styled with the
 **Packetflow Design System** (warm orange-on-cream editorial brand, Lora +
 Poppins, blue accent, Lucide icons).
 
 ## Stack
 
-- **Astro 5** — static site generation, zero client JS (except Lucide icons)
+- **Astro 7** — static site generation, near-zero client JS (the contact/lead
+  forms, the cookie banner and the mobile menu only); Lucide icons are inlined
+  at build time
 - **Design tokens** — the Packetflow DS tokens live in `src/styles/global.css`
   (colors, type, spacing, radii, shadows, motion). Re-skin there.
 - **@astrojs/sitemap** — automatic sitemap
+- Fonts self-hosted via `@fontsource` (no third-party font request)
 
 ## Getting started
 
@@ -24,76 +28,78 @@ npm run preview
 
 ## Deployment & branch flow
 
-Two environments, two branches:
+| Environment          | Trigger                              | Workflow           | Target                               |
+| -------------------- | ------------------------------------ | ------------------ | ------------------------------------ |
+| Staging / review     | a pull request marked ready for review | `github-pages.yml` | GitHub Pages (project sub-path, `noindex`) |
+| Production           | push to `main` (a merged PR)         | `deploy.yml`       | Cloudflare Pages (www.packetflow.be) |
 
-| Environment           | Branch | Workflow             | Target                          |
-| --------------------- | ------ | -------------------- | ------------------------------- |
-| Staging / acceptance  | `acc`  | `github-pages.yml`   | GitHub Pages (project sub-path) |
-| Production            | `main` | `deploy.yml`         | Cloudflare Pages (www.packetflow.be) |
+**Flow:** open a feature-branch PR into `main` → review it on the GitHub Pages
+staging URL → merge → it goes live on Cloudflare. GitHub Pages is one shared
+staging site, so the most recently built PR wins. Cloudflare's deploy step
+skips until the `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` repo secrets
+are set (see the comments in `deploy.yml`).
 
-**Flow:** open a feature-branch PR **into `acc`** → merge → review the live
-result on GitHub Pages → open a promotion PR **`acc` → `main`** → merge → it
-goes live on Cloudflare.
+## Where the words come from
 
-`promote-guard.yml` fails any PR into `main` that doesn't come from `acc`, so
-production can only be reached through staging. Cloudflare's deploy step skips
-until the `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` repo secrets are set
-(see the comments in `deploy.yml`).
+The site copies from the Packetflow vault rather than inventing its own
+positioning. Change the vault note first, then the site:
 
-To make the guard binding, protect `main` (Settings → Branches): require a PR
-before merging, require the **Build & deploy** and **Only promote from acc**
-checks, and don't allow direct pushes.
+| On the site                                   | Source in the vault           |
+| --------------------------------------------- | ----------------------------- |
+| Company description (`site.boilerplate`, hero) | `pf-boilerplate`              |
+| The solution hubs under `/diensten`           | `pf-solutions-map` (named solutions) |
+| Managed services and what they cover          | `pf-service-description`      |
+| Hours, response, contract terms (`/werkwijze`) | `pf-service-terms`            |
+| Voice, register, no em dashes in Dutch copy   | `ref-tone-of-voice`           |
+
+Two standing rules: **no prices on the site** (they live in the quote), and
+**no client references** unless that client has agreed to be shown.
 
 ## Information architecture
 
 Two cross-linked layers, both generated from data files:
 
-- **Diensten** (service-led) — `src/data/services.ts`
-  - 3 hubs: IT-beheer & support, Zakelijke WiFi & netwerken, Cloud/backup/beveiliging
+- **Diensten** (solution-led) — `src/data/services.ts`
+  - 6 hubs, one per named solution: kantoorverhuizing, beveiliging & back-up,
+    moderne werkplek, wifi & netwerken, bedrijfssoftware in eigen beheer, and
+    IT-beheer (Packetflow Beheer, the layer under all of them)
   - Local SEO pages at flat slugs (e.g. `/it-support-oudenburg`)
 - **Voor wie?** (audience-led) — `src/data/sectors.ts`
-  - 3 sectors: Vrije beroepen & praktijken (recurring engine), Horeca & B&B's,
-    Verenigingen & VZW's
-- Plus: Home, **KMO-Pakket**, **Over mij** (founder story), Contact, Privacy, 404
+  - 5 sectors: productie & toeleveranciers, medische & zorgpraktijken,
+    kantoren & vrije beroepen, horeca & B&B's, verenigingen & VZW's
+- Plus: Home, **Werkwijze** (process, price model, hours; no amounts),
+  **Over mij**, the local-vs-large comparison, Blog, Contact, Privacy, 404
 
 ```
 src/
   data/
-    site.ts        # business info (NAP), nav, geo  ← edit before launch
-    services.ts    # 3 service hubs + their local pages
-    sectors.ts     # 3 audience hubs ("Voor wie?")
+    site.ts        # business info (NAP), hours, nav, geo
+    services.ts    # solution hubs, managed services + their local pages
+    sectors.ts     # audience hubs ("Voor wie?")
   lib/
     schema.ts      # JSON-LD: shared LocalBusiness @id, Service, BreadcrumbList
   layouts/BaseLayout.astro
-  components/       # Logo, Button, Card, Badge, Kicker, Icon, Header, Footer, CtaSection
-  pages/            # index, pakket, over-mij, contact, privacy, 404,
-                    # diensten/[index,[hub]], sectoren/[index,[sector]], [local]
+  components/       # Logo, Button, Card, Badge, Kicker, Icon, Header, Footer, CtaSection, …
+  pages/            # index, werkwijze, over-mij, contact, privacy, 404,
+                    # diensten/[index,[hub]], sectoren/[index,[sector]], [local], blog/
+  content/blog/     # articles (Markdown + frontmatter, see content.config.ts)
   styles/global.css # design tokens + shared classes
 public/
-  _redirects        # 301 map (Odoo → Astro)  ← LAUNCH BLOCKER, complete it
-  robots.txt, favicon.svg
+  _headers          # security headers incl. CSP (allows GA only after consent)
+  _redirects        # 301 map (Odoo → Astro, retired pages → their replacement)
+  robots.txt, llms.txt, favicon.svg
 ```
 
 **Anti-doorway note:** each local page carries a unique `context` paragraph and
 distinct `highlights` — keep them genuinely different (or remove) rather than
 scaling near-identical city templates.
 
-## Before launch — TODO
+## Open items
 
-- [ ] **301 redirects** (`public/_redirects`): add a line for *every* indexed
-      Odoo URL (check Search Console → Pages). This is a launch blocker.
-- [ ] Confirm canonical host (currently **www.packetflow.be**, matching Odoo)
-      in `astro.config.mjs` + `robots.txt` + `_redirects`.
-- [ ] **Confirm KMO-Pakket pricing** — currently `€99 / maand` (flat) in
-      `src/pages/pakket.astro`, matching the live site. Adjust if the model differs.
-- [ ] Add a **real photo of Louis** → `public/louis.jpg` and swap the portrait
-      placeholder in `src/pages/over-mij.astro`.
-- [ ] Wire the contact form (`src/pages/contact.astro`) to a handler.
-- [ ] Replace the placeholder privacy policy.
-- [ ] Verify NAP / geo coordinates in `src/data/site.ts`.
-
-## Possible next steps (backlog)
-
-- `/kennisbank` via Astro content collections for the long tail.
-- Differentiate or trim local pages further as real references/cases land.
-- Self-host the webfonts and Lucide for full offline/independent shipping.
+- [ ] Paste the Google Business Profile reviews URL in `src/data/reviews.ts`.
+- [ ] Update the Google Business Profile opening hours to the service window
+      (ma–vr 18:00–21:00, za 09:00–12:00) so it matches the site's JSON-LD.
+- [ ] Confirm `soc@packetflow.be` (in `public/.well-known/security.txt`) is a
+      monitored mailbox, or point it at one that is.
+- [ ] After any change on the Odoo side, send one real test through the
+      contact form: the form posts `no-cors` and always shows success.

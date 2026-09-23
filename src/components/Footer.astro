@@ -1,63 +1,78 @@
 ---
 import { site } from "@/data/site";
 import { services } from "@/data/services";
+import { sectors } from "@/data/sectors";
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
 import { url } from "@/lib/url";
 const year = new Date().getFullYear();
+const locals = services.flatMap((hub) => hub.locals);
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__top">
     <div class="site-footer__brand">
-      <a href={url("/")} aria-label="Packetflow — home">
+      <a href={url("/")} aria-label="Packetflow, naar de homepage">
         <Logo variant="full" size={30} onDark tagline />
       </a>
       <p class="site-footer__lead">
-        Uw lokale IT-partner in {site.serviceArea}. Eén aanspreekpunt voor
-        medische praktijken en professionele kantoren in {site.serviceArea}.
+        {site.short} Vanuit {site.address.city}, voor heel {site.serviceArea}.
       </p>
       <div class="site-footer__contact">
         <a href={site.phoneHref}><Icon name="phone" size={16} /> {site.phone}</a>
         <a href={`mailto:${site.email}`}><Icon name="mail" size={16} /> {site.email}</a>
         <span><Icon name="map-pin" size={16} /> {site.address.postalCode} {site.address.city}, {site.address.region}</span>
-        <span><Icon name="building-2" size={16} /> KBO {site.vatId}</span>
+        <span><Icon name="clock" size={16} /> {site.hours.label}</span>
+        <span><Icon name="building-2" size={16} /> BTW {site.vatId}</span>
       </div>
     </div>
 
-    {
-      services.map((hub) => (
-        <nav class="site-footer__col" aria-label={hub.navTitle}>
-          <h2 class="site-footer__heading">
-            <a href={url(`/diensten/${hub.slug}`)}>{hub.navTitle}</a>
-          </h2>
-          <ul>
-            {hub.locals.length === 0 ? (
-              <li>
-                <a href={url(`/diensten/${hub.slug}`)}>Meer info</a>
-              </li>
-            ) : (
-              hub.locals.map((local) => (
-                <li>
-                  <a href={url(`/${local.slug}`)}>{local.title}</a>
-                </li>
-              ))
-            )}
-          </ul>
-        </nav>
-      ))
-    }
+    <nav class="site-footer__col" aria-label="Diensten">
+      <h2 class="site-footer__heading">
+        <a href={url("/diensten")}>Diensten</a>
+      </h2>
+      <ul>
+        {services.map((hub) => (
+          <li>
+            <a href={url(`/diensten/${hub.slug}`)}>{hub.title}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col" aria-label="Voor wie">
+      <h2 class="site-footer__heading">
+        <a href={url("/sectoren")}>Voor wie?</a>
+      </h2>
+      <ul>
+        {sectors.map((s) => (
+          <li>
+            <a href={url(`/sectoren/${s.slug}`)}>{s.navTitle}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col" aria-label="In de regio">
+      <h2 class="site-footer__heading">In de regio</h2>
+      <ul>
+        {locals.map((local) => (
+          <li>
+            <a href={url(`/${local.slug}`)}>{local.title}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </div>
 
   <div class="site-footer__bar">
     <div class="container site-footer__bar-in">
-      <span>{site.pillars} — © {year} {site.legalName}</span>
-      <nav aria-label="Juridisch">
+      <span>{site.pillars} · © {year} {site.legalName}</span>
+      <nav aria-label="Meer">
+        <a href={url("/werkwijze")}>Werkwijze</a>
         <a href={url("/blog")}>Blog</a>
         <a href={url("/over-mij")}>Over mij</a>
         <a href={url("/lokale-it-partner-vs-groot-it-bedrijf")}>Lokaal vs. groot</a>
-        <a href={url("/prijzen")}>Prijzen</a>
-        <a href={url("/tarieven")}>Tarieven</a>
         <a href={url("/privacy")}>Privacy</a>
         <a href={url("/contact")}>Contact</a>
         <button type="button" data-cookie-settings>Cookievoorkeuren</button>

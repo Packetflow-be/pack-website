@@ -112,8 +112,8 @@ const jsonLd = [
         <Kicker>Mijn aanpak</Kicker>
         <h2 class="approach__title">Concreet voor uw zaak</h2>
         <p class="approach__lead lead">
-          Geen complexe contracten, gewoon persoonlijke service. Dit is wat ik
-          meestal voor zaken als de uwe doe:
+          Eerst een plan, dan het werk, en alles gedocumenteerd in uw handen.
+          Dit is wat ik meestal voor zaken als de uwe doe:
         </p>
       </div>
       <ul class="checklist approach__list">
@@ -144,7 +144,7 @@ const jsonLd = [
                 <span class="feature__icon"><Icon name={hub!.icon} size={20} /></span>
                 <h3>{hub!.title}</h3>
                 <p>{hub!.tagline}</p>
-                <span class="rel-link__more">Meer over deze dienst <Icon name="arrow-right" size={15} /></span>
+                <span class="rel-link__more">Meer over deze oplossing <Icon name="arrow-right" size={15} /></span>
               </Card>
             </a>
           ))
@@ -159,7 +159,7 @@ const jsonLd = [
               {relatedLocals.map((l) => (
                 <li>
                   <a href={url(`/${l!.slug}`)}>
-                    <Icon name="map-pin" size={15} color="var(--orange-600)" />
+                    <Icon name="map-pin" size={15} color="var(--orange-700)" />
                     {l!.title}
                   </a>
                 </li>
@@ -171,28 +171,8 @@ const jsonLd = [
     </div>
   </section>
 
-  {/* Spotlight — standalone landing page cross-sell (e.g. Guesty/PMS) */}
-  {
-    sector.spotlight && (
-      <section class="section spotlight">
-        <div class="container">
-          <a href={url(sector.spotlight.href)} class="spotlight__card">
-            <span class="spotlight__icon"><Icon name={sector.spotlight.icon} size={24} /></span>
-            <div class="spotlight__body">
-              <h2 class="spotlight__title">{sector.spotlight.title}</h2>
-              <p class="spotlight__text">{sector.spotlight.body}</p>
-              <span class="spotlight__link">
-                {sector.spotlight.linkLabel} <Icon name="arrow-right" size={16} />
-              </span>
-            </div>
-          </a>
-        </div>
-      </section>
-    )
-  }
-
   {sector.faqs && sector.faqs.length > 0 && (
-    <Faq items={sector.faqs} title={`Veelgestelde vragen — ${sector.navTitle}`} />
+    <Faq items={sector.faqs} title={`Veelgestelde vragen: ${sector.navTitle.toLowerCase()}`} />
   )}
 
   <CtaSection />
@@ -300,58 +280,5 @@ const jsonLd = [
   }
   .rel-locals a:hover {
     color: var(--text-strong);
-  }
-
-  .spotlight__card {
-    display: flex;
-    align-items: start;
-    gap: var(--space-5);
-    padding: var(--space-6);
-    background: var(--surface-sunken);
-    border: 1px solid var(--border-soft);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--radius-lg);
-    transition:
-      border-color var(--dur-base) var(--ease-out),
-      box-shadow var(--dur-base) var(--ease-out);
-  }
-  .spotlight__card:hover {
-    border-color: var(--orange-300);
-    box-shadow: var(--shadow-md);
-  }
-  .spotlight__icon {
-    flex: none;
-    width: 46px;
-    height: 46px;
-    border-radius: var(--radius-md);
-    background: var(--ink);
-    display: grid;
-    place-content: center;
-    color: #fff;
-  }
-  .spotlight__title {
-    font-size: var(--text-lg);
-    margin: 0 0 var(--space-3);
-  }
-  .spotlight__text {
-    color: var(--text-muted);
-    line-height: var(--leading-relaxed);
-    margin: 0 0 var(--space-4);
-    max-width: 68ch;
-  }
-  .spotlight__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: var(--text-sm);
-    font-weight: var(--fw-medium);
-    color: var(--primary);
-  }
-  /* keep in sync with --container-md in global.css */
-  @media (max-width: 880px) {
-    .spotlight__card {
-      flex-direction: column;
-      gap: var(--space-4);
-    }
   }
 </style>

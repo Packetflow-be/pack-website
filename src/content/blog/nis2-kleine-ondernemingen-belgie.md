@@ -1,103 +1,168 @@
 ---
 title: "NIS2 voor kleine ondernemingen: geldt het voor mij?"
-description: "NIS2 geldt voor middelgrote en grote bedrijven in kritieke sectoren. Maar ook als KMO kunt u er mee te maken krijgen — en de maatregelen zijn sowieso goede praktijk."
+description: "NIS2 geldt voor middelgrote en grote bedrijven in kritieke sectoren. Ook als kleine onderneming krijgt u er vaak mee te maken, via de klanten die u beleveren."
 pubDate: 2026-06-27
+updatedDate: 2026-09-23
 tags: ["NIS2", "Beveiliging", "Compliance"]
 leadForm: true
 leadCampaign: "blog-nis2-kleine-ondernemingen"
 faqs:
   - question: "Geldt NIS2 voor mijn kleine onderneming?"
-    answer: "Waarschijnlijk niet rechtstreeks. NIS2 richt zich op middelgrote en grote organisaties (minstens 50 werknemers of €10 miljoen omzet) in 18 kritieke sectoren. Micro- en kleine ondernemingen vallen er in de meeste gevallen buiten. Uitzondering: als u als kleine speler actief bent in kritieke infrastructuur (energie, gezondheidszorg, ...) kan het alsnog van toepassing zijn."
-  - question: "Geldt NIS2 voor een KMO?"
-    answer: "Meestal niet rechtstreeks. Een KMO met minder dan 50 werknemers én minder dan €10 miljoen omzet valt in de regel buiten de NIS2-scope. Toch is NIS2 ook voor een KMO relevant: levert u aan een NIS2-plichtige klant, dan kan die de beveiligingslat bij u leggen via de leveranciersketen. En de onderliggende maatregelen — MFA, versleutelde back-up, patchbeheer — zijn voor elke KMO sowieso goede praktijk."
+    answer: "Waarschijnlijk niet rechtstreeks. NIS2 richt zich op middelgrote en grote organisaties in 18 sectoren. Kleine en micro-ondernemingen vallen er in de meeste gevallen buiten. Uitzondering: bepaalde kleine spelers in kritieke infrastructuur kunnen alsnog aangewezen worden."
+  - question: "Wanneer is een onderneming middelgroot?"
+    answer: "Vanaf 50 werknemers, of met een jaaromzet én een balanstotaal van elk meer dan 10 miljoen euro. Daaronder bent u een kleine of micro-onderneming, en valt u in de regel buiten de rechtstreekse NIS2-scope."
   - question: "Wat als mijn klanten wel onder NIS2 vallen?"
-    answer: "Dan kunnen zij de NIS2-verplichtingen doorschuiven naar u als leverancier. Leveranciersbeveiliging (supply chain security) is een expliciete NIS2-verplichting — grotere klanten zullen u kunnen vragen te voldoen aan bepaalde minimale beveiligingsnormen."
+    answer: "Dan moeten zij ook de beveiliging van hun leveranciers opvolgen. Leveranciersbeveiliging is een expliciete NIS2-verplichting, dus een grotere klant kan u vragen stellen over tweestapsverificatie, back-ups en incidenten, of minimale beveiligingseisen in het contract zetten."
   - question: "Wat zijn de belangrijkste NIS2-maatregelen?"
-    answer: "Risicoanalyse en beveiligingsbeleid, incidentrespons, back-up en herstel, toegangsbeheer en MFA, encryptie, patchbeheer en een procedure voor beveiligingsincidenten. Dit zijn ook zonder NIS2 goede basismaatregelen voor elke onderneming."
+    answer: "Risicoanalyse en beveiligingsbeleid, incidentrespons, back-up en herstel, toegangsbeheer en tweestapsverificatie, encryptie, patchbeheer en een procedure om incidenten te melden. Ook zonder NIS2 zijn dat goede basismaatregelen voor elke onderneming."
+  - question: "Wat is CyberFundamentals?"
+    answer: "CyberFundamentals is het Belgische raamwerk van het Centrum voor Cybersecurity België (CCB). Het deelt beveiligingsmaatregelen op in niveaus, van Small en Basic voor kleinere organisaties tot Important en Essential. Organisaties die onder NIS2 vallen, kunnen het gebruiken om aan te tonen dat ze aan de wet voldoen."
   - question: "Wat doet Packetflow rond NIS2?"
-    answer: "Servers die ik beheer zijn standaard CIS-gehardend. MFA, versleutelde back-ups, patchbeheer en toegangsbeheer zitten standaard in beheer. Clients voldoen daarmee al aan de kern van wat NIS2 van gelijkaardige maatregelen vraagt, ook al vallen ze er formeel niet onder."
+    answer: "In de beheerdiensten die u kiest zitten de technische basismaatregelen: bewaakte toestellen, tweestapsverificatie en toegangsregels, updates en back-ups met een hersteltest. Heeft u een vragenlijst van een klant gekregen, dan toont een readiness-check afgestemd op CyberFundamentals waar u staat en wat er nog ontbreekt."
 ---
 
-NIS2 duikt overal op: in de pers, op seminaries, in e-mails van uw accountant of beroepsfederatie. Maar geldt het nu voor ú? En als het niet geldt — moet u dan niets doen?
+NIS2 duikt overal op: in de pers, op seminaries, in e-mails van uw accountant of
+beroepsfederatie. Maar geldt het nu voor ú? En als het niet geldt, moet u dan
+niets doen?
 
-Korte versie: de meeste kleine Belgische ondernemingen en KMO's vallen er niet rechtstreeks onder. Maar negeren is ook niet het juiste antwoord. Hieronder leg ik uit waarom NIS2 ook voor een KMO relevant blijft.
+Korte versie: de meeste kleine Belgische ondernemingen vallen er niet
+rechtstreeks onder. Maar negeren is ook niet het juiste antwoord, vooral niet
+als u levert aan grotere bedrijven. Hieronder leg ik uit waarom.
 
 ## Wat is NIS2?
 
-NIS2 (Network and Information Security Directive 2) is een Europese richtlijn die de cyberveiligheid van kritieke sectoren moet verhogen. Ze bouwt voort op de oorspronkelijke NIS-richtlijn uit 2016, maar is een stuk breder en strenger.
+NIS2 (Network and Information Security Directive 2) is een Europese richtlijn
+die de cyberveiligheid van kritieke sectoren moet verhogen. Ze bouwt voort op de
+oorspronkelijke NIS-richtlijn uit 2016, maar is een stuk breder en strenger.
 
-In België werd NIS2 omgezet via de **Wet van 26 april 2024**. Het Centrum voor Cybersecurity België (CCB) is de bevoegde autoriteit. Organisaties die onder de richtlijn vallen, worden verplicht beveiligingsmaatregelen te nemen, incidenten te melden en hun bestuur expliciet verantwoordelijk te stellen voor de opvolging.
+In België werd NIS2 omgezet via de **wet van 26 april 2024**. Het Centrum voor
+Cybersecurity België (CCB) is de bevoegde autoriteit. Organisaties die onder de
+wet vallen, moeten beveiligingsmaatregelen nemen, ernstige incidenten melden en
+hun bestuur verantwoordelijk maken voor de opvolging.
 
 ## Voor wie geldt het?
 
-NIS2 richt zich op organisaties in **18 sectoren**, opgedeeld in essentiële en belangrijke entiteiten:
+NIS2 noemt **18 sectoren**, in twee groepen:
 
-- **Essentiële sectoren** (11): energie, transport, bankwezen, financiële marktinfrastructuur, gezondheidszorg, drinkwater, afvalwater, digitale infrastructuur, ICT-dienstverlening, overheidsdiensten, ruimtevaart.
-- **Belangrijke sectoren** (7): post en koeriers, afvalbeheer, chemie, levensmiddelen, productie, digitale aanbieders, onderzoek.
+- **Sectoren met een hoge kritikaliteit** (11): energie, vervoer, bankwezen,
+  infrastructuur voor de financiële markt, gezondheidszorg, drinkwater,
+  afvalwater, digitale infrastructuur, beheer van ICT-diensten, overheid en
+  ruimtevaart.
+- **Andere kritieke sectoren** (7): post- en koeriersdiensten, afvalbeheer,
+  chemische stoffen, levensmiddelen, bepaalde productie (onder meer machines,
+  elektronica, medische hulpmiddelen en voertuigen), digitale aanbieders en
+  onderzoek.
 
-De groottegrens is duidelijk: **middelgroot of groot**. Dat wil zeggen 50 of meer werknemers, of een jaaromzet van minstens €10 miljoen. Micro- en kleine ondernemingen — minder dan 50 werknemers én minder dan €10 miljoen omzet — zijn in de meeste gevallen uitdrukkelijk uitgesloten.
+Daarnaast telt de grootte. De wet geldt voor **middelgrote en grote**
+ondernemingen: vanaf 50 werknemers, of met een jaaromzet én een balanstotaal van
+elk meer dan 10 miljoen euro. Of u een *essentiële* of een *belangrijke* entiteit
+bent, hangt af van die combinatie van sector en grootte. Kleine en
+micro-ondernemingen vallen er in de meeste gevallen buiten.
 
-**Uitzondering**: bepaalde kleine spelers in kritieke infrastructuur kunnen alsnog als essentiële entiteit worden aangewezen, ongeacht hun grootte. Denk aan een kleine maar kritieke energiedistributeur of drinkwaterinstallatie.
+**Uitzondering**: bepaalde kleine spelers kunnen alsnog aangewezen worden,
+ongeacht hun grootte, bijvoorbeeld omdat ze een dienst leveren waar een hele
+sector op steunt.
 
 ## Uw situatie: valt u eronder?
 
-Voor de meeste van mijn klanten — advocatenkantoren, apotheken, huisartsenpraktijken, kleine accountants, kmo's in West-Vlaanderen — is het antwoord **nee**. Te weinig medewerkers, te weinig omzet, of niet in een van de aangewezen sectoren.
+Voor de meeste van mijn klanten, zoals advocatenkantoren, apotheken,
+huisartsenpraktijken en kleine accountants, is het antwoord **nee**. Te weinig
+medewerkers, te weinig omzet, of niet in een van de aangewezen sectoren.
 
-Een huisartsenpraktijk valt buiten de klassieke NIS2-scope. Een groot ziekenhuisnetwerk is een essentiële entiteit. Het verschil is groot.
+Een huisartsenpraktijk valt buiten de rechtstreekse NIS2-scope. Een groot
+ziekenhuisnetwerk is een essentiële entiteit. Het verschil is groot.
 
-Wilt u het zeker weten? Het CCB biedt een zelfevaluatie aan via hun platform — een gestructureerde doorlichting van uw situatie en sector. Ik heb die zelfevaluatie zelf doorlopen en ken de structuur ervan. Als u twijfelt over uw situatie, help ik u er graag mee.
+Voor een **producent of voedingsbedrijf** ligt het anders. Levensmiddelen en
+bepaalde productie staan in de lijst. Heeft u 50 medewerkers of meer, dan valt u
+er mogelijk zelf onder. En bent u kleiner, dan krijgt u de vraag meestal via uw
+klanten. Daarover meer hieronder, en op mijn pagina voor
+[productie en toeleveranciers](/sectoren/productie-toeleveranciers).
 
-## Maar: de leveranciersverplichting
+Wilt u het zeker weten? Het CCB biedt een zelfevaluatie aan waarmee u nagaat of
+de wet voor u geldt. Ik heb die zelf doorlopen en ken de structuur ervan. Als u
+twijfelt over uw situatie, help ik u er graag mee.
+
+## Maar: de leveranciersketen
 
 Hier wordt het relevant, ook voor u als kleine speler.
 
-NIS2 verplicht organisaties die eronder vallen om **ook hun leveranciers** te toetsen op cyberveiligheid. Leveranciersbeveiliging (supply chain security) is een expliciete eis in de richtlijn. Dat betekent: als een ziekenhuis, energiebedrijf of overheidsinstelling uw diensten afneemt — als softwareleverancier, onderhoudspartner of IT-dienstverlener — kunnen zij u vragen om bepaalde beveiligingsgaranties.
+NIS2 verplicht organisaties die eronder vallen om **ook de beveiliging van hun
+leveranciers** op te volgen. Dat betekent: als een ziekenhuis, een
+voedingsgroep of een overheidsinstelling uw diensten of producten afneemt, kan
+die u vragen stellen over uw beveiliging, of eisen in het contract zetten.
 
-Dat hoeft niet meteen om een formeel certificaat te gaan. Het begint met vragen zoals: heeft u MFA? Hoe doet u back-ups? Wat is uw procedure als er iets misloopt? Als u die vragen niet kunt beantwoorden, bent u een risico voor uw klant — en voor uw contract.
+Dat hoeft niet meteen om een certificaat te gaan. Het begint met een
+vragenlijst: heeft u tweestapsverificatie? Hoe doet u back-ups, en zijn ze
+getest? Wie kan op afstand bij uw systemen? Wat is uw procedure als er iets
+misloopt? Kan u die vragen niet beantwoorden, dan bent u een risico voor uw
+klant, en voor uw contract.
 
 ## Wat NIS2 in de praktijk vraagt
 
-De maatregelen die NIS2 oplegt zijn niet exotisch. Het zijn degelijke basispraktijken die elke serieuze organisatie zou moeten hebben:
+De maatregelen die NIS2 oplegt, zijn niet exotisch. Het zijn degelijke
+basispraktijken die elke serieuze organisatie zou moeten hebben:
 
-- **Risicoanalyse**: weten wat uw risico's zijn en welke systemen cruciaal zijn voor uw werking.
-- **Beveiligingsbeleid**: gedocumenteerde regels over wie toegang heeft tot wat, en hoe dat gecontroleerd wordt.
-- **Incidentrespons**: een procedure als er iets misgaat. Wie doet wat, wie wordt verwittigd, binnen welke termijn?
-- **[Back-up en herstel](/diensten/cloud-backup-beveiliging)**: versleutelde back-ups, regelmatig getest. Niet alleen hebben, maar ook kunnen bewijzen dat ze werken.
-- **Toegangsbeheer en MFA**: meervoudige verificatie, en het principe van minimale rechten — iedereen heeft enkel toegang tot wat hij nodig heeft.
-- **Patchbeheer**: beveiligingsupdates tijdig installeren, niet maanden uitstellen.
+- **Risicoanalyse**: weten wat uw risico's zijn en welke systemen cruciaal zijn
+  voor uw werking.
+- **Beveiligingsbeleid**: vastgelegde afspraken over wie toegang heeft tot wat,
+  en hoe dat gecontroleerd wordt.
+- **Incidentrespons**: een procedure als er iets misgaat. Wie doet wat, wie
+  wordt verwittigd, binnen welke termijn?
+- **[Back-up en herstel](/diensten/cloud-backup-beveiliging)**: back-ups die
+  regelmatig getest worden. Niet alleen hebben, maar ook kunnen tonen dat ze
+  werken.
+- **Toegangsbeheer en tweestapsverificatie**: iedereen heeft enkel toegang tot
+  wat hij nodig heeft, en aanmelden vraagt meer dan een wachtwoord.
+- **Patchbeheer**: beveiligingsupdates tijdig installeren, niet maanden
+  uitstellen.
 - **Encryptie**: gevoelige gegevens versleuteld opslaan en versturen.
 
-Herkent u dit? Dit zijn exact de maatregelen die ik standaard toepas voor klanten met [beheer](/prijzen).
+## Wat daarvan in beheer zit
 
-## Wat Packetflow standaard doet
+Een groot deel van de technische kant zit in de beheerdiensten die u bij mij
+kiest:
 
-Servers die ik beheer zijn standaard **CIS-gehardend** — geconfigureerd volgens de benchmarks van het Center for Internet Security, een van de meest erkende internationale frameworks voor veilige serverconfiguratie. Dat is geen optionele extra, het is de baseline.
+- **Bewaakte toestellen**: elk beheerd toestel wordt dag en nacht bewaakt door
+  een bemand beveiligingscentrum dat een aanval zelf kan indammen.
+- **Tweestapsverificatie en toegangsregels** voor Microsoft 365, ontworpen en
+  bijgehouden, met 24/7 bewaking van de accounts.
+- **Updates**: maandelijks, en kritieke lekken uiterlijk binnen de week.
+- **Back-ups met een hersteltest**, twee keer per jaar, met het resultaat in het
+  maandrapport.
+- **Documentatie**: wie heeft toegang tot wat, en hoe het netwerk in elkaar zit.
 
-Verder zit standaard in beheer:
+De organisatorische kant, zoals een risicoanalyse, een beleid en een
+incidentprocedure, is geen dienst die draait maar een afspraak die u maakt. Daar
+help ik bij met een readiness-check.
 
-- **MFA voor Microsoft 365**, standaard ingesteld en afgedwongen
-- **Versleutelde back-ups**, automatisch en getest
-- **Patchbeheer**: updates worden bijgehouden, niet uitgesteld
-- **Toegangsbeheer**: wie heeft toegang tot wat, en dat is gedocumenteerd
+## CyberFundamentals: de Belgische maatstaf
 
-Dat betekent dat klanten die met mij werken al een solide basis hebben — ook als NIS2 formeel niet op hen van toepassing is. Ze voldoen aan de geest van de richtlijn, en ze kunnen dat aantonen als een klant of verzekeraar ernaar vraagt.
+Het CCB heeft een eigen raamwerk: **CyberFundamentals**. Het deelt
+beveiligingsmaatregelen op in niveaus: **Small** en **Basic** voor kleinere
+organisaties, **Important** en **Essential** voor organisaties met meer risico.
+Organisaties die onder NIS2 vallen, kunnen het gebruiken om aan te tonen dat ze
+aan de wet voldoen. Voor wie er niet onder valt, is het een helder stappenplan
+dat klanten en verzekeraars herkennen.
 
-Ik volg de volledige NIS2-structuur bewust als leidraad, ook voor wie er formeel niet onder valt. De reden is praktisch: groeit uw organisatie en wordt u ooit aangewezen als belangrijke of essentiële entiteit, dan staat de basis al. U begint niet van nul — u bent al op weg.
-
-## De CyberFundamentals van het CCB
-
-Het CCB heeft een eigen framework ontwikkeld voor ondernemingen die buiten de NIS2-scope vallen: **CyberFundamentals**. Het is geen wettelijke verplichting, maar een helder stappenplan in vier niveaus — Basic, Important, Essential, Critical — dat aansluit bij internationale normen zoals ISO 27001 en de CIS Controls.
-
-Voor een kleine onderneming is het **Basic**-niveau een realistisch startpunt. Het dekt de meest voorkomende aanvalsvectoren: phishing, ransomware, dataverlies, account-overname. De maatregelen die ik standaard installeer, voldoen al aan dat niveau.
+Voor een kleine onderneming is **Small** of **Basic** een realistisch
+startpunt. De technische maatregelen hierboven dekken daar een groot deel van.
+Een readiness-check afgestemd op CyberFundamentals toont waar u staat, wat er
+nog ontbreekt, en wat u kan antwoorden op de vragenlijst van uw klant.
 
 ## Conclusie: geldt NIS2 voor u?
 
-Waarschijnlijk niet rechtstreeks. Maar dat betekent niet dat u er niets mee te maken heeft:
+Waarschijnlijk niet rechtstreeks. Maar dat betekent niet dat u er niets mee te
+maken heeft:
 
-1. **Leveranciersketen**: levert u aan een NIS2-plichtige klant, dan kunnen zij de lat bij u leggen.
-2. **Goede praktijk**: de maatregelen die NIS2 vraagt zijn sowieso de norm, niet de uitzondering.
-3. **CCB-verwachting**: ook buiten de wettelijke verplichting verwacht het CCB dat Belgische bedrijven een minimale beveiligingsbaseline respecteren.
+1. **Leveranciersketen**: levert u aan een klant die onder NIS2 valt, dan kan die
+   de lat bij u leggen.
+2. **Goede praktijk**: de maatregelen die NIS2 vraagt, zijn sowieso de norm en
+   niet de uitzondering.
+3. **Groei**: wordt u later wel middelgroot, of verandert uw sector, dan staat de
+   basis al.
 
-[Goed IT-beheer](/diensten/it-beheer-support) is in 2026 geen luxe meer. Het is de basisverwachting van klanten, verzekeraars en overheden — NIS2 of niet.
+[Goed IT-beheer](/diensten/it-beheer-support) is geen luxe meer. Het is wat
+klanten, verzekeraars en overheden verwachten, NIS2 of niet.
 
-Wil u weten hoe uw setup er vandaag voorstaat? Vul hieronder kort in hoe uw zaak eruitziet, dan geef ik u eerlijk feedback.
+Wilt u weten hoe uw setup er vandaag voorstaat? Vul hieronder kort in hoe uw zaak
+eruitziet, dan geef ik u eerlijk feedback.

@@ -53,13 +53,15 @@ const { tone = "neutral", dot = false, class: className } = Astro.props;
   .badge--orange .badge__dot {
     color: var(--orange-500);
   }
+  /* Text a shade darker than the status token so the small badge label
+     clears WCAG AA on its own soft fill. */
   .badge--success {
     background: var(--success-soft);
-    color: var(--success);
+    color: #276b45;
   }
   .badge--warning {
     background: var(--warning-soft);
-    color: var(--warning);
+    color: var(--orange-800);
   }
   .badge--danger {
     background: var(--danger-soft);

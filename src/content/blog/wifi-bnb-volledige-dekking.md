@@ -1,6 +1,6 @@
 ---
 title: "WiFi voor een B&B: volledige dekking, tevreden gasten"
-description: "Wat maakt wifi in een B&B anders dan thuis? Over volledige dekking in elke kamer, waarom boosters en powerline tekortschieten, en hoe access points, kanaalkeuze en antennes samen zorgen voor tevreden gasten."
+description: "Wat maakt wifi in een B&B anders dan thuis? Dekking in elke kamer, waarom boosters tekortschieten en hoe access points en kanaalkeuze gasten tevreden houden."
 pubDate: 2026-07-03
 tags: ["WiFi", "Horeca", "B&B"]
 leadForm: true
