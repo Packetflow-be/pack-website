@@ -8,6 +8,8 @@ import Button from "@/components/Button.astro";
 import Portrait from "@/components/Portrait.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { site } from "@/data/site";
+import { services } from "@/data/services";
+import { sectors } from "@/data/sectors";
 import { breadcrumbs, ORG_ID } from "@/lib/schema";
 
 const crumbs: [string, string][] = [
@@ -20,7 +22,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.owner,
-    jobTitle: "Netwerkspecialist & oprichter",
+    jobTitle: "Oprichter",
     worksFor: { "@id": ORG_ID },
     homeLocation: { "@type": "Place", name: `${site.address.city}, ${site.address.region}` },
   },
@@ -28,34 +30,36 @@ const jsonLd = [
 ];
 
 const principles = [
-  ["file-text", "Documentatie als standaard", "Netwerkschema's, configuraties, wachtwoorden — bewaard en beschikbaar zodat een andere IT'er morgen verder kan zonder bij nul te beginnen."],
+  ["file-text", "Documentatie als standaard", "Netwerkschema's, configuraties en toegang: bewaard en in uw handen, zodat een andere IT'er morgen verder kan zonder bij nul te beginnen."],
   ["scale", "Eerlijk advies, ook tegen mijn omzet in", "Werkt uw setup goed genoeg? Dan zeg ik dat. Heeft u iets niet nodig? Dan verkoop ik het niet."],
-  ["unlock", "Geen langetermijncontracten", "U werkt met mij zolang u tevreden bent. Geen lock-in, geen vaste maandkosten zonder duidelijke waarde."],
-  ["map-pin", "Ter plaatse én op afstand", "Installaties: ik kom langs. Configuratie en mailproblemen: meestal op afstand — sneller voor u."],
-  ["badge-check", "Microsoft Cloud Partner", "Voor M365-licenties wordt u rechtstreeks bij mij gefactureerd. Eén partij, één factuur, één aanspreekpunt."],
-  ["users", "Samenwerking met collega's", "Voor stroomwerken werk ik samen met elektriciens. Voor zware projecten verwijs ik door. Geen beloftes die ik niet kan waarmaken."],
+  ["unlock", "U zit nooit vast", "Geen minimale looptijd, één maand opzeg. Uw Microsoft 365-omgeving en uw gegevens staan op uw naam. U zit nooit vast, ook niet aan mij."],
+  ["map-pin", "Ter plaatse én op afstand", "Installaties: ik kom langs. Configuratie en mailproblemen: meestal op afstand, en dat is sneller voor u."],
+  ["badge-check", "Licenties via mij", "Microsoft 365-licenties koopt u via Packetflow, als aparte lijn op de factuur. Eén aanspreekpunt voor de licentie en het beheer."],
+  ["users", "Samenwerking met collega's", "Voor stroomwerken werk ik samen met elektriciens. Wat ik niet zelf kan, verwijs ik eerlijk door. Geen beloftes die ik niet kan waarmaken."],
 ];
 
 const meaning = [
-  "Ik kies klanten zorgvuldig. Geen tien dossiers in parallel, geen weken wachten op een antwoord.",
-  "U krijgt mij persoonlijk. Geen callcenter, geen “iemand uit mijn team belt u terug”.",
-  "Ik kom langs wanneer u tijd heeft. Zaakvoerders en bestuursleden zijn overdag bezig met hun eigen zaak.",
-  "Mijn tarieven zijn transparant. U betaalt voor doordacht werk — gedocumenteerd, beveiligd en herstelbaar — niet voor de lagen eromheen.",
+  `Ik werk voor mijn klanten ${site.hours.phrase}: ${site.hours.label}.`,
+  "Elke melding wordt uiterlijk de volgende werkdag bevestigd. Overdag ben ik meestal niet bereikbaar.",
+  "Uw toestellen en Microsoft 365-accounts worden intussen dag en nacht bewaakt door een beveiligingscentrum dat zelf ingrijpt.",
+  "Ik kies klanten zorgvuldig. Geen tien dossiers tegelijk, geen weken wachten op een antwoord.",
+  "Ik kom langs wanneer het u past. Zaakvoerders en bestuurders zijn overdag met hun eigen zaak bezig.",
 ];
 
 const firstContact = [
-  ["U vertelt kort wat u zoekt", "Een nieuw netwerk, een Peppol-deadline, een crashende laptop, of gewoon “ik weet niet waar te beginnen”."],
-  ["U krijgt eerlijk antwoord", "Of ik kan helpen, of niet, of u beter ergens anders zit. Geen verkooppraatje, geen automatisch ingeplande “ontdekkingsgesprekken”."],
-  ["Past het?", "Dan plannen we een vrijblijvende intake — telefonisch, op afstand, of ter plaatse als dat zinvol is. Pas als u akkoord bent met een offerte begint het echte werk."],
+  ["U vertelt kort wat u zoekt", "Een verhuizing, een Peppol-deadline, een vragenlijst van een klant over cyberveiligheid, of gewoon: ik weet niet waar te beginnen."],
+  ["U krijgt een eerlijk antwoord", "Of ik kan helpen, of niet, of u beter ergens anders zit. Geen verkooppraatje en geen automatisch ingeplande 'ontdekkingsgesprekken'."],
+  ["Past het?", "Dan plannen we een vrijblijvend bezoek ter plaatse. Pas als u akkoord bent met een offerte begint het echte werk."],
 ];
 
 // Plain, factual "feiten over Packetflow" block. Deliberately dull and
-// extractable: founder, location, services, service area en KBO op één plek,
-// zodat zoekmachines én AI-assistenten de kerngegevens betrouwbaar oppikken
-// (GEO — zie issue #49). Houd dit feitelijk en in lijn met data/site.ts.
+// extractable: founder, location, services, service area and company number
+// in one place, so search engines and AI assistants pick up the core facts
+// reliably. Keep it factual and in line with data/site.ts.
 const facts: { term: string; detail: string; href?: string }[] = [
   { term: "Oprichter", detail: site.owner },
-  { term: "Onderneming", detail: "Packetflow — eenmanszaak, in bijberoep" },
+  { term: "Onderneming", detail: "Packetflow, eenmanszaak" },
+  { term: "Wat Packetflow doet", detail: site.boilerplate },
   {
     term: "Thuisbasis",
     detail: `${site.address.street}, ${site.address.postalCode} ${site.address.city} (${site.address.region})`,
@@ -63,36 +67,22 @@ const facts: { term: string; detail: string; href?: string }[] = [
   {
     term: "Werkgebied",
     detail:
-      "West-Vlaanderen — o.a. Brugge, Oostende, Knokke-Heist, Blankenberge, Zedelgem en Oostkamp. Voor specifieke projecten ook daarbuiten.",
+      "West-Vlaanderen, onder meer Brugge, Oostende, Knokke-Heist, Blankenberge, Zedelgem en Oostkamp. Voor een afgebakend project ook daarbuiten.",
   },
-  {
-    term: "Diensten",
-    detail:
-      "IT-beheer & support, zakelijke WiFi & netwerken, cloud backup & beveiliging, Microsoft 365, Peppol e-facturatie en cybersecurity.",
-  },
-  {
-    term: "Voor wie",
-    detail:
-      "Medische & zorgpraktijken, kantoren & vrije beroepen, horeca & B&B's en verenigingen & VZW's.",
-  },
-  {
-    term: "Erkenning",
-    detail:
-      "Microsoft Cloud Partner — Microsoft 365-licenties worden rechtstreeks gefactureerd.",
-  },
-  {
-    term: "Bereikbaarheid",
-    detail: "'s Avonds en in het weekend, met één vast aanspreekpunt.",
-  },
-  { term: "Ondernemingsnummer", detail: `KBO ${site.vatId}` },
+  { term: "Diensten", detail: services.map((s) => s.title).join(", ") + "." },
+  { term: "Voor wie", detail: sectors.map((s) => s.navTitle).join(", ") + "." },
+  { term: "Bereikbaarheid", detail: `${site.hours.label}. Zondag en feestdagen zijn geen werkdagen.` },
+  { term: "Ondernemingsnummer", detail: site.companyNumber },
+  { term: "BTW", detail: site.vatId },
   { term: "Telefoon", detail: site.phone, href: site.phoneHref },
   { term: "E-mail", detail: site.email, href: `mailto:${site.email}` },
+  { term: "Support (klanten)", detail: site.supportEmail, href: `mailto:${site.supportEmail}` },
 ];
 ---
 
 <BaseLayout
-  title="Over mij — Louis Declerck, Packetflow"
-  description="Ik ben Louis Declerck, oprichter van Packetflow. Geen tussenpersoon, geen wisselend team — u krijgt mij persoonlijk, lokaal in West-Vlaanderen."
+  title="Over mij: Louis Declerck, Packetflow"
+  description="Ik ben Louis Declerck, oprichter van Packetflow. Geen tussenpersoon, geen wisselend team: u krijgt mij persoonlijk, vanuit Jabbeke, West-Vlaanderen."
   jsonLd={jsonLd}
 >
   {/* Hero */}
@@ -110,9 +100,8 @@ const facts: { term: string; detail: string; href?: string }[] = [
           </p>
           <p>
             Overdag werk ik als netwerkspecialist in een professionele
-            IT-omgeving. 's Avonds en in het weekend ben ik beschikbaar voor mijn
-            eigen klanten. Voor de meeste zaakvoerders en bestuurders is dat
-            precies het moment waarop ze zelf tijd hebben.
+            IT-omgeving. Die aanpak breng ik naar kleine bedrijven: eerst een
+            plan, dan het werk, en alles gedocumenteerd in uw handen.
           </p>
         </div>
         <div class="page-hero__actions">
@@ -126,20 +115,22 @@ const facts: { term: string; detail: string; href?: string }[] = [
     </div>
   </section>
 
-  {/* Bijberoep */}
+  {/* When I'm reachable, and why */}
   <section class="section">
-    <div class="container about-bijberoep">
+    <div class="container about-avail">
       <div class="prose">
         <Kicker>Eerlijk verhaal</Kicker>
-        <h2 class="about-h2">Waarom Packetflow een bijberoep is, en waarom dat goed nieuws is</h2>
+        <h2 class="about-h2">Wanneer ik bereikbaar ben, en waarom</h2>
         <p>
-          Een vraag die soms terugkomt: “Doe je dit werk fulltime?” Eerlijk
-          antwoord: nee.
+          Een vraag die soms terugkomt: "Hoe combineer je dat met je werk
+          overdag?" Eerlijk antwoord: met vaste uren en afspraken die ik ook
+          kan waarmaken.
         </p>
         <p>
-          Packetflow runt op avonden en weekends. Dat is geen tijdelijke fase —
-          het is een bewuste keuze, en het bepaalt voor wie ik wel en niet de
-          juiste IT-partner ben.
+          Ik beloof u liever minder en houd me eraan, dan meer en maak het niet
+          waar. Dat bepaalt ook voor wie ik wel en niet de juiste IT-partner
+          ben: heeft u overdag iemand nodig die binnen het uur ter plaatse is, dan
+          zeg ik u dat eerlijk.
         </p>
       </div>
       <Card class="about-meaning">
@@ -159,7 +150,7 @@ const facts: { term: string; detail: string; href?: string }[] = [
   </section>
 
   {/* Hoe ik werk */}
-  <section class="section about-work">
+  <section class="section band">
     <div class="container">
       <div class="section-head">
         <Kicker>Hoe ik werk</Kicker>
@@ -183,20 +174,20 @@ const facts: { term: string; detail: string; href?: string }[] = [
   <section class="section">
     <div class="container about-case">
       <Kicker>Een voorbeeld uit de praktijk</Kicker>
+      <h2 class="about-h2">Een patchkast die niemand begreep</h2>
       <blockquote class="about-case__quote">
-        Een kleine onderneming in Wallonië, na de overname van een pand waarvan
-        de vorige eigenaar de IT-infrastructuur “even snel zelf had gedaan”.
-        Resultaat: een patchkast vol ongelabelde kabels, een netwerk dat niemand
-        begreep, en bij elke storing de hoop dat je niet de verkeerde stekker uit
-        zou trekken. Tien uur ter plaatse: alles in kaart gebracht, herbedraad,
-        gelabeld, gedocumenteerd. Nu weet de eigenaar — en elke toekomstige
-        IT'er — exact wat waar zit.
+        Een kleine onderneming, na de overname van een pand waarvan de vorige
+        eigenaar de IT "even snel zelf had gedaan". Resultaat: een patchkast vol
+        ongelabelde kabels, een netwerk dat niemand begreep, en bij elke storing
+        de hoop dat je niet de verkeerde stekker uittrekt. Tien uur ter plaatse:
+        alles in kaart gebracht, herbedraad, gelabeld en gedocumenteerd. Nu weet
+        de eigenaar, en elke toekomstige IT'er, exact wat waar zit.
       </blockquote>
     </div>
   </section>
 
   {/* Eerste contact */}
-  <section class="section about-steps">
+  <section class="section band">
     <div class="container">
       <div class="section-head">
         <Kicker>Hoe een eerste contact eruitziet</Kicker>
@@ -223,16 +214,15 @@ const facts: { term: string; detail: string; href?: string }[] = [
     <div class="container">
       <Kicker color="var(--orange-300)">Waar werk ik</Kicker>
       <p class="about-area__text">
-        Mijn thuisbasis is Jabbeke. Ik werk regelmatig in Brugge, Oostende,
-        Knokke-Heist, Blankenberge, Zedelgem, Oostkamp en de rest van
-        West-Vlaanderen. Voor specifieke projecten reis ik verder: recente
-        klanten zaten in Oost-Vlaanderen en Wallonië.
+        Mijn thuisbasis is Jabbeke. Ik werk in Brugge, Oostende, Knokke-Heist,
+        Blankenberge, Zedelgem, Oostkamp en de rest van West-Vlaanderen. Voor
+        een afgebakend project reis ik ook verder.
       </p>
     </div>
   </section>
 
   {/* Feiten — plain, factual block (GEO: makes the core facts easy to extract) */}
-  <section class="section about-facts">
+  <section class="section band">
     <div class="container">
       <div class="section-head">
         <Kicker>Feiten</Kicker>
@@ -290,7 +280,7 @@ const facts: { term: string; detail: string; href?: string }[] = [
     font-size: var(--text-2xl);
     margin: var(--space-3) 0 var(--space-4);
   }
-  .about-bijberoep {
+  .about-avail {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-7);
@@ -303,10 +293,6 @@ const facts: { term: string; detail: string; href?: string }[] = [
     margin: 0 0 var(--space-4);
   }
 
-  .about-work {
-    background: var(--paper);
-    border-block: 1px solid var(--border-soft);
-  }
   .about-work__grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -326,83 +312,6 @@ const facts: { term: string; detail: string; href?: string }[] = [
     color: var(--text-body);
   }
 
-  .about-steps {
-    background: var(--paper);
-    border-block: 1px solid var(--border-soft);
-  }
-  .steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-5);
-    counter-reset: step;
-  }
-  .step {
-    display: flex;
-    gap: var(--space-4);
-  }
-  .step__num {
-    flex: none;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--orange-600);
-    color: #fff;
-    display: grid;
-    place-content: center;
-    font-family: var(--font-display);
-    font-weight: var(--fw-semibold);
-  }
-  .step__title {
-    font-size: var(--text-md);
-    font-family: var(--font-sans);
-    font-weight: var(--fw-semibold);
-    margin: 4px 0 6px;
-  }
-  .step__body {
-    font-size: var(--text-sm);
-    line-height: 1.6;
-    color: var(--text-muted);
-  }
-
-  .about-facts {
-    background: var(--paper);
-    border-block: 1px solid var(--border-soft);
-  }
-  .facts {
-    margin: 0;
-    max-width: 80ch;
-  }
-  .facts__row {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: var(--space-4);
-    padding: var(--space-4) 0;
-    border-bottom: 1px solid var(--border-soft);
-  }
-  .facts__row:first-child {
-    border-top: 1px solid var(--border-soft);
-  }
-  .facts__term {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-weight: var(--fw-semibold);
-    font-size: var(--text-sm);
-    color: var(--text-strong);
-  }
-  .facts__detail {
-    margin: 0;
-    font-size: var(--text-sm);
-    line-height: var(--leading-relaxed);
-    color: var(--text-muted);
-  }
-  .facts__detail a {
-    color: var(--text-link);
-    text-decoration: underline;
-  }
-
   .about-area {
     background: var(--ink);
   }
@@ -417,19 +326,12 @@ const facts: { term: string; detail: string; href?: string }[] = [
   /* keep in sync with --container-md in global.css */
   @media (max-width: 880px) {
     .about-hero,
-    .about-bijberoep {
-      grid-template-columns: 1fr;
-    }
-    .about-work__grid,
-    .steps {
+    .about-avail,
+    .about-work__grid {
       grid-template-columns: 1fr;
     }
     .about-hero__photo {
       order: -1;
-    }
-    .facts__row {
-      grid-template-columns: 1fr;
-      gap: 4px;
     }
   }
 </style>

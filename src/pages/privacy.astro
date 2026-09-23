@@ -12,7 +12,11 @@ const crumbs: [string, string][] = [
 const jsonLd = breadcrumbs(crumbs);
 ---
 
-<BaseLayout title="Privacybeleid" description={`Privacybeleid van ${site.legalName}.`} jsonLd={jsonLd}>
+<BaseLayout
+  title="Privacybeleid"
+  description={`Welke persoonsgegevens ${site.legalName} verwerkt via deze website en het contactformulier, waarom, hoe lang, met wie ze gedeeld worden en welke rechten u heeft.`}
+  jsonLd={jsonLd}
+>
   <section class="section">
     <div class="container privacy">
       <Breadcrumbs items={crumbs} />
@@ -21,23 +25,34 @@ const jsonLd = breadcrumbs(crumbs);
       <div class="prose">
         <h2>Wie is verantwoordelijk voor uw gegevens?</h2>
         <p>
-          Deze website en dienstverlening worden uitgebaat door:
+          Deze website en de dienstverlening worden uitgebaat door:
         </p>
         <ul>
-          <li><strong>{site.legalName}</strong> — {site.owner}</li>
+          <li><strong>{site.legalName}</strong>, {site.owner}</li>
           <li>{site.address.street}, {site.address.postalCode} {site.address.city}, {site.address.country}</li>
-          <li>Ondernemingsnummer (KBO): {site.vatId}</li>
+          <li>Ondernemingsnummer: {site.companyNumber} · BTW {site.vatId}</li>
           <li>E-mail: <a href={`mailto:${site.email}`}>{site.email}</a></li>
           <li>Telefoon: <a href={site.phoneHref}>{site.phone}</a></li>
         </ul>
 
-        <h2>Welke gegevens verzamel ik?</h2>
+        <h2>Welke gegevens verwerk ik, en waarom?</h2>
         <p>
-          Wanneer u het contactformulier gebruikt of mij mailt of belt, verwerk
-          ik de gegevens die u zelf doorgeeft — zoals uw naam, bedrijfsnaam,
-          e-mailadres, telefoonnummer en de inhoud van uw bericht. Ik gebruik
-          deze gegevens enkel om uw vraag te beantwoorden en om u een offerte of
-          dienstverlening te bezorgen.
+          <strong>Als u het contactformulier gebruikt, of mij mailt of belt,</strong>
+          verwerk ik de gegevens die u zelf doorgeeft: uw naam, bedrijfsnaam,
+          e-mailadres, telefoonnummer en de inhoud van uw bericht. Ik gebruik ze
+          om uw vraag te beantwoorden en u eventueel een offerte te bezorgen. De
+          rechtsgrond is het nemen van stappen op uw verzoek, voor een eventuele
+          overeenkomst (artikel 6.1.b AVG).
+        </p>
+        <p>
+          <strong>Als u klant bent,</strong> verwerk ik daarnaast de gegevens die
+          nodig zijn om de overeenkomst uit te voeren en te factureren. De
+          rechtsgrond is de uitvoering van de overeenkomst en, voor de
+          boekhouding, een wettelijke verplichting (artikel 6.1.b en 6.1.c AVG).
+        </p>
+        <p>
+          <strong>Websitestatistieken</strong> verwerk ik alleen met uw
+          toestemming (artikel 6.1.a AVG). Zie hieronder.
         </p>
 
         <h2>Cookies en websitestatistieken</h2>
@@ -46,46 +61,56 @@ const jsonLd = breadcrumbs(crumbs);
           standaard <strong>niets</strong> van Google. Pas als u daar
           uitdrukkelijk mee instemt via de cookiemelding, wordt Google
           Analytics 4 geladen om te meten hoeveel bezoekers er zijn en welke
-          pagina's zij bekijken. Weigert u, dan gebeurt er niets — de site
-          blijft volledig werken.
+          pagina's zij bekijken. Weigert u, dan gebeurt er niets en blijft de
+          site volledig werken.
         </p>
         <p>
-          Geeft u wel toestemming, dan plaatst Google een cookie in uw browser
-          (<code>_ga</code>) en verwerkt het gegevens zoals de bezochte
-          pagina's, het tijdstip, uw browser en apparaat, en een bij benadering
-          bepaalde locatie. Google Analytics 4 bewaart uw IP-adres niet.
-          Verwerker is Google Ireland Limited. Ik gebruik deze statistieken
-          enkel om de website te verbeteren — niet voor advertenties, en ik
-          verkoop ze niet.
+          Geeft u wel toestemming, dan plaatst Google twee cookies in uw browser
+          (<code>_ga</code> en <code>_ga_</code> gevolgd door een code) en
+          verwerkt het gegevens zoals de bezochte pagina's, het tijdstip, uw
+          browser en toestel, en een bij benadering bepaalde locatie. Google
+          Analytics 4 bewaart uw IP-adres niet. Verwerker is Google Ireland
+          Limited; gegevens kunnen ook door Google LLC in de Verenigde Staten
+          verwerkt worden, op basis van het EU-VS Data Privacy Framework. Ik
+          gebruik deze statistieken enkel om de website te verbeteren, niet voor
+          advertenties, en ik verkoop ze niet.
         </p>
         <p>
           U kan uw keuze op elk moment herzien, even makkelijk als u ze gaf:
           <button type="button" class="privacy__consent" data-cookie-settings
             >open de cookievoorkeuren</button
           > (ook onderaan elke pagina). Trekt u uw toestemming in, dan worden de
-          reeds geplaatste <code>_ga</code>-cookies meteen verwijderd.
+          geplaatste <code>_ga</code>-cookies meteen verwijderd.
         </p>
 
         <h2>Hoe lang bewaar ik ze?</h2>
         <p>
-          Ik bewaar uw gegevens niet langer dan nodig voor het doel waarvoor ze
-          verzameld werden, of zo lang als wettelijk vereist is (bijvoorbeeld
-          voor boekhoudkundige verplichtingen).
+          Gegevens uit een contactaanvraag bewaar ik zolang dat nodig is om uw
+          vraag te beantwoorden en op te volgen. Leidt de aanvraag niet tot een
+          samenwerking, dan verwijder ik ze zodra die opvolging afgerond is.
+          Klantgegevens bewaar ik zolang de samenwerking loopt, en factuur- en
+          boekhoudgegevens zo lang als de wet dat vraagt.
         </p>
 
         <h2>Met wie deel ik ze?</h2>
         <p>
-          Ik verkoop uw gegevens niet. Ze worden enkel gedeeld met
-          dienstverleners die nodig zijn om u te helpen (zoals Microsoft 365 voor
-          e-mail), en telkens in regel met de GDPR/AVG.
+          Ik verkoop uw gegevens niet. Ze worden alleen gedeeld met
+          dienstverleners die ik nodig heb om u te helpen, en telkens in regel
+          met de AVG:
         </p>
+        <ul>
+          <li><strong>Odoo SA</strong> (België), voor het klantenbeheer: aanvragen via het contactformulier komen daar terecht.</li>
+          <li><strong>Microsoft</strong>, voor e-mail en bestanden (Microsoft 365).</li>
+          <li><strong>Google</strong>, enkel voor websitestatistieken en enkel met uw toestemming.</li>
+        </ul>
 
         <h2>Uw rechten</h2>
         <p>
           U heeft het recht om uw gegevens in te kijken, te laten verbeteren of
-          te laten verwijderen, en om bezwaar te maken tegen de verwerking ervan.
-          Heeft u een vraag over uw gegevens? Mail naar
-          <a href={`mailto:${site.email}`}>{site.email}</a> of bel
+          te laten verwijderen, om de verwerking te laten beperken, om bezwaar
+          te maken, en om uw gegevens mee te nemen. Heeft u toestemming gegeven,
+          dan kan u die altijd intrekken. Heeft u een vraag over uw gegevens?
+          Mail naar <a href={`mailto:${site.email}`}>{site.email}</a> of bel
           <a href={site.phoneHref}>{site.phone}</a>. U kan ook klacht indienen bij
           de Gegevensbeschermingsautoriteit (gegevensbeschermingsautoriteit.be).
         </p>
@@ -108,6 +133,20 @@ const jsonLd = breadcrumbs(crumbs);
     color: var(--text-link);
     text-decoration: underline;
     cursor: pointer;
+  }
+  .privacy .prose h2 {
+    font-size: var(--text-lg);
+    margin: var(--space-6) 0 var(--space-3);
+  }
+  .privacy .prose ul {
+    margin: 0 0 var(--space-4);
+    padding-left: var(--space-5);
+    color: var(--text-body);
+    line-height: var(--leading-relaxed);
+  }
+  .privacy .prose a {
+    color: var(--text-link);
+    text-decoration: underline;
   }
   .privacy__title {
     font-size: var(--text-2xl);

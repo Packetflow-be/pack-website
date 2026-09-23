@@ -15,92 +15,89 @@ const crumbs: [string, string][] = [
   ["Lokale IT-partner vs. groot IT-bedrijf", "/lokale-it-partner-vs-groot-it-bedrijf"],
 ];
 
-// Comparison rows: [criterium, lokale partner, groot IT-bedrijf]. Kept fair —
-// the big-firm column is neutral, not a strawman, so the page reads as honest
-// advies dat de exacte afweging van de ICP bezit (GEO — zie issue #49).
+// Comparison rows: [criterium, lokale partner, groot IT-bedrijf]. Kept fair:
+// the big-firm column is neutral, not a strawman, and the local column only
+// claims what Packetflow actually commits to (vault: pf-service-terms). No
+// price argument: price is never the pitch (vault: packetflow-strategy).
 const rows: [string, string, string][] = [
   [
     "Aanspreekpunt",
     "Eén vaste persoon die uw zaak, mensen en software kent.",
-    "Wisselend team, meestal via een helpdesk of ticketsysteem.",
+    "Een team, meestal via een centrale helpdesk.",
+  ],
+  [
+    "Aanpak",
+    "Enterprise-engineering op KMO-schaal: eerst een plan, een gescheiden netwerk, geteste back-ups.",
+    "Gestandaardiseerde pakketten, doorgaans gebouwd voor grotere omgevingen.",
   ],
   [
     "Bereikbaarheid",
-    "'s Avonds en in het weekend, rechtstreeks bij dezelfde persoon.",
-    "Kantooruren; daarbuiten via een (betaald) SLA-contract.",
+    "Op weekdagen 's avonds en op zaterdagvoormiddag, rechtstreeks bij dezelfde persoon. Overdag meestal niet.",
+    "Tijdens de kantooruren; daarbuiten via een (betaald) SLA-contract.",
   ],
   [
-    "Reactiesnelheid",
-    "Korte lijnen en snel ter plaatse in de regio.",
-    "Afhankelijk van ticketprioriteit en het afgesproken SLA-niveau.",
+    "Reactie",
+    "Elke melding wordt uiterlijk de volgende werkdag bevestigd.",
+    "Afhankelijk van de ticketprioriteit en het afgesproken SLA-niveau.",
   ],
   [
-    "Prijs",
-    "Weinig overhead, transparant tarief — u betaalt voor wat u nodig heeft.",
-    "Hogere tarieven door kantoren, sales- en managementlagen.",
+    "24/7-bewaking",
+    "Toestellen en Microsoft 365 dag en nacht bewaakt door een bemand beveiligingscentrum (Huntress, Petra). Geen 24/7-wachtdienst van mij zelf.",
+    "Kan 24/7-bewaking én een 24/7-wachtdienst bieden, tegen meerkost.",
   ],
   [
     "Contract",
-    "Maandelijks opzegbaar, geen lock-in.",
+    "Geen minimale looptijd, één maand opzeg.",
     "Vaak meerjarencontracten met een vaste minimumafname.",
   ],
   [
-    "Kennis van uw zaak",
-    "Persoonlijk: kent uw gewoontes en geschiedenis uit het hoofd.",
-    "Gedocumenteerd in een systeem, doorgaans minder persoonlijk.",
+    "Documentatie",
+    "Alles gedocumenteerd en in uw handen. U blijft eigenaar van alles.",
+    "Gedocumenteerd, meestal in het systeem van het IT-bedrijf zelf.",
   ],
   [
     "Schaal",
-    "Op zijn best voor 1 tot ~20 werkplekken.",
+    "Op zijn best voor 2 tot ~20 werkplekken.",
     "Gebouwd voor grote organisaties en complexe omgevingen.",
-  ],
-  [
-    "24/7-dekking",
-    "Geen 24/7-wachtdienst; avond en weekend wel.",
-    "Kan 24/7-bewaking (NOC/SOC) bieden tegen meerkost.",
-  ],
-  [
-    "Documentatie",
-    "Alles vastgelegd zodat een andere IT'er morgen verder kan.",
-    "Gestandaardiseerd gedocumenteerd binnen het bedrijf.",
   ],
 ];
 
 const bigFirm = [
   "U heeft tientallen werkplekken of meerdere vestigingen.",
   "U heeft gegarandeerde 24/7-uptime met een strak SLA nodig.",
+  "U heeft overdag iemand nodig die binnen het uur ter plaatse is.",
   "U wilt een team met directe vervanging bij afwezigheid.",
   "U draait complexe, gespecialiseerde infrastructuur (eigen datacenter, ERP-maatwerk).",
 ];
 
 const localPartner = [
-  "U bent een solo- tot kleine onderneming, praktijk of kantoor (1 tot ~20 mensen).",
-  "U wilt één gezicht dat uw zaak echt kent, geen wisselend ticketteam.",
-  "U wilt een transparant tarief zonder de overhead van een groot bedrijf.",
-  "U wilt flexibiliteit, zonder een meerjarencontract te tekenen.",
-  "Bereikbaarheid 's avonds en in het weekend past bij uw agenda.",
+  "U bent een kleine onderneming, praktijk of kantoor (2 tot ~20 mensen).",
+  "U wilt één gezicht dat uw zaak echt kent, geen wisselend team.",
+  "U wilt de aanpak van een groot IT-team, op de maat van uw zaak.",
+  "U wilt weten wat er in uw maandprijs zit, zonder meerjarencontract.",
+  "'s Avonds en op zaterdagvoormiddag past voor u, en overdag kan het wachten tot de volgende werkdag.",
 ];
 
 const faqs = [
   {
-    question: "Is een lokale IT-partner goedkoper dan een groot IT-bedrijf?",
+    question: "Hoe vergelijk ik een lokale partner met een groot IT-bedrijf?",
     answer:
-      "Voor een kleine onderneming meestal wel. Een lokale partner draagt geen kantoren, salesteam of managementlagen, dus die overhead zit niet in het uurtarief. U betaalt voor het werk en de licenties, transparant op de factuur. Een groot IT-bedrijf is doorgaans duurder, maar biedt in ruil schaal, 24/7-dekking en gegarandeerde vervanging.",
+      "Vergelijk niet het uurtarief, maar wat er in de maandprijs zit: welke toestellen en accounts bewaakt worden, of back-ups ook getest worden, of u een rapport krijgt, en wat een overname of een opzeg kost. Bij Packetflow staat dat per dienst beschreven, en de overname is een apart project met een vaste prijs.",
   },
   {
     question: "Wat als mijn zaak groeit?",
     answer:
-      "Tot ongeveer 20 werkplekken blijft een lokale partner vlot werkbaar. Groeit u verder, of komen er meerdere vestigingen bij, dan is een groter IT-bedrijf met een team vaak de logischere keuze. Ik zeg dat eerlijk en help u bij een nette overdracht — alles is gedocumenteerd, zodat een andere IT'er zonder problemen verder kan.",
+      "Tot ongeveer 20 werkplekken blijft een lokale partner vlot werkbaar. Groeit u verder, of komen er meerdere vestigingen bij, dan is een groter IT-bedrijf met een team vaak de logischere keuze. Ik zeg dat eerlijk en help u bij een nette overdracht: alles is gedocumenteerd, zodat een andere IT'er zonder problemen verder kan.",
   },
   {
     question: "Is een eenmanszaak wel betrouwbaar als IT-partner?",
     answer:
-      "Betrouwbaarheid zit in documentatie en afspraken, niet in de grootte van het bedrijf. Netwerkschema's, configuraties en wachtwoorden worden bijgehouden en beschikbaar gesteld, zodat u nooit afhankelijk bent van één persoon. Voor stroomwerken of zware projecten werk ik samen met vaste collega's; wat ik niet zelf kan, verwijs ik eerlijk door.",
+      "Betrouwbaarheid zit in documentatie en afspraken, niet in de grootte van het bedrijf. Netwerkschema's, configuraties en toegang worden bijgehouden en staan op uw naam, zodat u nooit afhankelijk bent van één persoon. Voor stroomwerken of zware projecten werk ik samen met vaste collega's; wat ik niet zelf kan, verwijs ik eerlijk door.",
   },
   {
-    question: "Bied je 24/7-support zoals een groot IT-bedrijf?",
+    question: "Is er 24/7-ondersteuning zoals bij een groot IT-bedrijf?",
     answer:
-      "Nee, geen 24/7-wachtdienst. Wel ben ik 's avonds en in het weekend rechtstreeks bereikbaar — precies wanneer veel zaakvoerders zelf tijd hebben. Systemen worden proactief bewaakt zodat problemen vaak opgelost zijn vóór u er iets van merkt. Heeft u écht gegarandeerde 24/7-dekking nodig, dan is een groot IT-bedrijf de betere keuze.",
+      "Er is 24/7-bewaking: uw toestellen en Microsoft 365-accounts worden dag en nacht bewaakt door een bemand beveiligingscentrum dat een aanval zelf kan indammen. Er is geen 24/7-wachtdienst van mij: de opvolging gebeurt op weekdagen 's avonds en op zaterdagvoormiddag, en elke melding wordt uiterlijk de volgende werkdag bevestigd. Heeft u gegarandeerde 24/7-dekking door mensen nodig, dan is een groot IT-bedrijf de betere keuze.",
   },
 ];
 
@@ -112,7 +109,7 @@ const jsonLd = [
 
 <BaseLayout
   title="Lokale IT-partner of groot IT-bedrijf?"
-  description="Lokale IT-partner of groot IT-bedrijf? Een eerlijke vergelijking op prijs, bereikbaarheid, contract en kennis van uw zaak voor West-Vlaamse KMO's."
+  description="Lokale IT-partner of groot IT-bedrijf? Een eerlijke vergelijking op aanpak, bereikbaarheid, 24/7-bewaking en contract, voor West-Vlaamse KMO's."
   jsonLd={jsonLd}
 >
   <section class="page-hero">
@@ -122,7 +119,7 @@ const jsonLd = [
         <Kicker>Eerlijke vergelijking</Kicker>
         <h1>Lokale IT-partner vs. groot IT-bedrijf</h1>
         <p class="lead page-hero__lead">
-          Er is geen winnaar die voor iedereen geldt — het hangt af van uw
+          Er is geen winnaar die voor iedereen geldt: het hangt af van uw
           situatie. Hieronder zet ik beide eerlijk naast elkaar, zodat u kunt
           beslissen wat het beste past bij uw zaak.
         </p>
@@ -140,7 +137,7 @@ const jsonLd = [
         <Kicker>Naast elkaar</Kicker>
         <h2>De vergelijking, criterium per criterium</h2>
       </div>
-      <div class="cmp-wrap">
+      <div class="cmp-wrap" tabindex="0" role="region" aria-label="Vergelijking lokale IT-partner en groot IT-bedrijf">
         <table class="cmp">
           <thead>
             <tr>
@@ -208,11 +205,11 @@ const jsonLd = [
       <p class="cmp-honest__text">
         Ik ben een lokale partner, dus mijn voorkeur kent u. Maar ik verkoop u
         niets dat niet past: heeft uw zaak een team, meerdere vestigingen of
-        24/7-garanties nodig, dan zeg ik dat. Bent u een praktijk of kantoor dat
-        één vast, bereikbaar aanspreekpunt zoekt aan een transparant tarief, dan is
-        dat precies waar Packetflow voor gemaakt is — bekijk de
-        <a href="/prijzen"> prijzen</a> of lees
-        <a href="/over-mij"> hoe ik werk</a>.
+        24/7-garanties door mensen nodig, dan zeg ik dat. Bent u een bedrijf,
+        praktijk of kantoor dat de aanpak van een groot IT-team zoekt, met één
+        vast aanspreekpunt, dan is dat precies waar Packetflow voor gemaakt is.
+        Bekijk de <a href="/werkwijze">werkwijze</a> of lees
+        <a href="/over-mij">wie ik ben</a>.
       </p>
     </div>
   </section>
@@ -221,7 +218,7 @@ const jsonLd = [
 
   <CtaSection
     title="Twijfelt u nog welke aanpak bij uw zaak past?"
-    body="Leg me kort uw situatie voor. U krijgt een eerlijk antwoord — ook als dat betekent dat u beter bij een groter bedrijf zit."
+    body="Leg me kort uw situatie voor. U krijgt een eerlijk antwoord, ook als dat betekent dat u beter bij een groter bedrijf zit."
   />
 </BaseLayout>
 

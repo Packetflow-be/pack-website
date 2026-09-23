@@ -23,7 +23,7 @@ const {
   source,
   campaign,
   title = "Benieuwd wat IT-beheer ú zou kosten?",
-  body = "Vertel kort over uw zaak en uw huidige setup. Ik bezorg u een heldere richtprijs — vrijblijvend, binnen één werkdag.",
+  body = "Vertel kort over uw zaak en uw huidige setup. Ik bezorg u vrijblijvend een heldere richtprijs, binnen één werkdag.",
 } = Astro.props;
 
 const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
@@ -76,12 +76,12 @@ const formId = `lead-form-${source}`;
         <Button type="submit" variant="primary" size="lg" iconRight="send">
           Vraag een richtprijs
         </Button>
-        <p class="lead-form__fine">Geen verkooppraat. Uw gegevens blijven bij mij — zie <a href="/privacy">privacy</a>.</p>
+        <p class="lead-form__fine">Geen verkooppraat. Uw gegevens blijven bij mij, zie <a href="/privacy">privacy</a>.</p>
       </form>
 
       <div class="lead-form__success form-success" role="status" tabindex="-1" hidden>
         <span class="form-success__icon"><Icon name="check" size={28} color="var(--success)" /></span>
-        <h3 class="form-success__title">Bedankt — tot binnenkort!</h3>
+        <h3 class="form-success__title">Bedankt, tot binnenkort!</h3>
         <p class="form-success__body">Ik neem binnen één werkdag contact met u op.</p>
       </div>
     </Card>
@@ -199,7 +199,7 @@ const formId = `lead-form-${source}`;
     margin-bottom: 6px;
   }
   .lead-form__opt {
-    color: var(--text-faint);
+    color: var(--text-muted);
     font-weight: var(--fw-regular);
   }
   .lead-form input,

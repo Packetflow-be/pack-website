@@ -33,7 +33,8 @@
   --blue-50: #eef4fc;
 
   /* ---- Brand: Packetflow Orange ---- */
-  --orange-700: #c2410c; /* burnt — editorial / print accent */
+  --orange-800: #9a3412; /* deep burnt: hover/press on orange-700, text on tinted fills */
+  --orange-700: #c2410c; /* burnt: primary action fill (white text 5.2:1, WCAG AA) */
   --orange-600: #e2620f;
   --orange-500: #f37f21; /* logo orange */
   --orange-300: #f8ae6e;
@@ -86,12 +87,15 @@
   --border-brand: var(--orange-600);
   --rule-accent: var(--orange-500);
 
-  /* Orange is the PRIMARY action; blue is the supporting accent. */
+  /* Orange is the PRIMARY action; blue is the supporting accent.
+     The fill is orange-700, not the logo-adjacent orange-600: white text on
+     orange-600 is 3.5:1 and fails WCAG AA for button labels. Hover goes
+     darker, not lighter, so the label never drops below AA either. */
   --accent: var(--blue-700);
   --accent-press: var(--blue-800);
-  --primary: var(--orange-600);
-  --primary-hover: var(--orange-500);
-  --primary-press: var(--orange-700);
+  --primary: var(--orange-700);
+  --primary-hover: var(--orange-800);
+  --primary-press: var(--orange-800);
   --focus-ring: var(--orange-300);
 
   /* ---- Typography ---- */
@@ -442,7 +446,7 @@ svg {
   height: 24px;
   border-radius: 50%;
   background: var(--orange-50);
-  color: var(--orange-600);
+  color: var(--orange-700);
   display: grid;
   place-content: center;
   flex: none;
@@ -455,10 +459,101 @@ svg {
   margin-bottom: var(--space-4);
 }
 
+/* Numbered steps (werkwijze, homepage, over mij) */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+.steps--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.step {
+  display: flex;
+  gap: var(--space-4);
+}
+.step__num {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  display: grid;
+  place-content: center;
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+}
+.step__title {
+  font-size: var(--text-md);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  margin: 4px 0 6px;
+}
+.step__body {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Definition rows (facts, service terms) */
+.facts {
+  margin: 0;
+  max-width: 80ch;
+}
+.facts__row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.facts__row:first-child {
+  border-top: 1px solid var(--border-soft);
+}
+.facts__term {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-sm);
+  color: var(--text-strong);
+}
+.facts__detail {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+.facts__detail a {
+  color: var(--text-link);
+  text-decoration: underline;
+}
+
+/* A section on the brighter paper surface, ruled top and bottom */
+.band {
+  background: var(--paper);
+  border-block: 1px solid var(--border-soft);
+}
+
+/* Inline text link inside running copy */
+.text-link {
+  color: var(--text-link);
+  text-decoration: underline;
+}
+
 /* keep in sync with --container-md in global.css */
 @media (max-width: 880px) {
   .grid-2,
-  .grid-cards {
+  .grid-cards,
+  .steps,
+  .steps--4 {
     grid-template-columns: 1fr;
+  }
+  .facts__row {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }

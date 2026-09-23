@@ -1,51 +1,59 @@
 # Packetflow
 
-> Packetflow is de lokale IT-partner van Louis Declerck in West-Vlaanderen
-> (thuisbasis Jabbeke). Hij helpt kleine ondernemingen — medische
-> praktijken, kantoren & vrije beroepen, horeca/B&B's en verenigingen — met
-> Microsoft 365, veilige backup, zakelijke WiFi, Peppol e-facturatie en
-> cybersecurity. De degelijkheid van een groot IT-team, met één vast
-> aanspreekpunt: gedocumenteerd, beveiligd en herstelbaar — bereikbaar
-> 's avonds en in het weekend.
+> Packetflow bouwt IT voor bedrijven waar stilstand geld kost: kantoor én
+> productie onder één plan. Netwerk, segmentatie, geteste back-ups, geregelde
+> toegang. Gedocumenteerd opgeleverd, en de klant blijft eigenaar van alles.
+> Enterprise-engineering op KMO-schaal, door Louis Declerck, vanuit Jabbeke
+> (West-Vlaanderen).
 
 ## Kernfeiten
 
 - Oprichter: Louis Declerck
-- Onderneming: Packetflow — eenmanszaak, in bijberoep
+- Onderneming: Packetflow, eenmanszaak
 - Thuisbasis: Hageweg 39, 8490 Jabbeke (West-Vlaanderen)
-- Werkgebied: West-Vlaanderen (o.a. Brugge, Oostende, Knokke-Heist, Blankenberge, Zedelgem, Oostkamp); voor projecten ook daarbuiten
-- Ondernemingsnummer: KBO BE 1024.713.047
-- Microsoft Cloud Partner
-- Telefoon: +32 468 22 72 12 — E-mail: louis@packetflow.be
+- Werkgebied: West-Vlaanderen (o.a. Brugge, Oostende, Knokke-Heist, Blankenberge, Zedelgem, Oostkamp); voor een afgebakend project ook daarbuiten
+- Voor wie: bedrijven van 2 tot ongeveer 20 mensen zonder eigen IT-afdeling
+- Bereikbaarheid: maandag tot vrijdag 18:00–21:00, zaterdag 09:00–12:00. Elke melding wordt uiterlijk de volgende werkdag bevestigd.
+- 24/7: toestellen (Huntress) en Microsoft 365-accounts (Petra Security) worden dag en nacht bewaakt door een bemand beveiligingscentrum. Er is geen 24/7-wachtdienst van Packetflow zelf.
+- Contract: geen minimale looptijd, één maand opzeg. De overname van een omgeving is een apart project met een vaste prijs.
+- Prijzen: niet gepubliceerd. Na een gratis kennismaking en bezoek volgt een offerte; beheer wordt per maand per eenheid (toestel, gebruiker, Microsoft 365-omgeving, vestiging) aangerekend.
+- Ondernemingsnummer: 1024.713.047 · BTW BE 1024.713.047
+- Telefoon: +32 468 22 72 12 · E-mail: louis@packetflow.be · Support voor klanten: support@packetflow.be
 
 ## Belangrijkste pagina's
 
-- [Home](https://www.packetflow.be/): overzicht van Packetflow en het aanbod.
-- [Prijzen](https://www.packetflow.be/prijzen): drie manieren om te werken — beheer per module (vanaf €15/toestel/maand), een urenkaart van 10u voor €550, of losse hulp aan €60/u. Alles excl. btw.
-- [Over mij](https://www.packetflow.be/over-mij): Louis Declerck, werkwijze, principes en de feiten over Packetflow.
-- [Lokale IT-partner vs. groot IT-bedrijf](https://www.packetflow.be/lokale-it-partner-vs-groot-it-bedrijf): eerlijke vergelijking op prijs, bereikbaarheid, contract en kennis van uw zaak.
-- [Tarieven](https://www.packetflow.be/tarieven): uurtarief en verplaatsingskosten per zone.
-- [Contact](https://www.packetflow.be/contact): vrijblijvend contact opnemen.
+- [Home](https://www.packetflow.be/): wat Packetflow doet en voor wie.
+- [Werkwijze](https://www.packetflow.be/werkwijze): van kennismaking tot beheer, hoe een prijs is opgebouwd, contract en bereikbaarheid.
+- [Over mij](https://www.packetflow.be/over-mij): Louis Declerck, principes en de feiten over Packetflow.
+- [Lokale IT-partner vs. groot IT-bedrijf](https://www.packetflow.be/lokale-it-partner-vs-groot-it-bedrijf): eerlijke vergelijking op aanpak, bereikbaarheid, 24/7-bewaking en contract.
+- [Contact](https://www.packetflow.be/contact): vrijblijvend kennismaken.
 
 ## Diensten
 
 - [Diensten (overzicht)](https://www.packetflow.be/diensten)
-- [IT-beheer & support](https://www.packetflow.be/diensten/it-beheer-support): proactief beheer en één vast aanspreekpunt.
-- [Zakelijke WiFi & netwerken](https://www.packetflow.be/diensten/zakelijke-wifi-netwerken): stabiele, veilige netwerken die de piek aankunnen.
-- [Cloud backup & beveiliging](https://www.packetflow.be/diensten/cloud-backup-beveiliging): versleutelde, geteste back-up en cybersecurity.
+- [De verhuizing zonder IT-zorgen](https://www.packetflow.be/diensten/kantoorverhuizing): netwerk, wifi en firewall goed gelegd bij een verhuizing of verbouwing.
+- [Beveilig de praktijk](https://www.packetflow.be/diensten/cloud-backup-beveiliging): 24/7 bewaakte toestellen en accounts, tweestapsverificatie, back-ups met hersteltest.
+- [Moderne werkplek](https://www.packetflow.be/diensten/moderne-werkplek): Microsoft 365 goed ingericht, beheerde toestellen, Peppol-e-facturatie.
+- [Zakelijke wifi & netwerken](https://www.packetflow.be/diensten/zakelijke-wifi-netwerken): een gastennetwerk dat klopt, gescheiden van kassa en eigen systemen.
+- [Uw bedrijfssoftware, in eigen beheer](https://www.packetflow.be/diensten/bedrijfssoftware-eigen-beheer): bedrijfssoftware zelf hosten, gebackupt en gedocumenteerd.
+- [IT-beheer & support](https://www.packetflow.be/diensten/it-beheer-support): Packetflow Beheer, de diensten per eenheid die alles draaiende houden.
 
 ## Voor wie (sectoren)
 
 - [Sectoren (overzicht)](https://www.packetflow.be/sectoren)
-- [Medische & zorgpraktijken](https://www.packetflow.be/sectoren/medische-praktijken): IT voor apotheken, tandartsen en praktijken, in regel met de GDPR.
-- [Kantoren & vrije beroepen](https://www.packetflow.be/sectoren/kantoren-vrije-beroepen): discrete IT voor advocaten, architecten en makelaars.
-- [Horeca & B&B's](https://www.packetflow.be/sectoren/horeca-bnb): stabiele netwerken en gasten-WiFi die de service aankunnen.
-- [Verenigingen & VZW's](https://www.packetflow.be/sectoren/verenigingen-vzw): betaalbare, eenvoudige IT voor vrijwilligerswerking.
+- [Productie & toeleveranciers](https://www.packetflow.be/sectoren/productie-toeleveranciers): kantoor en productie gescheiden, hulp bij de NIS2-vragenlijst van een klant.
+- [Medische & zorgpraktijken](https://www.packetflow.be/sectoren/medische-praktijken): IT voor apotheken, tandartsen en praktijken.
+- [Kantoren & vrije beroepen](https://www.packetflow.be/sectoren/kantoren-vrije-beroepen): IT voor advocaten, architecten en makelaars.
+- [Horeca & B&B's](https://www.packetflow.be/sectoren/horeca-bnb): gastenwifi en netwerken die de service aankunnen.
+- [Verenigingen & VZW's](https://www.packetflow.be/sectoren/verenigingen-vzw): eenvoudige, overdraagbare IT voor vrijwilligerswerking.
 
 ## Blog
 
 - [Blog (overzicht)](https://www.packetflow.be/blog)
 - [Wat kost IT-beheer voor een kleine onderneming?](https://www.packetflow.be/blog/wat-kost-it-beheer-kleine-onderneming)
+- [NIS2 voor kleine ondernemingen](https://www.packetflow.be/blog/nis2-kleine-ondernemingen-belgie)
+- [Gasten- en kassanetwerk scheiden in de horeca](https://www.packetflow.be/blog/kassanetwerk-scheiden-horeca)
+- [Wifi voor een B&B](https://www.packetflow.be/blog/wifi-bnb-volledige-dekking)
 
 ## Lokale pagina's
 

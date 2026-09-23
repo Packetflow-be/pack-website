@@ -8,7 +8,6 @@ import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { getPublishedPosts, formatDate } from "@/lib/blog";
 import { breadcrumbs } from "@/lib/schema";
 import { url } from "@/lib/url";
-import { site } from "@/data/site";
 
 const posts = await getPublishedPosts();
 
@@ -19,10 +18,10 @@ const crumbs: [string, string][] = [
 const jsonLd = breadcrumbs(crumbs);
 
 const description =
-  "Praktische inzichten over IT, beveiliging en e-facturatie voor praktijken, kantoren en lokale zaken in West-Vlaanderen — zonder jargon.";
+  "Praktische inzichten over IT, beveiliging, netwerken en e-facturatie voor bedrijven, praktijken en kantoren in West-Vlaanderen. Zonder jargon.";
 ---
 
-<BaseLayout title="Blog — IT-inzichten zonder jargon" description={description} jsonLd={jsonLd}>
+<BaseLayout title="Blog: IT-inzichten zonder jargon" description={description} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container page-hero__in">
       <Breadcrumbs items={crumbs} />
@@ -68,7 +67,7 @@ const description =
 
   <CtaSection
     title="Een vraag die hier nog niet beantwoord is?"
-    body={`Stel ze gerust. Ik denk vrijblijvend met u mee — als lokale IT-partner in ${site.serviceArea}.`}
+    body="Stel ze gerust. Ik denk vrijblijvend met u mee en antwoord binnen één werkdag."
   />
 </BaseLayout>
 
@@ -105,7 +104,7 @@ const description =
     font-weight: var(--fw-semibold);
     letter-spacing: var(--tracking-kicker);
     text-transform: uppercase;
-    color: var(--orange-600);
+    color: var(--orange-800);
   }
   .post-card__title {
     font-size: var(--text-lg);

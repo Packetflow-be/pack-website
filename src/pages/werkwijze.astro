@@ -1,0 +1,262 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import Card from "@/components/Card.astro";
+import Kicker from "@/components/Kicker.astro";
+import Icon from "@/components/Icon.astro";
+import Button from "@/components/Button.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Faq from "@/components/Faq.astro";
+import { site } from "@/data/site";
+import { breadcrumbs, faqPage } from "@/lib/schema";
+import { url } from "@/lib/url";
+
+// WERKWIJZE — how working with Packetflow runs, how a price is built and when
+// clients can reach Louis. Replaces the old /prijzen and /tarieven pages: no
+// amounts are published, by decision (2026-09-23). The wording follows the
+// client-facing service terms and description in the vault (pf-service-terms,
+// pf-service-description). Those are still drafts pending a legal read, so
+// only the settled parts are here: the model, the hours, the term and notice.
+
+const crumbs: [string, string][] = [
+  ["Home", "/"],
+  ["Werkwijze", "/werkwijze"],
+];
+
+const steps: [string, string][] = [
+  ["Kennismaking", "Een gesprek van 30 minuten, bij u of via telefoon. U vertelt waar het knelt, ik zeg eerlijk of ik kan helpen. Gratis."],
+  ["Bezoek ter plaatse", "Ik kom kijken hoe het er vandaag bij ligt: toestellen, netwerk, Microsoft 365, back-ups en wie waar toegang heeft. Ook gratis."],
+  ["Offerte", "Een vaste prijs voor de overname of het project, en een maandprijs per eenheid voor het beheer. Per dienst staat wat erin zit en wat niet."],
+  ["Plan en overname", "Een overstapplan met data en een terugvaloptie per stap. De toegang van de vorige partij wordt netjes overgedragen."],
+  ["Oplevering", "Alles gedocumenteerd in uw handen: netwerkschema, configuratie, toegang. U blijft eigenaar van alles."],
+  ["Beheer", "Bewaakt en bijgewerkt, met één vast aanspreekpunt en elke maand één pagina rapport over al uw diensten samen."],
+];
+
+const pricing: { term: string; detail: string }[] = [
+  { term: "Kennismaking en bezoek", detail: "Gratis. Dat is de manier om te weten wat u nodig heeft, voor er een prijs op kan staan." },
+  { term: "Overname van uw omgeving", detail: "Een apart project met een vaste prijs in de offerte. Zo zit er geen opstartkost verstopt in een looptijd." },
+  { term: "Projecten", detail: "Een verhuizing, een migratie of een nieuwe installatie krijgt altijd een vaste prijs, na het bezoek ter plaatse." },
+  { term: "Beheer", detail: "Per maand, per eenheid die u zelf kan tellen: een toestel, een gebruiker, uw Microsoft 365-omgeving of een vestiging. U kiest per dienst wat u nodig heeft." },
+  { term: "Extra werk", detail: "Per uur, op de maandfactuur. Wat niet op de vaste lijst van een dienst staat, wordt eerst geoffreerd en pas uitgevoerd na uw akkoord." },
+  { term: "Hardware en licenties", detail: "Apart, elk als eigen lijn op de factuur, zodat u ziet wat een toestel of een Microsoft-licentie kost." },
+];
+
+const hours: [string, string][] = [
+  ["Maandag tot vrijdag", `${site.hours.weekdays.opens} tot ${site.hours.weekdays.closes}`],
+  ["Zaterdag", `${site.hours.saturday.opens} tot ${site.hours.saturday.closes}`],
+  ["Zondag en feestdagen", "Geen werkdag"],
+];
+
+const faqs = [
+  {
+    question: "Wat kost het?",
+    answer:
+      "Dat hangt af van hoeveel toestellen, gebruikers en vestigingen u heeft, en van hoe uw omgeving er vandaag bij ligt. Daarom komt er eerst een gratis bezoek. Daarna krijgt u een offerte met een vaste prijs voor de overname of het project en een maandprijs per eenheid voor het beheer.",
+  },
+  {
+    question: "Moet ik een contract voor lange tijd tekenen?",
+    answer:
+      "Nee. Een beheercontract loopt per maand, zonder minimale looptijd. Opzeggen kan per mail, met één maand opzeg.",
+  },
+  {
+    question: "Zijn de Microsoft-licenties inbegrepen?",
+    answer:
+      "Nee. Die staan als aparte lijn op de factuur, zodat u ziet wat de licentie kost. Voor sommige diensten, zoals toegangsregels en toestelbeheer, is Microsoft 365 Business Premium nodig. Dat controleer ik voor de offerte.",
+  },
+  {
+    question: "Wat als ik wil stoppen?",
+    answer:
+      "U zegt per mail op, met één maand opzeg. Uw Microsoft 365-omgeving en uw gegevens staan op uw naam en de documentatie heeft u al. Ik help bij een nette overdracht naar wie na mij komt.",
+  },
+  {
+    question: "Wat als u op verlof bent?",
+    answer:
+      "Verlof kondig ik minstens twee weken vooraf aan. In die periode volg ik geen meldingen op, maar de bewaking van uw toestellen en accounts en uw back-ups blijven gewoon lopen. Meldingen die binnenkomen, bevestig ik op de eerste werkdag erna.",
+  },
+];
+
+const jsonLd = [breadcrumbs(crumbs), faqPage(faqs)];
+---
+
+<BaseLayout
+  title="Werkwijze: van kennismaking tot beheer"
+  description="Hoe werken met Packetflow verloopt: gratis kennismaking en bezoek, een vaste prijs per project, beheer per maand per eenheid, en duidelijke uren."
+  jsonLd={jsonLd}
+>
+  <section class="page-hero">
+    <div class="container page-hero__in">
+      <Breadcrumbs items={crumbs} />
+      <Kicker>Werkwijze</Kicker>
+      <h1>Zo werk ik</h1>
+      <p class="lead page-hero__lead">
+        Van het eerste gesprek tot het beheer daarna: wat u mag verwachten, hoe
+        een prijs is opgebouwd en wanneer u mij bereikt. Zonder kleine letters.
+      </p>
+      <div class="page-hero__actions">
+        <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
+        <Button href={site.phoneHref} variant="secondary" iconLeft="phone">Bel {site.phone}</Button>
+      </div>
+    </div>
+  </section>
+
+  {/* Steps */}
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <Kicker>Van eerste gesprek tot beheer</Kicker>
+        <h2>Zes stappen, altijd dezelfde</h2>
+      </div>
+      <ol class="steps">
+        {
+          steps.map(([title, body], i) => (
+            <li class="step">
+              <span class="step__num">{i + 1}</span>
+              <div>
+                <h3 class="step__title">{title}</h3>
+                <p class="step__body">{body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  {/* Pricing model, no amounts */}
+  <section class="section band" id="prijs">
+    <div class="container werk-grid">
+      <div class="section-head">
+        <Kicker>Hoe een prijs is opgebouwd</Kicker>
+        <h2>Waarom hier geen prijzen staan</h2>
+        <p>
+          Twee kantoren met evenveel toestellen hebben zelden hetzelfde nodig.
+          Na het bezoek krijgt u een offerte met per dienst wat erin zit, wat
+          niet, en wat het kost. Die legt u gerust naast een andere.
+        </p>
+        <p>
+          <a href={url("/blog/wat-kost-it-beheer-kleine-onderneming")} class="text-link">Lees waar de kost van IT-beheer van afhangt</a>
+        </p>
+      </div>
+      <dl class="facts">
+        {
+          pricing.map((row) => (
+            <div class="facts__row">
+              <dt class="facts__term">{row.term}</dt>
+              <dd class="facts__detail">{row.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  {/* Always included + contract */}
+  <section class="section">
+    <div class="container grid-2">
+      <Card class="werk-card">
+        <h2 class="werk-card__title">Altijd inbegrepen</h2>
+        <ul class="checklist">
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Elke maand één pagina rapport, over al uw diensten samen: wat er liep, wat er gebeurde en wat aandacht vraagt.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Eén vast aanspreekpunt, dat uw omgeving kent.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Geen lock-in: uw Microsoft 365-omgeving en uw gegevens blijven van u.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Back-ups met twee keer per jaar een hersteltest, waar u een back-updienst afneemt.</span></li>
+        </ul>
+      </Card>
+      <Card class="werk-card">
+        <h2 class="werk-card__title">Het contract</h2>
+        <ul class="checklist">
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Geen minimale looptijd: een beheercontract loopt per maand.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Opzeggen kan per mail, met één maand opzeg.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>De overname is een apart project, dus u hoeft nergens aan vast te zitten om die terug te verdienen.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>Wat een dienst inhoudt, staat per dienst beschreven in de bijlage bij de offerte.</span></li>
+        </ul>
+      </Card>
+    </div>
+  </section>
+
+  {/* Reachability */}
+  <section class="section band" id="bereikbaarheid">
+    <div class="container werk-grid">
+      <div class="section-head">
+        <Kicker>Bereikbaarheid</Kicker>
+        <h2>Wanneer u mij bereikt</h2>
+        <p>
+          Overdag werk ik als netwerkspecialist. Voor mijn klanten werk ik op
+          vaste uren, die ik ook kan waarmaken.
+        </p>
+      </div>
+      <div>
+        <dl class="facts">
+          {
+            hours.map(([day, time]) => (
+              <div class="facts__row">
+                <dt class="facts__term">{day}</dt>
+                <dd class="facts__detail">{time}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <ul class="checklist werk-list">
+          <li><span class="check"><Icon name="mail" size={14} /></span><span>Klanten mailen naar <a href={`mailto:${site.supportEmail}`} class="text-link">{site.supportEmail}</a>. Een mail is een melding: vanaf dan loopt de responstijd.</span></li>
+          <li><span class="check"><Icon name="phone" size={14} /></span><span>Bellen mag altijd, maar overdag ben ik meestal niet bereikbaar. Stuur daarom ook een korte mail: een gemiste oproep is geen melding.</span></li>
+          <li><span class="check"><Icon name="clock" size={14} /></span><span>Elke melding wordt uiterlijk de volgende werkdag bevestigd. Een bevestiging is geen oplossing: ze betekent dat ik weet wat er aan de hand is, en dat u de volgende stap kent.</span></li>
+          <li><span class="check"><Icon name="shield-check" size={14} /></span><span>Wat wel dag en nacht draait: de bewaking van uw toestellen (Huntress) en uw Microsoft 365-accounts (Petra Security), door een bemand beveiligingscentrum dat zelf kan ingrijpen.</span></li>
+        </ul>
+        <p class="werk-honest">
+          <strong>Wat ik niet aanbied:</strong> 24/7-bereikbaarheid van mij zelf,
+          een gegarandeerde termijn voor de oplossing, of een gegarandeerde tijd
+          voor een interventie ter plaatse. Waar het kan, gebeurt alles van op
+          afstand.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faqs} title="Vragen over de werkwijze" />
+
+  <CtaSection
+    title="Benieuwd wat dit voor uw zaak betekent?"
+    body="Plan een kennismaking van 30 minuten, bij u of via telefoon. Ik antwoord binnen één werkdag, vaak sneller."
+  />
+</BaseLayout>
+
+<style>
+  .werk-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .werk-grid .section-head {
+    margin-bottom: 0;
+  }
+  .werk-grid .section-head p + p {
+    margin-top: var(--space-3);
+  }
+  .werk-card__title {
+    font-size: var(--text-lg);
+    margin: 0 0 var(--space-5);
+  }
+  .werk-list {
+    margin-top: var(--space-6);
+  }
+  .werk-honest {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    border-left: 3px solid var(--orange-500);
+    background: var(--surface-raised);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--text-body);
+  }
+  .werk-honest strong {
+    color: var(--text-strong);
+  }
+  /* keep in sync with --container-md in global.css */
+  @media (max-width: 880px) {
+    .werk-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

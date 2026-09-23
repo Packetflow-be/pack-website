@@ -29,7 +29,7 @@ const reviewsLink = googleReviewsUrl || site.profiles.googleBusiness;
         <div class="reviews__grid">
           {reviews.map((r) => (
             <Card class="review">
-              <div class="review__stars" aria-label={`${r.rating} van 5 sterren`}>
+              <div class="review__stars" role="img" aria-label={`${r.rating} van 5 sterren`}>
                 {Array.from({ length: Math.round(r.rating) }).map(() => (
                   <Icon name="star" size={16} color="var(--orange-500, var(--orange-600))" />
                 ))}

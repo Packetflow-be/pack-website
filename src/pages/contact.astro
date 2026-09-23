@@ -25,7 +25,7 @@ const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
 ---
 
 <BaseLayout
-  title="Contact — vrijblijvend kennismaken"
+  title="Contact: vrijblijvend kennismaken"
   description={`Neem contact op met ${site.name}. Bel ${site.phone}, mail ${site.email} of laat een bericht achter. Ik antwoord binnen één werkdag.`}
   jsonLd={jsonLd}
 >
@@ -34,10 +34,11 @@ const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
       <div>
         <Breadcrumbs items={crumbs} />
         <Kicker>Vrijblijvend kennismaken</Kicker>
-        <h1 class="contact__title">30 minuten, kosteloos — bij u of via telefoon</h1>
+        <h1 class="contact__title">30 minuten kennismaken, kosteloos</h1>
         <p class="lead contact__lead">
-          Vertel kort waar het schoentje knelt. Ik antwoord binnen één werkdag —
-          vaak sneller. Geen verkooppraat, gewoon een eerlijk gesprek.
+          Bij u of via telefoon. Vertel kort waar het schoentje knelt, dan
+          antwoord ik binnen één werkdag, vaak sneller. Geen verkooppraat,
+          gewoon een eerlijk gesprek.
         </p>
         <div class="contact__list">
           {
@@ -50,11 +51,15 @@ const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
           }
         </div>
         <p class="contact__avail">
-          <Icon name="clock" size={15} /> Beschikbaar 's avonds en in het weekend.
+          <Icon name="clock" size={15} /> Ik werk {site.hours.phrase} ({site.hours.label}). Overdag antwoord ik meestal pas 's avonds.
         </p>
         <p class="contact__avail">
-          <Icon name="map-pin" size={15} /> Werk ik bij u ter plaatse? Bekijk de
-          <a href="/tarieven#verplaatsingskosten">verplaatsingskosten</a>.
+          <Icon name="life-buoy" size={15} /> Al klant? Mail naar
+          <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>, dan is uw melding meteen geregistreerd.
+        </p>
+        <p class="contact__avail">
+          <Icon name="route" size={15} /> Hoe een samenwerking verloopt, leest u in de
+          <a href="/werkwijze">werkwijze</a>.
         </p>
       </div>
 
@@ -98,7 +103,7 @@ const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
 
         <div id="contact-success" class="form-success" role="status" tabindex="-1" hidden>
           <span class="form-success__icon"><Icon name="check" size={28} color="var(--success)" /></span>
-          <h2 class="form-success__title">Bedankt — tot binnenkort!</h2>
+          <h2 class="form-success__title">Bedankt, tot binnenkort!</h2>
           <p class="form-success__body">Ik neem binnen één werkdag contact met u op.</p>
         </div>
       </Card>
@@ -232,7 +237,7 @@ const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
     margin-bottom: 6px;
   }
   .contact-form__opt {
-    color: var(--text-faint);
+    color: var(--text-muted);
     font-weight: var(--fw-regular);
   }
   .contact-form input,

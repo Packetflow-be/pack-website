@@ -11,7 +11,7 @@ export type Partner = {
 };
 
 export const partnersIntro =
-  "Trots om te werken met de netwerkoplossingen van erkende partners — professionele WiFi en netwerken die u kunt vertrouwen.";
+  "Voor wifi en netwerken werk ik met de oplossingen van erkende partners: apparatuur gebouwd voor zaken waar veel mensen tegelijk online zijn.";
 
 export const partners: Partner[] = [
   {

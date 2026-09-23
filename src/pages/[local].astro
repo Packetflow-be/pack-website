@@ -12,7 +12,7 @@ import { service, breadcrumbs } from "@/lib/schema";
 import { url } from "@/lib/url";
 
 // Flat, root-level slugs (e.g. /it-support-oudenburg). Static routes like
-// /prijzen and /contact take priority, so there is no collision.
+// /werkwijze and /contact take priority, so there is no collision.
 export function getStaticPaths() {
   return allLocals().map((local) => ({ params: { local: local.slug }, props: { local } }));
 }
@@ -84,7 +84,7 @@ const jsonLd = [
             <div><dt>Dienst</dt><dd>{hub.navTitle}</dd></div>
             <div><dt>Regio</dt><dd>{local.city}</dd></div>
             <div><dt>Voor</dt><dd>{hub.audience}</dd></div>
-            <div><dt>Bereikbaar</dt><dd>'s Avonds &amp; in het weekend</dd></div>
+            <div><dt>Bereikbaar</dt><dd>{site.hours.label}</dd></div>
           </dl>
         </Card>
         {
@@ -153,7 +153,7 @@ const jsonLd = [
     margin-top: var(--space-4);
     font-size: var(--text-sm);
     font-weight: var(--fw-medium);
-    color: var(--primary);
+    color: var(--orange-800);
   }
   .local-aside {
     display: flex;
