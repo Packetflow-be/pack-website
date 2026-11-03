@@ -21,6 +21,11 @@ interface Props {
 }
 const { hub } = Astro.props;
 const isBeheer = hub.slug === "it-beheer-support";
+// Named offer pages (N1, N3, ...) carry a kicker and lead with the customer's
+// own sentences in the hero; the older hubs keep their problem block.
+const named = Boolean(hub.kicker);
+const heroQuotes = (hub.symptoms?.length ?? 0) > 0;
+const showProblem = !(heroQuotes && !hub.problem.body);
 
 const crumbs: [string, string][] = [
   ["Home", "/"],
@@ -46,37 +51,42 @@ const jsonLd = [
     )
   }
   <section class="page-hero">
-    <div class="container page-hero__in">
-      <Breadcrumbs items={crumbs} />
-      {hub.kicker && <Kicker>{hub.kicker}</Kicker>}
-      <Badge tone="blue">{hub.audience}</Badge>
-      <h1>{hub.title}</h1>
-      <p class="lead page-hero__lead">{hub.tagline}</p>
-      <div class="page-hero__actions">
-        <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
-        <Button href="/werkwijze" variant="secondary">Hoe ik werk</Button>
+    <div class={`container page-hero__in ${heroQuotes ? "hero-split" : ""}`}>
+      <div class="hero-split__main">
+        <Breadcrumbs items={crumbs} />
+        {hub.kicker ? <Kicker>{hub.kicker}</Kicker> : <Badge tone="blue">{hub.audience}</Badge>}
+        <h1>{hub.title}</h1>
+        <p class="lead page-hero__lead">{hub.tagline}</p>
+        <div class="page-hero__actions">
+          <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
+          <Button href="/werkwijze" variant="secondary">Hoe ik werk</Button>
+        </div>
       </div>
-    </div>
-  </section>
-
-  {/* The problem, then the answer */}
-  <section class="section">
-    <div class="container problem">
-      <div>
-        <Kicker>Het probleem</Kicker>
-        <h2 class="problem__title">{hub.problem.title}</h2>
-        {
-          hub.symptoms && hub.symptoms.length > 0 && (
+      {
+        heroQuotes && (
+          <aside class="hero-quotes" aria-labelledby="herkenbaar">
+            <p class="hero-quotes__title" id="herkenbaar">Herkenbaar?</p>
             <ul class="symptoms">
-              {hub.symptoms.map((line) => (
+              {hub.symptoms!.map((line) => (
                 <li class="symptom">
                   <Icon name="quote" size={16} class="symptom__mark" />
                   <span>{line}</span>
                 </li>
               ))}
             </ul>
-          )
-        }
+          </aside>
+        )
+      }
+    </div>
+  </section>
+
+  {/* The problem, then the answer */}
+  {showProblem && (
+  <section class="section">
+    <div class="container problem">
+      <div>
+        <Kicker>Het probleem</Kicker>
+        <h2 class="problem__title">{hub.problem.title}</h2>
         {hub.problem.body && <p class="problem__body">{hub.problem.body}</p>}
       </div>
       <div class="problem__answer">
@@ -85,14 +95,15 @@ const jsonLd = [
       </div>
     </div>
   </section>
+  )}
 
   <section class="section band">
     <div class="container">
       <div class="section-head">
-        <Kicker>{isBeheer ? "Altijd inbegrepen" : "Wat ik voor u doe"}</Kicker>
-        <h2>{isBeheer ? "Wat er in elk beheercontract zit" : "Wat erin zit"}</h2>
+        <Kicker>{isBeheer ? "Altijd inbegrepen" : named ? hub.solution : "Wat ik voor u doe"}</Kicker>
+        <h2>{isBeheer ? "Wat er in elk beheercontract zit" : named ? "Wat u krijgt" : "Wat erin zit"}</h2>
       </div>
-      <div class="grid-cards">
+      <div class={`grid-cards ${hub.features.length >= 5 ? "grid-cards--3" : ""}`}>
         {
           hub.features.map((f) => (
             <Card class="feature">
@@ -143,7 +154,7 @@ const jsonLd = [
         <div class="container">
           <div class="section-head">
             <Kicker>Zo verloopt het</Kicker>
-            <h2>Van eerste gesprek tot beheer</h2>
+            <h2>{named ? "Hoe het werkt" : "Van eerste gesprek tot beheer"}</h2>
           </div>
           <ol class="steps steps--4">
             {hub.steps.map((step, i) => (
@@ -275,7 +286,7 @@ const jsonLd = [
     )
   }
 
-  {hub.faqs && hub.faqs.length > 0 && <Faq items={hub.faqs} title={`Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
+  {hub.faqs && hub.faqs.length > 0 && <Faq items={hub.faqs} title={named ? `Vragen over ${hub.navTitle}` : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
 
   <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
 </BaseLayout>
@@ -294,13 +305,36 @@ const jsonLd = [
     padding: 10px 0;
   }
 
+  /* Hero with the customer's own sentences beside it */
+  .hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+  .hero-quotes {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--orange-600);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6);
+  }
+  .hero-quotes__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--text-strong);
+  }
+
   /* "Herkenbaar?": the customer's own sentences */
   .symptoms {
     list-style: none;
-    margin: 16px 0 0;
+    margin: var(--space-4) 0 0;
     padding: 0;
     display: grid;
-    gap: 10px;
+    gap: var(--space-4);
   }
   .symptom {
     display: flex;
@@ -309,13 +343,27 @@ const jsonLd = [
     font-family: var(--font-serif);
     font-style: italic;
     font-size: 1.125rem;
-    line-height: 1.5;
+    line-height: 1.45;
     color: var(--text-strong);
-    background: var(--paper);
-    border: 1px solid var(--border-soft);
-    border-left: 3px solid var(--orange-600);
-    border-radius: 10px;
-    padding: 12px 16px;
+  }
+
+  /* Five or six features: three across on wide screens */
+  .grid-cards--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 1100px) {
+    .grid-cards--3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 880px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    .grid-cards--3 {
+      grid-template-columns: 1fr;
+    }
   }
   .symptom :global(.symptom__mark) {
     flex: none;
@@ -406,7 +454,7 @@ const jsonLd = [
   }
   .notes {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
     gap: var(--space-5);
   }
   .note {

@@ -258,22 +258,22 @@ const allServices: ServiceHub[] = [
     slug: "tijdelijk-netwerk",
     navTitle: "Tijdelijk netwerk",
     title: "Internet op de werf, zonder te wachten op een lijn",
-    metaTitle: "Tijdelijk internet voor werfkeet en event",
+    metaTitle: "Tijdelijk internet voor werf en werfcontainer",
     solution: "Tijdelijk netwerk",
     kicker: "Tijdelijk netwerk",
     audience: "Werven, events en verhuizingen",
     icon: "hard-hat",
     held: true,
     tagline:
-      "Een vaste lijn naar een werf laat weken op zich wachten. Ik plaats een 5G-kit in de werfkeet, met wifi en een veilige verbinding met uw kantoor. Is de werf klaar, dan verhuist de kit mee naar de volgende.",
+      "Een vaste lijn naar een werf laat weken op zich wachten. Ik plaats een 5G-kit in de werfcontainer, met wifi en een veilige verbinding met uw kantoor. Is de werf klaar, dan verhuist de kit mee naar de volgende.",
     description:
-      "Een 5G-kit in de werfkeet, met wifi en een veilige verbinding met uw kantoor. Per maand gehuurd, bewaakt, en mee naar de volgende werf. Ook voor een event of de weken tussen twee kantoren.",
+      "Een 5G-kit in de werfcontainer, met wifi en een veilige verbinding met uw kantoor. Per maand gehuurd, bewaakt, en mee naar de volgende werf. Ook voor een event of de weken tussen twee kantoren.",
     metaDescription:
-      "Internet in de werfkeet zonder weken te wachten op een lijn. Een 5G-kit met wifi en een verbinding met kantoor, per maand, mee naar de volgende werf.",
+      "Internet in de werfcontainer zonder weken te wachten op een lijn. Een 5G-kit met wifi en een verbinding met kantoor, per maand, mee naar de volgende werf.",
     problem: { title: "Herkenbaar?", body: "" },
     symptoms: [
-      "Zes weken wachten op een lijn, voor een werfkeet die er vier maanden staat.",
-      "De werfleider deelt de hotspot van zijn gsm met heel de keet.",
+      "Zes weken wachten op een lijn, voor een werfcontainer die er vier maanden staat.",
+      "De werfleider deelt de hotspot van zijn gsm met heel de werf.",
       "Het nieuwe kantoor is klaar, maar de lijn is er nog niet.",
       "Een event van drie dagen, en ter plaatse geen internet.",
     ],
@@ -281,11 +281,11 @@ const allServices: ServiceHub[] = [
       {
         icon: "router",
         title: "Een 5G-kit die tegen een stootje kan",
-        body: "Een router met een antenne buiten, in de werfkeet geplaatst en ter plaatse getest.",
+        body: "Een router met een antenne buiten, in de werfcontainer geplaatst en ter plaatse getest.",
       },
       {
         icon: "wifi",
-        title: "Wifi in de keet",
+        title: "Wifi in de werfcontainer",
         body: "Voor de laptops, de tablets en de printer van de werfleider.",
       },
       {
@@ -315,7 +315,7 @@ const allServices: ServiceHub[] = [
       },
       {
         title: "Plaatsing",
-        body: "De kit in de werfkeet, het bereik nagemeten en de verbinding met kantoor getest.",
+        body: "De kit in de werfcontainer, het bereik nagemeten en de verbinding met kantoor getest.",
       },
       {
         title: "Verhuizen of ophalen",
@@ -333,7 +333,7 @@ const allServices: ServiceHub[] = [
           "Zodra de kit staat. Er komt geen vaste lijn aan te pas, dus u wacht niet op een aansluiting. Het bereik op de werf meet ik vooraf.",
       },
       {
-        question: "Kunnen we vanuit de werfkeet aan onze bestanden op kantoor?",
+        question: "Kunnen we vanuit de werfcontainer aan onze bestanden op kantoor?",
         answer:
           "Ja. De kit legt een beveiligde verbinding met uw kantoornetwerk, zodat plannen en programma's werken zoals op kantoor. Of uw kantoornetwerk dat toelaat, bekijk ik vooraf.",
       },
@@ -917,6 +917,12 @@ const allServices: ServiceHub[] = [
 
 /** The hubs this build publishes: held hubs only outside production. */
 export const services: ServiceHub[] = allServices.filter((hub) => !hub.held || !isProductionBuild);
+
+/** How lists name a hub: the solution name for named offer pages (whose H1
+ * is a sentence), the title for the older hubs. */
+export function hubName(hub: ServiceHub): string {
+  return hub.kicker ? hub.solution : hub.title;
+}
 
 export function getHub(slug: string): ServiceHub | undefined {
   return services.find((s) => s.slug === slug);
