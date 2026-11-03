@@ -8,6 +8,8 @@ import Icon from "@/components/Icon.astro";
 import Button from "@/components/Button.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Faq from "@/components/Faq.astro";
+import OfferSection from "@/components/OfferSection.astro";
+import { showHeld } from "@/lib/build";
 import { services, type ServiceHub } from "@/data/services";
 import { site } from "@/data/site";
 import { service, breadcrumbs, faqPage } from "@/lib/schema";
@@ -26,6 +28,9 @@ const isBeheer = hub.slug === "it-beheer-support";
 const named = Boolean(hub.kicker);
 const heroQuotes = (hub.symptoms?.length ?? 0) > 0;
 const showProblem = !(heroQuotes && !hub.problem.body);
+const offer = hub.offer && showHeld(hub.offer.held) ? hub.offer : undefined;
+// One FAQ block per page: the hub's own questions, then the offer's.
+const pageFaqs = [...(hub.faqs ?? []), ...(offer?.faqs ?? [])];
 
 const crumbs: [string, string][] = [
   ["Home", "/"],
@@ -36,7 +41,7 @@ const crumbs: [string, string][] = [
 const jsonLd = [
   service({ name: hub.solution, description: hub.description, serviceType: hub.navTitle }),
   breadcrumbs(crumbs),
-  ...(hub.faqs && hub.faqs.length > 0 ? [faqPage(hub.faqs)] : []),
+  ...(pageFaqs.length > 0 ? [faqPage(pageFaqs)] : []),
 ];
 ---
 
@@ -116,6 +121,8 @@ const jsonLd = [
       </div>
     </div>
   </section>
+
+  {offer && <OfferSection offer={offer} />}
 
   {
     hub.services && hub.services.length > 0 && (
@@ -286,7 +293,7 @@ const jsonLd = [
     )
   }
 
-  {hub.faqs && hub.faqs.length > 0 && <Faq items={hub.faqs} title={named ? `Vragen over ${hub.navTitle}` : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
+  {pageFaqs.length > 0 && <Faq items={pageFaqs} title={named ? `Vragen over ${hub.navTitle}` : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
 
   <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
 </BaseLayout>
