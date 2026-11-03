@@ -7,9 +7,10 @@ import Kicker from "@/components/Kicker.astro";
 import Icon from "@/components/Icon.astro";
 import Button from "@/components/Button.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Faq from "@/components/Faq.astro";
 import { services, type ServiceHub } from "@/data/services";
 import { site } from "@/data/site";
-import { service, breadcrumbs } from "@/lib/schema";
+import { service, breadcrumbs, faqPage } from "@/lib/schema";
 import { url } from "@/lib/url";
 
 export function getStaticPaths() {
@@ -20,6 +21,11 @@ interface Props {
 }
 const { hub } = Astro.props;
 const isBeheer = hub.slug === "it-beheer-support";
+// Named offer pages (N1, N3, ...) carry a kicker and lead with the customer's
+// own sentences in the hero; the older hubs keep their problem block.
+const named = Boolean(hub.kicker);
+const heroQuotes = (hub.symptoms?.length ?? 0) > 0;
+const showProblem = !(heroQuotes && !hub.problem.body);
 
 const crumbs: [string, string][] = [
   ["Home", "/"],
@@ -30,30 +36,58 @@ const crumbs: [string, string][] = [
 const jsonLd = [
   service({ name: hub.solution, description: hub.description, serviceType: hub.navTitle }),
   breadcrumbs(crumbs),
+  ...(hub.faqs && hub.faqs.length > 0 ? [faqPage(hub.faqs)] : []),
 ];
 ---
 
 <BaseLayout title={hub.metaTitle ?? hub.title} description={hub.metaDescription ?? hub.description} jsonLd={jsonLd}>
-  <section class="page-hero">
-    <div class="container page-hero__in">
-      <Breadcrumbs items={crumbs} />
-      <Badge tone="blue">{hub.audience}</Badge>
-      <h1>{hub.title}</h1>
-      <p class="lead page-hero__lead">{hub.tagline}</p>
-      <div class="page-hero__actions">
-        <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
-        <Button href="/werkwijze" variant="secondary">Hoe ik werk</Button>
+  {
+    hub.held && (
+      <div class="held-banner" role="note">
+        <div class="container">
+          <strong>Concept, alleen op staging.</strong> Deze pagina staat nog niet op packetflow.be: ze gaat live zodra haar publicatievoorwaarde in de vault vervuld is.
+        </div>
       </div>
+    )
+  }
+  <section class="page-hero">
+    <div class={`container page-hero__in ${heroQuotes ? "hero-split" : ""}`}>
+      <div class="hero-split__main">
+        <Breadcrumbs items={crumbs} />
+        {hub.kicker ? <Kicker>{hub.kicker}</Kicker> : <Badge tone="blue">{hub.audience}</Badge>}
+        <h1>{hub.title}</h1>
+        <p class="lead page-hero__lead">{hub.tagline}</p>
+        <div class="page-hero__actions">
+          <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
+          <Button href="/werkwijze" variant="secondary">Hoe ik werk</Button>
+        </div>
+      </div>
+      {
+        heroQuotes && (
+          <aside class="hero-quotes" aria-labelledby="herkenbaar">
+            <p class="hero-quotes__title" id="herkenbaar">Herkenbaar?</p>
+            <ul class="symptoms">
+              {hub.symptoms!.map((line) => (
+                <li class="symptom">
+                  <Icon name="quote" size={16} class="symptom__mark" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
     </div>
   </section>
 
   {/* The problem, then the answer */}
+  {showProblem && (
   <section class="section">
     <div class="container problem">
       <div>
         <Kicker>Het probleem</Kicker>
         <h2 class="problem__title">{hub.problem.title}</h2>
-        <p class="problem__body">{hub.problem.body}</p>
+        {hub.problem.body && <p class="problem__body">{hub.problem.body}</p>}
       </div>
       <div class="problem__answer">
         <Kicker>{isBeheer ? "Wat Packetflow Beheer doet" : hub.solution}</Kicker>
@@ -61,14 +95,15 @@ const jsonLd = [
       </div>
     </div>
   </section>
+  )}
 
   <section class="section band">
     <div class="container">
       <div class="section-head">
-        <Kicker>{isBeheer ? "Altijd inbegrepen" : "Wat ik voor u doe"}</Kicker>
-        <h2>{isBeheer ? "Wat er in elk beheercontract zit" : "Wat erin zit"}</h2>
+        <Kicker>{isBeheer ? "Altijd inbegrepen" : named ? hub.solution : "Wat ik voor u doe"}</Kicker>
+        <h2>{isBeheer ? "Wat er in elk beheercontract zit" : named ? "Wat u krijgt" : "Wat erin zit"}</h2>
       </div>
-      <div class="grid-cards">
+      <div class={`grid-cards ${hub.features.length >= 5 ? "grid-cards--3" : ""}`}>
         {
           hub.features.map((f) => (
             <Card class="feature">
@@ -119,7 +154,7 @@ const jsonLd = [
         <div class="container">
           <div class="section-head">
             <Kicker>Zo verloopt het</Kicker>
-            <h2>Van eerste gesprek tot beheer</h2>
+            <h2>{named ? "Hoe het werkt" : "Van eerste gesprek tot beheer"}</h2>
           </div>
           <ol class="steps steps--4">
             {hub.steps.map((step, i) => (
@@ -138,9 +173,18 @@ const jsonLd = [
   }
 
   {
-    (hub.requirement || hub.limits || hub.ongoing) && (
+    (hub.forWho || hub.requirement || hub.limits || hub.ongoing) && (
       <section class="section notes-band">
         <div class="container notes">
+          {hub.forWho && (
+            <div class="note">
+              <span class="note__icon"><Icon name="users" size={18} /></span>
+              <div>
+                <h2 class="note__title">Voor wie</h2>
+                <p>{hub.forWho}</p>
+              </div>
+            </div>
+          )}
           {hub.requirement && (
             <div class="note">
               <span class="note__icon"><Icon name="badge-check" size={18} /></span>
@@ -242,12 +286,131 @@ const jsonLd = [
     )
   }
 
-  <CtaSection />
+  {hub.faqs && hub.faqs.length > 0 && <Faq items={hub.faqs} title={named ? `Vragen over ${hub.navTitle}` : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
+
+  <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
 </BaseLayout>
 
 <style>
   .page-hero :global(.badge) {
     margin-bottom: var(--space-4);
+  }
+
+  /* Staging-only marker on held pages */
+  .held-banner {
+    background: var(--warning-soft);
+    color: var(--orange-800);
+    border-bottom: 1px solid var(--orange-300);
+    font-size: 0.875rem;
+    padding: 10px 0;
+  }
+
+  /* Hero with the customer's own sentences beside it */
+  .hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+  .hero-quotes {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--orange-600);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6);
+  }
+  .hero-quotes__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  /* "Herkenbaar?": the customer's own sentences */
+  .symptoms {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+  .symptom {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    line-height: 1.45;
+    color: var(--text-strong);
+  }
+
+  /* Five or six features: three across on wide screens. A six-track grid
+     lets a short last row stretch instead of leaving a hole (5 = 3 + 2). */
+  .grid-cards--3 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid-cards--3 > :global(*) {
+    grid-column: span 2;
+  }
+  .grid-cards--3 > :global(*:nth-child(3n + 1):nth-last-child(2)),
+  .grid-cards--3 > :global(*:nth-child(3n + 2):last-child) {
+    grid-column: span 3;
+  }
+  .grid-cards--3 > :global(*:nth-child(3n + 1):last-child) {
+    grid-column: 1 / -1;
+  }
+  @media (max-width: 1100px) {
+    .grid-cards--3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-cards--3 > :global(*),
+    .grid-cards--3 > :global(*:nth-child(3n + 1):nth-last-child(2)),
+    .grid-cards--3 > :global(*:nth-child(3n + 2):last-child),
+    .grid-cards--3 > :global(*:nth-child(3n + 1):last-child) {
+      grid-column: auto;
+    }
+    .grid-cards--3 > :global(*:nth-child(odd):last-child) {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 880px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    .grid-cards--3 {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    .grid-cards--3 > :global(*:nth-child(odd):last-child) {
+      grid-column: auto;
+    }
+    /* Compact on phones: icon beside the title, text under the title. */
+    .grid-cards--3 > :global(.feature) {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      column-gap: 14px;
+      row-gap: 4px;
+      align-items: center;
+      padding: 18px;
+    }
+    .grid-cards--3 > :global(.feature) :global(.feature__icon) {
+      width: 40px;
+      height: 40px;
+      grid-row: span 1;
+    }
+    .grid-cards--3 > :global(.feature) :global(p) {
+      grid-column: 2;
+      margin: 0;
+    }
+  }
+  .symptom :global(.symptom__mark) {
+    flex: none;
+    margin-top: 4px;
+    color: var(--orange-600);
   }
 
   /* Problem → answer */
@@ -333,7 +496,7 @@ const jsonLd = [
   }
   .notes {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
     gap: var(--space-5);
   }
   .note {

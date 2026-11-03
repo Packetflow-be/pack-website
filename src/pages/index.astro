@@ -10,7 +10,7 @@ import Kicker from "@/components/Kicker.astro";
 import Icon from "@/components/Icon.astro";
 import Portrait from "@/components/Portrait.astro";
 import { site } from "@/data/site";
-import { services } from "@/data/services";
+import { services, hubName } from "@/data/services";
 import { sectors } from "@/data/sectors";
 import { url } from "@/lib/url";
 
@@ -141,7 +141,7 @@ const howSteps = [
           services.map((hub) => (
             <a href={url(`/diensten/${hub.slug}`)} class="svc">
               <Icon name={hub.icon} size={24} color="var(--orange-700)" />
-              <h3 class="svc__title">{hub.title}</h3>
+              <h3 class="svc__title">{hubName(hub)}</h3>
               <p class="svc__body">{hub.tagline}</p>
             </a>
           ))

@@ -1,6 +1,6 @@
 ---
 import { site } from "@/data/site";
-import { services } from "@/data/services";
+import { services, hubName } from "@/data/services";
 import { sectors } from "@/data/sectors";
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
@@ -34,7 +34,7 @@ const locals = services.flatMap((hub) => hub.locals);
       <ul>
         {services.map((hub) => (
           <li>
-            <a href={url(`/diensten/${hub.slug}`)}>{hub.title}</a>
+            <a href={url(`/diensten/${hub.slug}`)}>{hubName(hub)}</a>
           </li>
         ))}
       </ul>
@@ -83,7 +83,7 @@ const locals = services.flatMap((hub) => hub.locals);
 
 <style>
   .site-footer {
-    margin-top: var(--space-10);
+    margin-top: 0;
     background: var(--ink);
     color: var(--grey-300);
   }

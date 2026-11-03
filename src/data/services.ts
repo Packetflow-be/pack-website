@@ -83,8 +83,33 @@ export type ServiceHub = {
    * kennisbank-artikels. Keep it to a few genuinely relevant articles.
    */
   reading?: { href: string; title: string; body: string }[];
+  /** Small label above the H1 when it should differ from `audience`. */
+  kicker?: string;
+  /**
+   * "Herkenbaar?": sentences a customer says, in their own words. Rendered in
+   * the problem block instead of (or above) `problem.body`.
+   */
+  symptoms?: string[];
+  /** "Voor wie": who this is for, one short paragraph. */
+  forWho?: string;
+  /** Visible FAQ + FAQPage JSON-LD (vault: ref-website-copy). */
+  faqs?: { question: string; answer: string }[];
+  /** Page-specific line above the standard CTA pair. */
+  cta?: { title: string; body: string };
+  /**
+   * Built on staging, left out of production until its publish condition in
+   * the vault (ref-website-copy) holds. Remove the flag to go live.
+   */
+  held?: boolean;
   locals: LocalPage[];
 };
+
+// Production is the build whose site is www.packetflow.be (the deploy
+// workflow pins SITE_URL; staging builds on GitHub Pages use their own
+// origin). Held hubs are dropped there, so no route, nav item, footer link or
+// sitemap entry exists for them on the live site.
+// Fails closed: a build that does not know its site counts as production.
+export const isProductionBuild = (import.meta.env.SITE ?? "https://www.packetflow.be").includes("www.packetflow.be");
 
 // The four steps every solution follows. Individual hubs override the third
 // step, where the actual work differs.
@@ -106,7 +131,234 @@ const lastStep = {
 const beheerLine =
   "Na de oplevering houdt Packetflow Beheer het draaiende: bewaakt, bijgewerkt en gebackupt, met één vast aanspreekpunt en elke maand één pagina rapport.";
 
-export const services: ServiceHub[] = [
+const allServices: ServiceHub[] = [
+  {
+    // N1 Altijd online (vault: pf-solutions-map, ref-website-copy page 1).
+    // Held: publish when Louis approves the one-page offer.
+    slug: "altijd-online",
+    navTitle: "Altijd online",
+    title: "Uw internet valt weg. Uw kassa werkt door.",
+    metaTitle: "Back-up internet via 4G of 5G voor uw zaak",
+    solution: "Altijd online",
+    kicker: "Altijd online",
+    audience: "Winkels, horeca en praktijken",
+    icon: "radio-tower",
+    held: true,
+    tagline:
+      "Met één internetlijn ligt alles stil zodra die lijn het laat afweten. Ik plaats een tweede verbinding via 4G of 5G die vanzelf overneemt. Uw kassa, uw betaalterminal en uw telefoon werken gewoon door.",
+    description:
+      "Een tweede internetlijn via 4G of 5G die vanzelf overneemt als uw vaste lijn uitvalt. Kassa en betaalterminal gaan voor, u krijgt een melding bij elke omschakeling, en de simkaart zit in de maandprijs.",
+    metaDescription:
+      "Valt uw internet weg, dan schakelt uw zaak vanzelf over op 4G of 5G. Kassa, betaalterminal en telefoon werken door, bij welke provider u ook zit.",
+    problem: { title: "Herkenbaar?", body: "" },
+    symptoms: [
+      "We rekenen weer af via de hotspot van mijn gsm.",
+      "Bancontact ligt er weer uit.",
+      "Midden in een gesprek valt de telefoon weg.",
+      "Binnen heb ik amper bereik, een 4G-back-up gaat hier toch niet.",
+    ],
+    features: [
+      {
+        icon: "arrow-left-right",
+        title: "Een tweede lijn die vanzelf overneemt",
+        body: "Valt uw vaste lijn uit, dan schakelt de router zelf over op 4G of 5G. Is uw lijn terug, dan schakelt hij ook zelf terug.",
+      },
+      {
+        icon: "credit-card",
+        title: "Kassa en betaalterminal gaan voor",
+        body: "Op de tweede lijn krijgen de toestellen waarmee u verkoopt voorrang op de rest.",
+      },
+      {
+        icon: "radio-tower",
+        title: "Een antenne buiten als het binnen niet lukt",
+        body: "Aan de gevel, gericht op de mast. Of dat bij u werkt, meet ik vooraf.",
+      },
+      {
+        icon: "bell-ring",
+        title: "U weet het als uw lijn uitvalt",
+        body: "U krijgt een melding zodra de tweede lijn overneemt, ook als niemand in de zaak iets merkt.",
+      },
+      {
+        icon: "card-sim",
+        title: "De simkaart zit erbij",
+        body: "Het data-abonnement voor de tweede lijn zit in de maandprijs. U sluit niets extra af.",
+      },
+      {
+        icon: "globe",
+        title: "Bij welke provider u ook zit",
+        body: "Uw vaste lijn blijft waar ze is. Is die echt slecht, dan kan Starlink uw hoofdlijn worden, met 4G of 5G als reserve.",
+      },
+    ],
+    steps: [
+      {
+        title: "Kennismaking en meting",
+        body: "Gratis. Ik kom langs en meet het bereik van 4G en 5G, binnen en buiten, op de verschillende netwerken.",
+      },
+      {
+        title: "Plan en offerte",
+        body: "Een vaste prijs voor de installatie en een maandprijs voor de opvolging, met de simkaart erin.",
+      },
+      {
+        title: "Installatie en test",
+        body: "Router, simkaart en waar nodig de antenne. Daarna trekken we samen de stekker van uw vaste lijn uit en kijken we of alles blijft werken.",
+      },
+      {
+        title: "Opvolging",
+        body: "Ik hou beide lijnen in de gaten. U krijgt een melding bij elke omschakeling en elke maand één pagina rapport.",
+      },
+    ],
+    forWho:
+      "Winkels, horeca, praktijken en kleine bedrijven met één vestiging en één internetlijn. Overal waar een kassa, een betaalterminal, telefonie via internet of de scanners in het magazijn niet stil mogen vallen.",
+    faqs: [
+      {
+        question: "Mijn provider biedt zelf een 4G-back-up aan. Waarom zou ik dit nemen?",
+        answer:
+          "Soms volstaat dat, en dan zeg ik u dat ook. Het verschil zit in de rest: dit werkt bij elke provider, uw kassa gaat voor, u krijgt een melding als de lijn omschakelt, en waar binnen te weinig bereik is, komt er een antenne buiten.",
+      },
+      {
+        question: "Ik heb binnen bijna geen bereik. Kan dit dan wel?",
+        answer:
+          "Vaak wel. Een antenne aan de gevel, gericht op de mast, vangt vaak een bruikbaar signaal op waar uw gsm binnen niets vindt. Of dat bij u lukt, meet ik vooraf. Lukt het niet, dan hoort u dat voor u iets koopt.",
+      },
+      {
+        question: "Heb ik een extra abonnement nodig?",
+        answer:
+          "Nee. De simkaart voor de tweede lijn zit in de maandprijs. Zolang uw vaste lijn werkt, gaat er bijna geen verkeer over.",
+      },
+      {
+        question: "Kan het ook met Starlink?",
+        answer:
+          "Ja. Is uw vaste lijn echt slecht, dan kan Starlink uw hoofdlijn worden, met 4G of 5G als reserve. Het Starlink-abonnement sluit u zelf af, op uw naam. Ik zorg voor de router, de omschakeling en de opvolging.",
+      },
+      {
+        // Checked 2026-11-03 (Febelfin FAQ, UGent WP 2022-13; vault
+        // prj-track2-avenues). Re-read on the day of publishing.
+        question: "Moet ik als handelaar elektronisch betalen aanbieden?",
+        answer:
+          "Ja, als u aan consumenten verkoopt. Sinds 1 juli 2022 moet elke onderneming, ook een vrij beroep, consumenten minstens één elektronische betaalmogelijkheid bieden (artikel VI.7/4 van het Wetboek van economisch recht). Welke, kiest u zelf: een kaartterminal, Payconiq of een overschrijving. Een tweede lijn is dus geen wettelijke plicht. Ze zorgt er wel voor dat de betaalmogelijkheid die u koos, blijft werken als uw internet uitvalt.",
+      },
+    ],
+    cta: {
+      title: "Hoe stevig is uw lijn?",
+      body: "Ik kom het bereik bij u meten en zeg u eerlijk of een tweede lijn de moeite loont.",
+    },
+    reading: [
+      {
+        href: "/blog/kassanetwerk-scheiden-horeca",
+        title: "Gasten- en kassanetwerk scheiden in de horeca",
+        body: "Waarom de kassa en de betaalterminal niet op de gastenwifi horen.",
+      },
+    ],
+    locals: [],
+  },
+  {
+    // N3 Tijdelijk netwerk (vault: pf-solutions-map, ref-website-copy page 2).
+    // Held: publish when the rental terms are decided and a first customer
+    // said yes. No cameras (licence). Event line kept (Louis, 2026-11-03).
+    slug: "tijdelijk-netwerk",
+    navTitle: "Tijdelijk netwerk",
+    title: "Internet op de werf, zonder te wachten op een lijn",
+    metaTitle: "Tijdelijk internet voor werf en werfcontainer",
+    solution: "Tijdelijk netwerk",
+    kicker: "Tijdelijk netwerk",
+    audience: "Werven, events en verhuizingen",
+    icon: "hard-hat",
+    held: true,
+    tagline:
+      "Een vaste lijn naar een werf laat weken op zich wachten. Ik plaats een 5G-kit in de werfcontainer, met wifi en een veilige verbinding met uw kantoor. Is de werf klaar, dan verhuist de kit mee naar de volgende.",
+    description:
+      "Een 5G-kit in de werfcontainer, met wifi en een veilige verbinding met uw kantoor. Per maand gehuurd, bewaakt, en mee naar de volgende werf. Ook voor een event of de weken tussen twee kantoren.",
+    metaDescription:
+      "Internet in de werfcontainer zonder weken te wachten op een lijn. Een 5G-kit met wifi en een verbinding met kantoor, per maand, mee naar de volgende werf.",
+    problem: { title: "Herkenbaar?", body: "" },
+    symptoms: [
+      "Zes weken wachten op een lijn, voor een werfcontainer die er vier maanden staat.",
+      "De werfleider deelt de hotspot van zijn gsm met heel de werf.",
+      "Het nieuwe kantoor is klaar, maar de lijn is er nog niet.",
+      "Een event van drie dagen, en ter plaatse geen internet.",
+    ],
+    features: [
+      {
+        icon: "router",
+        title: "Een 5G-kit die tegen een stootje kan",
+        body: "Een router met een antenne buiten, in de werfcontainer geplaatst en ter plaatse getest.",
+      },
+      {
+        icon: "wifi",
+        title: "Wifi in de werfcontainer",
+        body: "Voor de laptops, de tablets en de printer van de werfleider.",
+      },
+      {
+        icon: "lock",
+        title: "Een veilige verbinding met kantoor",
+        body: "Plannen, bestanden en programma's werken zoals op kantoor, via een VPN.",
+      },
+      {
+        icon: "bell-ring",
+        title: "U hoort het als de verbinding wegvalt",
+        body: "U krijgt een melding, en hoeft niet te wachten tot de werfleider belt.",
+      },
+      {
+        icon: "truck",
+        title: "Per maand, en mee naar de volgende werf",
+        body: "Is de werf klaar, dan verhuist de kit of haal ik ze op.",
+      },
+    ],
+    steps: [
+      {
+        title: "Kennismaking",
+        body: "Gratis. Hoeveel werven heeft u tegelijk, hoe lang lopen ze, en wat moet er werken?",
+      },
+      {
+        title: "Plan en offerte",
+        body: "Per werf een maandprijs, met wat erin zit en wat er gebeurt bij verlies of schade.",
+      },
+      {
+        title: "Plaatsing",
+        body: "De kit in de werfcontainer, het bereik nagemeten en de verbinding met kantoor getest.",
+      },
+      {
+        title: "Verhuizen of ophalen",
+        body: "Naar de volgende werf, of terug naar mij als het project klaar is.",
+      },
+    ],
+    forWho:
+      "Aannemers, projectontwikkelaars en bouwbedrijven met werven die maanden lopen. Ook voor een pop-up, een event of de weken tussen twee kantoren.",
+    limits:
+      "Geen camera's. Bewakingscamera's plaatsen of onderhouden mag in België alleen een onderneming met een vergunning voor camerasystemen (FOD Binnenlandse Zaken). Die vergunning heb ik niet. Voor werfcamera's gaat u best naar een erkende installateur.",
+    faqs: [
+      {
+        question: "Hoe snel is de werf online?",
+        answer:
+          "Zodra de kit staat. Er komt geen vaste lijn aan te pas, dus u wacht niet op een aansluiting. Het bereik op de werf meet ik vooraf.",
+      },
+      {
+        question: "Kunnen we vanuit de werfcontainer aan onze bestanden op kantoor?",
+        answer:
+          "Ja. De kit legt een beveiligde verbinding met uw kantoornetwerk, zodat plannen en programma's werken zoals op kantoor. Of uw kantoornetwerk dat toelaat, bekijk ik vooraf.",
+      },
+      {
+        question: "Wat als de werf langer duurt dan gepland?",
+        answer:
+          "Dan loopt de huur gewoon een maand langer. Is de werf klaar, dan verhuist de kit naar de volgende of haal ik ze op.",
+      },
+      {
+        question: "Plaatst u ook werfcamera's?",
+        answer:
+          "Nee. Daarvoor is in België een vergunning nodig als onderneming voor camerasystemen, en die heb ik niet. Voor camera's gaat u best naar een erkende installateur.",
+      },
+      {
+        question: "Werkt het ook voor een event of een verhuizing?",
+        answer:
+          "Ja. Dezelfde kit brengt internet naar een event van een paar dagen, of overbrugt de weken tussen twee kantoren.",
+      },
+    ],
+    cta: {
+      title: "Hoeveel werven heeft u lopen?",
+      body: "Vertel me hoeveel werven u tegelijk heeft, dan reken ik het voor u uit.",
+    },
+    locals: [],
+  },
   {
     slug: "kantoorverhuizing",
     navTitle: "Kantoorverhuizing",
@@ -662,6 +914,15 @@ export const services: ServiceHub[] = [
     ],
   },
 ];
+
+/** The hubs this build publishes: held hubs only outside production. */
+export const services: ServiceHub[] = allServices.filter((hub) => !hub.held || !isProductionBuild);
+
+/** How lists name a hub: the solution name for named offer pages (whose H1
+ * is a sentence), the title for the older hubs. */
+export function hubName(hub: ServiceHub): string {
+  return hub.kicker ? hub.solution : hub.title;
+}
 
 export function getHub(slug: string): ServiceHub | undefined {
   return services.find((s) => s.slug === slug);

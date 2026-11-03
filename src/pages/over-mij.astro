@@ -8,7 +8,7 @@ import Button from "@/components/Button.astro";
 import Portrait from "@/components/Portrait.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { site } from "@/data/site";
-import { services } from "@/data/services";
+import { services, hubName } from "@/data/services";
 import { sectors } from "@/data/sectors";
 import { breadcrumbs, ORG_ID } from "@/lib/schema";
 
@@ -69,7 +69,7 @@ const facts: { term: string; detail: string; href?: string }[] = [
     detail:
       "West-Vlaanderen, onder meer Brugge, Oostende, Knokke-Heist, Blankenberge, Zedelgem en Oostkamp. Voor een afgebakend project ook daarbuiten.",
   },
-  { term: "Diensten", detail: services.map((s) => s.title).join(", ") + "." },
+  { term: "Diensten", detail: services.map((s) => hubName(s)).join(", ") + "." },
   { term: "Voor wie", detail: sectors.map((s) => s.navTitle).join(", ") + "." },
   { term: "Bereikbaarheid", detail: `${site.hours.label}. Zondag en feestdagen zijn geen werkdagen.` },
   { term: "Ondernemingsnummer", detail: site.companyNumber },
