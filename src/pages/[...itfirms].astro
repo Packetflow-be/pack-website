@@ -1,0 +1,19 @@
+---
+// /voor-it-bedrijven (vault: ref-website-copy page 5). A rest route so that a
+// held page builds no route at all in production: getStaticPaths returns
+// nothing there. A plain voor-it-bedrijven.astro would always be built.
+import HubPage from "@/components/HubPage.astro";
+import { itFirmsPage } from "@/data/itfirms";
+import { showHeld } from "@/lib/build";
+
+export function getStaticPaths() {
+  return showHeld(itFirmsPage.held) ? [{ params: { itfirms: itFirmsPage.slug } }] : [];
+}
+
+const crumbs: [string, string][] = [
+  ["Home", "/"],
+  [itFirmsPage.navTitle, `/${itFirmsPage.slug}`],
+];
+---
+
+<HubPage hub={itFirmsPage} crumbs={crumbs} />

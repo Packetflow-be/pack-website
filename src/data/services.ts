@@ -105,6 +105,16 @@ export type ServiceHub = {
   held?: boolean;
   /** A named offer rendered as its own section after the features. */
   offer?: OfferSection;
+  /**
+   * Related hubs (slugs), shown as cards near the end of the page. Only hubs
+   * that exist in this build appear, so held hubs are never linked in
+   * production.
+   */
+  related?: string[];
+  /** One short line for this hub's card on other pages (else the tagline). */
+  relatedLine?: string;
+  /** The story behind the work: an editorial block after the features. */
+  story?: { kicker: string; title: string; paragraphs: string[] };
   locals: LocalPage[];
 };
 
@@ -140,6 +150,9 @@ const allServices: ServiceHub[] = [
     // N1 Altijd online (vault: pf-solutions-map, ref-website-copy page 1).
     // Held: publish when Louis approves the one-page offer.
     slug: "altijd-online",
+    related: ["zakelijke-wifi-netwerken", "tijdelijk-netwerk", "it-beheer-support"],
+    relatedLine:
+      "Valt uw internet weg, dan neemt 4G of 5G vanzelf over. Uw kassa en betaalterminal werken door.",
     navTitle: "Altijd online",
     title: "Uw internet valt weg. Uw kassa werkt door.",
     metaTitle: "Back-up internet via 4G of 5G voor uw zaak",
@@ -260,6 +273,9 @@ const allServices: ServiceHub[] = [
     // Held: publish when the rental terms are decided and a first customer
     // said yes. No cameras (licence). Event line kept (Louis, 2026-11-03).
     slug: "tijdelijk-netwerk",
+    related: ["zakelijke-wifi-netwerken", "kantoorverhuizing", "altijd-online"],
+    relatedLine:
+      "Internet en wifi voor een werf, een event of de weken tussen twee kantoren. Per maand, zonder te wachten op een vaste lijn.",
     navTitle: "Tijdelijk netwerk",
     title: "Internet op de werf, zonder te wachten op een lijn",
     metaTitle: "Tijdelijk internet voor werf en werfcontainer",
@@ -371,6 +387,9 @@ const allServices: ServiceHub[] = [
     // nothing about what the law asks of pharmacies (not verified); no Dutch
     // (NL) sources.
     slug: "temperatuurbewaking",
+    related: ["altijd-online", "it-beheer-support"],
+    relatedLine:
+      "Sensoren in uw koelkasten en een alarm naar uw eigen mensen, zonder papieren logboek.",
     navTitle: "Temperatuurbewaking",
     title: "Temperatuurbewaking met alarm, zonder papieren logboek",
     metaTitle: "Temperatuurbewaking met alarm voor koelkasten",
@@ -499,6 +518,9 @@ const allServices: ServiceHub[] = [
   },
   {
     slug: "kantoorverhuizing",
+    related: ["tijdelijk-netwerk", "zakelijke-wifi-netwerken"],
+    relatedLine:
+      "Netwerk, wifi en firewall goed gelegd, terwijl de muren nog open liggen.",
     navTitle: "Kantoorverhuizing",
     title: "De verhuizing zonder IT-zorgen",
     metaTitle: "Kantoorverhuizing: netwerk, wifi en IT goed geregeld",
@@ -690,6 +712,9 @@ const allServices: ServiceHub[] = [
   },
   {
     slug: "zakelijke-wifi-netwerken",
+    related: ["tijdelijk-netwerk", "altijd-online", "kantoorverhuizing"],
+    relatedLine:
+      "Een gastennetwerk dat nooit aan uw kassa of eigen systemen kan, en wifi die overeind blijft.",
     navTitle: "Wifi & netwerken",
     title: "Zakelijke wifi & netwerken",
     solution: "Gastnetwerk dat klopt",
@@ -897,6 +922,8 @@ const allServices: ServiceHub[] = [
   },
   {
     slug: "it-beheer-support",
+    relatedLine:
+      "Bewaakt, bijgewerkt en gebackupt, met één vast aanspreekpunt en elke maand één pagina rapport.",
     navTitle: "IT-beheer",
     title: "IT-beheer & support",
     metaTitle: "IT-beheer voor praktijken, kantoren en KMO's",
