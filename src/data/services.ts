@@ -252,6 +252,114 @@ const allServices: ServiceHub[] = [
     locals: [],
   },
   {
+    // N3 Tijdelijk netwerk (vault: pf-solutions-map, ref-website-copy page 2).
+    // Held: publish when the rental terms are decided and a first customer
+    // said yes. No cameras (licence). Event line kept (Louis, 2026-11-03).
+    slug: "tijdelijk-netwerk",
+    navTitle: "Tijdelijk netwerk",
+    title: "Internet op de werf, zonder te wachten op een lijn",
+    metaTitle: "Tijdelijk internet voor werfkeet en event",
+    solution: "Tijdelijk netwerk",
+    kicker: "Tijdelijk netwerk",
+    audience: "Werven, events en verhuizingen",
+    icon: "hard-hat",
+    held: true,
+    tagline:
+      "Een vaste lijn naar een werf laat weken op zich wachten. Ik plaats een 5G-kit in de werfkeet, met wifi en een veilige verbinding met uw kantoor. Is de werf klaar, dan verhuist de kit mee naar de volgende.",
+    description:
+      "Een 5G-kit in de werfkeet, met wifi en een veilige verbinding met uw kantoor. Per maand gehuurd, bewaakt, en mee naar de volgende werf. Ook voor een event of de weken tussen twee kantoren.",
+    metaDescription:
+      "Internet in de werfkeet zonder weken te wachten op een lijn. Een 5G-kit met wifi en een verbinding met kantoor, per maand, mee naar de volgende werf.",
+    problem: { title: "Herkenbaar?", body: "" },
+    symptoms: [
+      "Zes weken wachten op een lijn, voor een werfkeet die er vier maanden staat.",
+      "De werfleider deelt de hotspot van zijn gsm met heel de keet.",
+      "Het nieuwe kantoor is klaar, maar de lijn is er nog niet.",
+      "Een event van drie dagen, en ter plaatse geen internet.",
+    ],
+    features: [
+      {
+        icon: "router",
+        title: "Een 5G-kit die tegen een stootje kan",
+        body: "Een router met een antenne buiten, in de werfkeet geplaatst en ter plaatse getest.",
+      },
+      {
+        icon: "wifi",
+        title: "Wifi in de keet",
+        body: "Voor de laptops, de tablets en de printer van de werfleider.",
+      },
+      {
+        icon: "lock",
+        title: "Een veilige verbinding met kantoor",
+        body: "Plannen, bestanden en programma's werken zoals op kantoor, via een VPN.",
+      },
+      {
+        icon: "bell-ring",
+        title: "U hoort het als de verbinding wegvalt",
+        body: "U krijgt een melding, en hoeft niet te wachten tot de werfleider belt.",
+      },
+      {
+        icon: "truck",
+        title: "Per maand, en mee naar de volgende werf",
+        body: "Is de werf klaar, dan verhuist de kit of haal ik ze op.",
+      },
+    ],
+    steps: [
+      {
+        title: "Kennismaking",
+        body: "Gratis. Hoeveel werven heeft u tegelijk, hoe lang lopen ze, en wat moet er werken?",
+      },
+      {
+        title: "Plan en offerte",
+        body: "Per werf een maandprijs, met wat erin zit en wat er gebeurt bij verlies of schade.",
+      },
+      {
+        title: "Plaatsing",
+        body: "De kit in de werfkeet, het bereik nagemeten en de verbinding met kantoor getest.",
+      },
+      {
+        title: "Verhuizen of ophalen",
+        body: "Naar de volgende werf, of terug naar mij als het project klaar is.",
+      },
+    ],
+    forWho:
+      "Aannemers, projectontwikkelaars en bouwbedrijven met werven die maanden lopen. Ook voor een pop-up, een event of de weken tussen twee kantoren.",
+    limits:
+      "Geen camera's. Bewakingscamera's plaatsen of onderhouden mag in België alleen een onderneming met een vergunning voor camerasystemen (FOD Binnenlandse Zaken). Die vergunning heb ik niet. Voor werfcamera's gaat u best naar een erkende installateur.",
+    faqs: [
+      {
+        question: "Hoe snel is de werf online?",
+        answer:
+          "Zodra de kit staat. Er komt geen vaste lijn aan te pas, dus u wacht niet op een aansluiting. Het bereik op de werf meet ik vooraf.",
+      },
+      {
+        question: "Kunnen we vanuit de werfkeet aan onze bestanden op kantoor?",
+        answer:
+          "Ja. De kit legt een beveiligde verbinding met uw kantoornetwerk, zodat plannen en programma's werken zoals op kantoor. Of uw kantoornetwerk dat toelaat, bekijk ik vooraf.",
+      },
+      {
+        question: "Wat als de werf langer duurt dan gepland?",
+        answer:
+          "Dan loopt de huur gewoon een maand langer. Is de werf klaar, dan verhuist de kit naar de volgende of haal ik ze op.",
+      },
+      {
+        question: "Plaatst u ook werfcamera's?",
+        answer:
+          "Nee. Daarvoor is in België een vergunning nodig als onderneming voor camerasystemen, en die heb ik niet. Voor camera's gaat u best naar een erkende installateur.",
+      },
+      {
+        question: "Werkt het ook voor een event of een verhuizing?",
+        answer:
+          "Ja. Dezelfde kit brengt internet naar een event van een paar dagen, of overbrugt de weken tussen twee kantoren.",
+      },
+    ],
+    cta: {
+      title: "Hoeveel werven heeft u lopen?",
+      body: "Vertel me hoeveel werven u tegelijk heeft, dan reken ik het voor u uit.",
+    },
+    locals: [],
+  },
+  {
     slug: "kantoorverhuizing",
     navTitle: "Kantoorverhuizing",
     title: "De verhuizing zonder IT-zorgen",
