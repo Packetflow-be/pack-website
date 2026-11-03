@@ -13,6 +13,22 @@ import { site } from "@/data/site";
 import { services, hubName } from "@/data/services";
 import { sectors } from "@/data/sectors";
 import { url } from "@/lib/url";
+import { itFirmsPage } from "@/data/itfirms";
+import { showHeld } from "@/lib/build";
+
+// Two doors under the hero: businesses and IT firms (Louis's two tracks,
+// 2026-11-03). Shown only while /voor-it-bedrijven is live in this build: a
+// single door would be pointless.
+const showDoors = showHeld(itFirmsPage.held);
+
+// Waarom Packetflow: the why before the what (vault: ref-origin-story;
+// a previous job, as an employee, no names, no blame).
+const story = [
+  "Vier uur 's nachts, in een fabriek in Frankrijk. Twee uur later moest de productie opnieuw starten. Ik was er in een vorige job, als werknemer, al drie dagen en drie nachten om alle servers over te zetten naar een nieuw platform. Het oude systeem was al gewist: er was geen weg terug. Het is gelukt, op één server na.",
+  "Die nacht vergeet ik niet. Niet omdat ze spannend was, maar omdat ze niet had moeten gebeuren. Met een plan B was het een gewone nacht geweest.",
+  "Bij veel kleine bedrijven is IT een zwarte doos. U betaalt elke maand, maar u weet niet goed waarvoor. In juli 2025 ben ik Packetflow begonnen om dat anders te doen: ik leg uit wat ik doe en waarom, alles wordt gedocumenteerd, en u blijft eigenaar van alles.",
+  "Mijn doel is saaie IT. Als u mij twee keer per jaar nodig hebt, wanneer u uitbreidt, dan heb ik mijn werk goed gedaan.",
+];
 
 // The LocalBusiness/Organization node is emitted site-wide by BaseLayout, so
 // the homepage needs no page-specific JSON-LD of its own.
@@ -103,24 +119,52 @@ const howSteps = [
     </div>
   </section>
 
-  {/* ---- Pillars ---- */}
+  {/* ---- Two doors ---- */}
+  {
+    showDoors && (
+      <section class="doors" aria-label="Voor wie werk ik">
+        <div class="container doors__grid">
+          <a href={url("/diensten")} class="door">
+            <span class="door__kicker">Voor zaken en praktijken</span>
+            <span class="door__title">Uw netwerk, internet en back-up, gewoon in orde</span>
+            <span class="door__body">Voor bedrijven waar stilstand geld kost: een plan, het werk, en alles gedocumenteerd in uw handen.</span>
+            <span class="door__more">Bekijk de oplossingen <Icon name="arrow-right" size={16} /></span>
+          </a>
+          <a href={url(`/${itFirmsPage.slug}`)} class="door door--alt">
+            <span class="door__kicker">Voor IT-bedrijven</span>
+            <span class="door__title">De avond- en weekendingenieur onder uw naam</span>
+            <span class="door__body">Migraties, firewalls en servers 's avonds en in het weekend, wanneer uw eigen team er niet is.</span>
+            <span class="door__more">Zo werk ik met IT-bedrijven <Icon name="arrow-right" size={16} /></span>
+          </a>
+        </div>
+      </section>
+    )
+  }
+
+  {/* ---- Waarom Packetflow: the story, then the three pillars ---- */}
   <section class="section pillars">
-    <div class="container">
-      <Kicker>Waarom Packetflow</Kicker>
-      <h2 class="section__title">De degelijkheid van een groot IT-team, op maat van een KMO</h2>
-      <div class="grid-3">
+    <div class="container why">
+      <div class="why__story">
+        <Kicker>Waarom Packetflow</Kicker>
+        <h2 class="section__title">IT zonder zwarte doos</h2>
+        {story.map((para) => <p class="why__p">{para}</p>)}
+        <p class="why__sign">Louis</p>
+      </div>
+      <ul class="why__pillars">
         {
-          pillars.map(([icon, title, body], i) => (
-            <Card accent={i === 1} class="pillar">
+          pillars.map(([icon, title, body]) => (
+            <li class="pillar">
               <span class="pillar__icon">
-                <Icon name={icon} size={22} color="#fff" />
+                <Icon name={icon} size={20} color="#fff" />
               </span>
-              <h3 class="pillar__title">{title}</h3>
-              <p class="pillar__body">{body}</p>
-            </Card>
+              <div>
+                <h3 class="pillar__title">{title}</h3>
+                <p class="pillar__body">{body}</p>
+              </div>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </div>
   </section>
 
@@ -142,7 +186,7 @@ const howSteps = [
             <a href={url(`/diensten/${hub.slug}`)} class="svc">
               <Icon name={hub.icon} size={24} color="var(--orange-700)" />
               <h3 class="svc__title">{hubName(hub)}</h3>
-              <p class="svc__body">{hub.tagline}</p>
+              <p class="svc__body">{hub.relatedLine ?? hub.tagline}</p>
             </a>
           ))
         }
@@ -385,9 +429,10 @@ const howSteps = [
     background: var(--paper);
   }
   .pillar {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 16px;
+    align-items: start;
   }
   .pillar__icon {
     width: 46px;
@@ -399,12 +444,120 @@ const howSteps = [
   }
   .pillar__title {
     font-size: var(--text-lg);
-    margin: 0;
+    margin: 2px 0 6px;
   }
   .pillar__body {
     font-size: var(--text-sm);
     line-height: 1.65;
     color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Waarom Packetflow: story left, pillars right */
+  .why {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+  .why__p {
+    font-family: var(--font-serif);
+    font-size: 1.1875rem;
+    line-height: 1.65;
+    color: var(--text-strong);
+    margin: 0 0 var(--space-4);
+    max-width: 62ch;
+  }
+  .why__sign {
+    margin: var(--space-5) 0 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .why__sign::before {
+    content: "\2014\00a0";
+  }
+  .why__pillars {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-6);
+    display: grid;
+    gap: var(--space-6);
+    background: var(--cream);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--orange-600);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Two doors */
+  .doors {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .doors__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    padding-block: 0 var(--space-8);
+  }
+  .door {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: var(--space-6);
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .door:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .door--alt {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--cream);
+  }
+  .door__kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange-700);
+  }
+  .door--alt .door__kicker {
+    color: var(--orange-300);
+  }
+  .door__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+  .door__body {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .door--alt .door__body {
+    color: var(--grey-300);
+  }
+  .door__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: var(--space-3);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--orange-800);
+  }
+  .door--alt .door__more {
+    color: var(--orange-300);
   }
 
   /* Services */
@@ -622,6 +775,11 @@ const howSteps = [
 
   /* keep in sync with --container-md in global.css */
   @media (max-width: 880px) {
+    .hero__grid {
+      padding-block: var(--space-7);
+    }
+    .why,
+    .doors__grid,
     .hero__grid,
     .grid-3,
     .svc-grid,
