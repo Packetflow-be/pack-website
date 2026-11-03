@@ -68,8 +68,8 @@ export const praktijkZonderStilstand: OfferSection = {
     },
     {
       icon: "radar",
-      title: "Bewaakt, met een maandrapport",
-      body: "Alles in de gaten gehouden, en elke maand één pagina rapport.",
+      title: "Bewaakt, met een kwartaalrapport",
+      body: "Alles in de gaten gehouden, en elk kwartaal een rapport.",
     },
   ],
   steps: [
@@ -87,7 +87,7 @@ export const praktijkZonderStilstand: OfferSection = {
     },
     {
       title: "Opvolging",
-      body: "Bewaakt, het certificaat in de agenda, hersteltests en elke maand één pagina rapport.",
+      body: "Bewaakt, het certificaat in de agenda, hersteltests en elk kwartaal een rapport.",
     },
   ],
   scope:

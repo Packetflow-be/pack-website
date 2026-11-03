@@ -138,7 +138,7 @@ Het begint met een gratis kennismaking en een bezoek ter plaatse. Daarna krijgt
 u een offerte met twee delen: een vaste prijs voor de overname of het project,
 en een maandprijs per eenheid voor het beheer. Per dienst staat wat erin zit en
 wat niet. Er is geen minimale looptijd, u zegt op met één maand opzeg, en uw
-omgeving blijft op uw naam. Elke maand krijgt u één pagina rapport, met daarin
+omgeving blijft op uw naam. Elk kwartaal krijgt u een rapport, met daarin
 ook het resultaat van de hersteltests.
 
 Hoe dat van begin tot einde verloopt, leest u in de

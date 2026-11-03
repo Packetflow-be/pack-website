@@ -139,11 +139,11 @@ const firstSteps = [
 ];
 const lastStep = {
   title: "Oplevering en beheer",
-  body: "Alles gedocumenteerd in uw handen. Daarna blijft het bewaakt en bijgewerkt, met elke maand één pagina rapport.",
+  body: "Alles gedocumenteerd in uw handen. Daarna blijft het bewaakt en bijgewerkt, met elk kwartaal een rapport.",
 };
 
 const beheerLine =
-  "Na de oplevering houdt Packetflow Beheer het draaiende: bewaakt, bijgewerkt en gebackupt, met één vast aanspreekpunt en elke maand één pagina rapport.";
+  "Na de oplevering houdt Packetflow Beheer het draaiende: bewaakt, bijgewerkt en gebackupt, met één vast aanspreekpunt en elk kwartaal een rapport.";
 
 const allServices: ServiceHub[] = [
   {
@@ -221,7 +221,7 @@ const allServices: ServiceHub[] = [
       },
       {
         title: "Opvolging",
-        body: "Ik hou beide lijnen in de gaten. U krijgt een melding bij elke omschakeling en elke maand één pagina rapport.",
+        body: "Ik hou beide lijnen in de gaten. U krijgt een melding bij elke omschakeling en elk kwartaal een rapport.",
       },
     ],
     forWho:
@@ -623,7 +623,7 @@ const allServices: ServiceHub[] = [
       },
       {
         icon: "file-check",
-        title: "Elke maand één pagina rapport",
+        title: "Elk kwartaal een rapport",
         body: "Over al uw diensten samen: wat er liep, wat er gebeurde en wat aandacht vraagt. Het resultaat van de hersteltests staat erin.",
       },
     ],
@@ -923,7 +923,7 @@ const allServices: ServiceHub[] = [
   {
     slug: "it-beheer-support",
     relatedLine:
-      "Bewaakt, bijgewerkt en gebackupt, met één vast aanspreekpunt en elke maand één pagina rapport.",
+      "Bewaakt, bijgewerkt en gebackupt, met één vast aanspreekpunt en elk kwartaal een rapport.",
     navTitle: "IT-beheer",
     title: "IT-beheer & support",
     metaTitle: "IT-beheer voor praktijken, kantoren en KMO's",
@@ -933,9 +933,9 @@ const allServices: ServiceHub[] = [
     tagline:
       "Eens alles goed staat, moet iemand het zo houden: bewaakt, bijgewerkt en gebackupt. Met één vast aanspreekpunt dat uw omgeving kent.",
     description:
-      "Packetflow Beheer houdt uw IT draaiende na de oplevering. U kiest de diensten die u nodig heeft en betaalt per maand, per eenheid die u zelf kan tellen: een toestel, een gebruiker, uw Microsoft 365-omgeving of een vestiging. Elke maand krijgt u één pagina rapport, en u blijft eigenaar van alles.",
+      "Packetflow Beheer houdt uw IT draaiende na de oplevering. U kiest de diensten die u nodig heeft en betaalt per maand, per eenheid die u zelf kan tellen: een toestel, een gebruiker, uw Microsoft 365-omgeving of een vestiging. Elk kwartaal krijgt u een rapport, en u blijft eigenaar van alles.",
     metaDescription:
-      "IT-beheer per dienst voor praktijken, kantoren en KMO's: 24/7 bewaakte toestellen, updates, geteste back-ups en elke maand een rapport.",
+      "IT-beheer per dienst voor praktijken, kantoren en KMO's: 24/7 bewaakte toestellen, updates, geteste back-ups en elk kwartaal een rapport.",
     problem: {
       title: "De computerman die nooit opneemt",
       body: "Veel kleine bedrijven hebben geen IT-beheer, maar iemand die af en toe komt als er iets stuk is. Tussen twee bezoeken ziet niemand of de updates liepen, of de back-up nog werkt en wie er nog toegang heeft.",
@@ -948,7 +948,7 @@ const allServices: ServiceHub[] = [
       },
       {
         icon: "file-check",
-        title: "Elke maand één pagina rapport",
+        title: "Elk kwartaal een rapport",
         body: "Over al uw diensten samen: wat er liep, wat er gebeurde en wat aandacht vraagt. In mensentaal.",
       },
       {
@@ -1052,7 +1052,7 @@ const allServices: ServiceHub[] = [
           "Oudenburg ligt op een steenworp van Jabbeke, langs de as richting Oostende. Voor de zelfstandigen en kleine praktijken hier ben ik dichtbij genoeg om langs te komen wanneer het ter plaatse moet. Ideaal als uw huidige 'IT-er' een neef is die nooit tijd heeft.",
         highlights: [
           "Dichtbij, vanuit het nabijgelegen Jabbeke",
-          "Toestellen bewaakt en bijgewerkt, met een maandrapport",
+          "Toestellen bewaakt en bijgewerkt, met een kwartaalrapport",
           "Alles gedocumenteerd en in uw handen",
           "Persoonlijk: dezelfde persoon, elke keer",
         ],
