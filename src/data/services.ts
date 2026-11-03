@@ -73,7 +73,9 @@ export type ServiceHub = {
   /** The managed services a client picks from (Packetflow Beheer). */
   services?: ManagedService[];
   /** An honest-limits line: what this solution is not. */
-  limits?: string;
+  limits?: string | string[];
+  /** Sources for the facts on the page, linked in a small line before the FAQ. */
+  sources?: { label: string; href: string }[];
   /** A prerequisite worth saying before the quote (e.g. a licence level). */
   requirement?: string;
   /** What keeps it running after delivery. Rendered with a link to Beheer. */
@@ -358,6 +360,140 @@ const allServices: ServiceHub[] = [
     cta: {
       title: "Hoeveel werven heeft u lopen?",
       body: "Vertel me hoeveel werven u tegelijk heeft, dan reken ik het voor u uit.",
+    },
+    locals: [],
+  },
+  {
+    // Temperatuurbewaking (vault: ref-website-copy page 4,
+    // prj-temperature-monitoring-offering). Held: publish after the pilot is
+    // written up, the liability lines are in pf-service-terms and the prices
+    // are decided. Facts as sourced (FAVV G-023, G-044, Departement Zorg);
+    // nothing about what the law asks of pharmacies (not verified); no Dutch
+    // (NL) sources.
+    slug: "temperatuurbewaking",
+    navTitle: "Temperatuurbewaking",
+    title: "Temperatuurbewaking met alarm, zonder papieren logboek",
+    metaTitle: "Temperatuurbewaking met alarm voor koelkasten",
+    solution: "Temperatuurbewaking",
+    kicker: "Temperatuurbewaking",
+    audience: "Horeca, beenhouwers en apotheken",
+    icon: "thermometer-snowflake",
+    held: true,
+    tagline:
+      "Sensoren meten dag en nacht de temperatuur in uw koelkasten en koelcellen. Wijkt ze af, dan krijgen uw eigen mensen een sms en een e-mail. En elke maand krijgt u een rapport voor uw registratie.",
+    description:
+      "Draadloze sensoren in uw koelkasten en koelcellen, een alarm per sms en e-mail naar uw eigen mensen, en elke maand een rapport met de temperatuurcurves voor uw registratie.",
+    metaDescription:
+      "Sensoren in uw koelkasten en koelcellen, een alarm per sms en e-mail bij een afwijking, en elke maand een rapport. Voor horeca, beenhouwers en apotheken.",
+    problem: { title: "Herkenbaar?", body: "" },
+    symptoms: [
+      "Elke morgen de temperatuur van elke frigo op een blad noteren.",
+      "Na het weekend bleek de koelcel warm te staan.",
+      "'s Nachts viel de stroom uit, en niemand weet hoe lang de vaccins te warm stonden.",
+      "Het FAVV komt langs, en op de lijst ontbreken dagen.",
+    ],
+    features: [
+      {
+        icon: "thermometer",
+        title: "Een sensor per koelkast of koelcel",
+        body: "De sonde zit binnen, de zender buiten op de deur of de muur. Aan uw koelinstallatie wordt niets aangesloten.",
+      },
+      {
+        icon: "bell-ring",
+        title: "Een alarm naar uw eigen mensen",
+        body: "Per sms en e-mail bij te warm of te koud. Ook als een sensor zwijgt, het systeem offline is of een batterij bijna leeg is: een stil systeem ziet er nooit uit als een koude koelkast.",
+      },
+      {
+        icon: "signal",
+        title: "Werkt ook als uw internet wegvalt",
+        body: "Het systeem heeft een eigen mobiele verbinding en een kleine noodvoeding, zodat het alarm toch vertrekt. Het mobiele bereik test ik ter plaatse.",
+      },
+      {
+        icon: "file-text",
+        title: "Elke maand een rapport",
+        body: "De temperatuurcurve per toestel, als pdf, voor uw registratie en voor een controle.",
+      },
+      {
+        icon: "calendar-check",
+        title: "Elk jaar een controle",
+        body: "De sensoren nagekeken met een referentiethermometer, en geregistreerd. De batterijen vervang ik.",
+      },
+      {
+        icon: "map-pin-check",
+        title: "Uw gegevens blijven in de EU",
+        body: "De metingen worden in de Europese Unie bewaard en verwerkt.",
+      },
+    ],
+    steps: [
+      {
+        title: "Kennismaking",
+        body: "Gratis. Welke koelkasten en koelcellen, en wie krijgt het alarm?",
+      },
+      {
+        title: "Plan en offerte",
+        body: "Een vaste prijs voor de plaatsing en een maandprijs volgens het aantal sensoren.",
+      },
+      {
+        title: "Plaatsing",
+        body: "Sensoren en ontvanger geplaatst, elk alarm getest en uw contactpersonen ingesteld.",
+      },
+      {
+        title: "Opvolging",
+        body: "Elke maand het rapport, elk jaar de controle, en nieuwe batterijen als dat nodig is.",
+      },
+    ],
+    forWho:
+      "Restaurants en cafés, beenhouwers, bakkers en traiteurs, apotheken en huisartsenpraktijken met een vaccinkoelkast, bloemisten en kleine labo's.",
+    limits: [
+      "Geen diepvriesopslag groter dan 10 m³ en geen diepvriestransport: daar zijn gecertificeerde registratietoestellen nodig (EN 12830).",
+      "Geen koppeling met uw koelinstallatie: de sensoren meten alleen, ze sturen niets aan.",
+      "Geen nachtdienst van mijn kant: het alarm gaat naar u en uw mensen, en u beslist wie reageert. Ik volg de werking van het systeem op.",
+      "U blijft verantwoordelijk voor uw autocontrole en uw koudeketen. Dit is een hulpmiddel: ik doe er alles aan dat een alarm aankomt, maar een garantie is het niet.",
+    ],
+    faqs: [
+      {
+        question: "Aanvaardt het FAVV een automatische registratie?",
+        answer:
+          "Voor de horeca noemt de FAVV-gids autocontrole horeca (G-023) een geautomatiseerde continue registratie uitdrukkelijk als een van de manieren om de dagelijkse controle van koelkasten en diepvriezers te doen. De gids raadt wel aan om zo'n installatie geregeld na te kijken met een draagbare thermometer. Voor uw eigen zaak blijft de gids van uw sector de referentie.",
+      },
+      {
+        question: "Wat vraagt het FAVV in een winkel of beenhouwerij?",
+        answer:
+          "Het praktijkhandboek voor de handel (G-044) vraagt in elk koel- en diepvriestoestel een goed afleesbare thermometer, tot op 1 °C nauwkeurig, en een controle van de meettoestellen minstens één keer per jaar, die geregistreerd wordt. De temperatuurbewaking komt bovenop die thermometer, niet in de plaats ervan. De jaarlijkse controle van de sensoren doe ik voor u, en ze staat in het rapport.",
+      },
+      {
+        question: "Wie reageert als het alarm 's nachts afgaat?",
+        answer:
+          "U, of wie u aanduidt. Het alarm gaat rechtstreeks per sms en e-mail naar uw eigen contactpersonen. Ik volg de werking van het systeem op, niet uw koelkasten.",
+      },
+      {
+        question: "Wat als de stroom of het internet uitvalt?",
+        answer:
+          "De sensoren werken op batterij. De ontvanger heeft een kleine noodvoeding en een eigen mobiele verbinding, zodat het alarm ook dan kan vertrekken. Valt een sensor of de ontvanger toch stil, dan krijgt u daar ook een melding van.",
+      },
+      {
+        question: "Is dit geschikt voor een vaccinkoelkast?",
+        answer:
+          "Ja, als hulpmiddel. Een vaccin dat niet op de juiste temperatuur bewaard werd, is een temperatuurincident dat u meldt bij het Departement Zorg. Het alarm waarschuwt u op tijd, en de curve toont hoe lang en hoe warm. Wat uw inspecteur precies vraagt, bekijken we samen.",
+      },
+    ],
+    sources: [
+      {
+        label: "FAVV: gids autocontrole horeca (G-023)",
+        href: "https://favv-afsca.be/sites/default/files/G-023_v2_nl_11-01-2024.pdf",
+      },
+      {
+        label: "FAVV: praktijkhandboek voor de handel (G-044)",
+        href: "https://favv-afsca.be/sites/default/files/autocontrole/g-044/praktijkhandboek/2024-10-25_G-044_Praktijkhandboek_PDF-met-zoekfunctie.pdf",
+      },
+      {
+        label: "Departement Zorg: probleem met vaccin melden",
+        href: "https://www.departementzorg.be/nl/alles-over-vaccineren/probleem-met-vaccin-melden",
+      },
+    ],
+    cta: {
+      title: "Hoeveel koelkasten heeft u?",
+      body: "Vertel me hoeveel koelkasten en koelcellen u heeft, dan kom ik kijken.",
     },
     locals: [],
   },

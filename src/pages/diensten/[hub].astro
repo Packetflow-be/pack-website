@@ -204,7 +204,13 @@ const jsonLd = [
               <span class="note__icon"><Icon name="scale" size={18} /></span>
               <div>
                 <h2 class="note__title">{isBeheer ? "Wat er niet in zit" : "Eerlijk gezegd"}</h2>
-                <p>{hub.limits}</p>
+                {Array.isArray(hub.limits) ? (
+                  <ul class="note__list">
+                    {hub.limits.map((line) => <li>{line}</li>)}
+                  </ul>
+                ) : (
+                  <p>{hub.limits}</p>
+                )}
               </div>
             </div>
           )}
@@ -293,7 +299,7 @@ const jsonLd = [
     )
   }
 
-  {pageFaqs.length > 0 && <Faq items={pageFaqs} title={named ? `Vragen over ${hub.navTitle}` : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
+  {pageFaqs.length > 0 && <Faq items={pageFaqs} title={named ? "Veelgestelde vragen" : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" sources={hub.sources} />}
 
   <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
 </BaseLayout>
@@ -301,6 +307,14 @@ const jsonLd = [
 <style>
   .page-hero :global(.badge) {
     margin-bottom: var(--space-4);
+  }
+
+  /* "Eerlijk gezegd" as a list when a hub has several limits */
+  .note__list {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 6px;
   }
 
   /* Staging-only marker on held pages */
@@ -504,6 +518,7 @@ const jsonLd = [
   .notes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    align-items: start;
     gap: var(--space-5);
   }
   .note {
