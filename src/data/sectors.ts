@@ -147,7 +147,7 @@ export const sectors: Sector[] = [
       "Microsoft 365 met tweestapsverificatie en toegangsregels, afgestemd op zorgdata.",
       "Back-ups van toestellen en Microsoft 365, met twee keer per jaar een hersteltest.",
       "Een netwerk waarin de balie, de spreekkamers en de gastenwifi van elkaar gescheiden zijn.",
-      "Elke maand één pagina rapport, en één vast aanspreekpunt dat uw praktijk kent.",
+      "Elk kwartaal een rapport, en één vast aanspreekpunt dat uw praktijk kent.",
     ],
     serviceSlugs: ["cloud-backup-beveiliging", "it-beheer-support", "zakelijke-wifi-netwerken"],
     localSlugs: ["it-partner-jabbeke", "it-support-oudenburg", "managed-it-west-vlaanderen"],

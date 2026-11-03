@@ -128,7 +128,7 @@ kiest:
   bijgehouden, met 24/7 bewaking van de accounts.
 - **Updates**: maandelijks, en kritieke lekken uiterlijk binnen de week.
 - **Back-ups met een hersteltest**, twee keer per jaar, met het resultaat in het
-  maandrapport.
+  kwartaalrapport.
 - **Documentatie**: wie heeft toegang tot wat, en hoe het netwerk in elkaar zit.
 
 De organisatorische kant, zoals een risicoanalyse, een beleid en een
