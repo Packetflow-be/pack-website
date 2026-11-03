@@ -498,7 +498,7 @@ const howSteps = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-5);
-    padding-block: var(--space-6) var(--space-8);
+    padding-block: 0 var(--space-8);
   }
   .door {
     display: flex;
@@ -775,6 +775,9 @@ const howSteps = [
 
   /* keep in sync with --container-md in global.css */
   @media (max-width: 880px) {
+    .hero__grid {
+      padding-block: var(--space-7);
+    }
     .why,
     .doors__grid,
     .hero__grid,
