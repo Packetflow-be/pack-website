@@ -3,7 +3,7 @@
 // shape as a service hub so it renders with HubPage, but it lives at the top
 // level, not under /diensten, and is not in the main menu.
 //
-// Held: publish only after mail H to e-BO is sent. No client or partner
+// Published 2026-11-03 (mail H to e-BO sent and acknowledged; Louis). No client or partner
 // names, nothing about e-BO. Louis 2026-11-03: no promise lines (no
 // "klanten niet overnemen", no "aan u gefactureerd"). The story is from vault
 // ref-origin-story: a previous job, as an employee, employer and factory
@@ -19,7 +19,6 @@ export const itFirmsPage: ServiceHub = {
   kicker: "Voor IT-bedrijven",
   audience: "IT-bedrijven en MSP's",
   icon: "server-cog",
-  held: true,
   tagline:
     "Uw team heeft overdag de handen vol, en die migratie of firewallwissel kan alleen 's avonds of in het weekend. Die werken doe ik, onder uw naam.",
   description:
