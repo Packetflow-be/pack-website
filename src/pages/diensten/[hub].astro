@@ -178,7 +178,7 @@ const jsonLd = [
         <div class="container notes">
           {hub.forWho && (
             <div class="note">
-              <span class="note__icon"><Icon name="store" size={18} /></span>
+              <span class="note__icon"><Icon name="users" size={18} /></span>
               <div>
                 <h2 class="note__title">Voor wie</h2>
                 <p>{hub.forWho}</p>
@@ -347,13 +347,33 @@ const jsonLd = [
     color: var(--text-strong);
   }
 
-  /* Five or six features: three across on wide screens */
+  /* Five or six features: three across on wide screens. A six-track grid
+     lets a short last row stretch instead of leaving a hole (5 = 3 + 2). */
   .grid-cards--3 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid-cards--3 > :global(*) {
+    grid-column: span 2;
+  }
+  .grid-cards--3 > :global(*:nth-child(3n + 1):nth-last-child(2)),
+  .grid-cards--3 > :global(*:nth-child(3n + 2):last-child) {
+    grid-column: span 3;
+  }
+  .grid-cards--3 > :global(*:nth-child(3n + 1):last-child) {
+    grid-column: 1 / -1;
   }
   @media (max-width: 1100px) {
     .grid-cards--3 {
       grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-cards--3 > :global(*),
+    .grid-cards--3 > :global(*:nth-child(3n + 1):nth-last-child(2)),
+    .grid-cards--3 > :global(*:nth-child(3n + 2):last-child),
+    .grid-cards--3 > :global(*:nth-child(3n + 1):last-child) {
+      grid-column: auto;
+    }
+    .grid-cards--3 > :global(*:nth-child(odd):last-child) {
+      grid-column: 1 / -1;
     }
   }
   @media (max-width: 880px) {
@@ -363,6 +383,28 @@ const jsonLd = [
     }
     .grid-cards--3 {
       grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    .grid-cards--3 > :global(*:nth-child(odd):last-child) {
+      grid-column: auto;
+    }
+    /* Compact on phones: icon beside the title, text under the title. */
+    .grid-cards--3 > :global(.feature) {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      column-gap: 14px;
+      row-gap: 4px;
+      align-items: center;
+      padding: 18px;
+    }
+    .grid-cards--3 > :global(.feature) :global(.feature__icon) {
+      width: 40px;
+      height: 40px;
+      grid-row: span 1;
+    }
+    .grid-cards--3 > :global(.feature) :global(p) {
+      grid-column: 2;
+      margin: 0;
     }
   }
   .symptom :global(.symptom__mark) {
