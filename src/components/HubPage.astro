@@ -129,11 +129,15 @@ const jsonLd = [
   {
     hub.story && (
       <section class="section story">
-        <div class="container story__in">
-          <Kicker>{hub.story.kicker}</Kicker>
-          <h2 class="story__title">{hub.story.title}</h2>
-          {hub.story.paragraphs.map((para) => <p class="story__p">{para}</p>)}
-          <p class="story__sign">Louis</p>
+        <div class="container">
+          <div class="story__in">
+            <div class="section-head">
+              <Kicker>{hub.story.kicker}</Kicker>
+              <h2>{hub.story.title}</h2>
+            </div>
+            {hub.story.paragraphs.map((para) => <p class="story__p">{para}</p>)}
+            <p class="story__sign">Louis</p>
+          </div>
         </div>
       </section>
     )
@@ -353,13 +357,13 @@ const jsonLd = [
 
   /* The story behind the work (editorial, one column) */
   .story {
-    background: var(--cream);
+    background: var(--paper);
+    border-block: 1px solid var(--border-soft);
   }
   .story__in {
     max-width: 68ch;
-  }
-  .story__title {
-    margin: var(--space-3) 0 var(--space-5);
+    padding-left: var(--space-6);
+    border-left: 3px solid var(--orange-600);
   }
   .story__p {
     font-family: var(--font-serif);
