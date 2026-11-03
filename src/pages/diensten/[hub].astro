@@ -7,9 +7,10 @@ import Kicker from "@/components/Kicker.astro";
 import Icon from "@/components/Icon.astro";
 import Button from "@/components/Button.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Faq from "@/components/Faq.astro";
 import { services, type ServiceHub } from "@/data/services";
 import { site } from "@/data/site";
-import { service, breadcrumbs } from "@/lib/schema";
+import { service, breadcrumbs, faqPage } from "@/lib/schema";
 import { url } from "@/lib/url";
 
 export function getStaticPaths() {
@@ -30,13 +31,24 @@ const crumbs: [string, string][] = [
 const jsonLd = [
   service({ name: hub.solution, description: hub.description, serviceType: hub.navTitle }),
   breadcrumbs(crumbs),
+  ...(hub.faqs && hub.faqs.length > 0 ? [faqPage(hub.faqs)] : []),
 ];
 ---
 
 <BaseLayout title={hub.metaTitle ?? hub.title} description={hub.metaDescription ?? hub.description} jsonLd={jsonLd}>
+  {
+    hub.held && (
+      <div class="held-banner" role="note">
+        <div class="container">
+          <strong>Concept, alleen op staging.</strong> Deze pagina staat nog niet op packetflow.be: ze gaat live zodra haar publicatievoorwaarde in de vault vervuld is.
+        </div>
+      </div>
+    )
+  }
   <section class="page-hero">
     <div class="container page-hero__in">
       <Breadcrumbs items={crumbs} />
+      {hub.kicker && <Kicker>{hub.kicker}</Kicker>}
       <Badge tone="blue">{hub.audience}</Badge>
       <h1>{hub.title}</h1>
       <p class="lead page-hero__lead">{hub.tagline}</p>
@@ -53,7 +65,19 @@ const jsonLd = [
       <div>
         <Kicker>Het probleem</Kicker>
         <h2 class="problem__title">{hub.problem.title}</h2>
-        <p class="problem__body">{hub.problem.body}</p>
+        {
+          hub.symptoms && hub.symptoms.length > 0 && (
+            <ul class="symptoms">
+              {hub.symptoms.map((line) => (
+                <li class="symptom">
+                  <Icon name="quote" size={16} class="symptom__mark" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        {hub.problem.body && <p class="problem__body">{hub.problem.body}</p>}
       </div>
       <div class="problem__answer">
         <Kicker>{isBeheer ? "Wat Packetflow Beheer doet" : hub.solution}</Kicker>
@@ -138,9 +162,18 @@ const jsonLd = [
   }
 
   {
-    (hub.requirement || hub.limits || hub.ongoing) && (
+    (hub.forWho || hub.requirement || hub.limits || hub.ongoing) && (
       <section class="section notes-band">
         <div class="container notes">
+          {hub.forWho && (
+            <div class="note">
+              <span class="note__icon"><Icon name="store" size={18} /></span>
+              <div>
+                <h2 class="note__title">Voor wie</h2>
+                <p>{hub.forWho}</p>
+              </div>
+            </div>
+          )}
           {hub.requirement && (
             <div class="note">
               <span class="note__icon"><Icon name="badge-check" size={18} /></span>
@@ -242,12 +275,52 @@ const jsonLd = [
     )
   }
 
-  <CtaSection />
+  {hub.faqs && hub.faqs.length > 0 && <Faq items={hub.faqs} title={`Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
+
+  <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
 </BaseLayout>
 
 <style>
   .page-hero :global(.badge) {
     margin-bottom: var(--space-4);
+  }
+
+  /* Staging-only marker on held pages */
+  .held-banner {
+    background: var(--warning-soft);
+    color: var(--orange-800);
+    border-bottom: 1px solid var(--orange-300);
+    font-size: 0.875rem;
+    padding: 10px 0;
+  }
+
+  /* "Herkenbaar?": the customer's own sentences */
+  .symptoms {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .symptom {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: var(--text-strong);
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--orange-600);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .symptom :global(.symptom__mark) {
+    flex: none;
+    margin-top: 4px;
+    color: var(--orange-600);
   }
 
   /* Problem → answer */

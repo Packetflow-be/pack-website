@@ -15,8 +15,11 @@ import { url } from "@/lib/url";
 // clients can reach Louis. Replaces the old /prijzen and /tarieven pages: no
 // amounts are published, by decision (2026-09-23). The wording follows the
 // client-facing service terms and description in the vault (pf-service-terms,
-// pf-service-description). Those are still drafts pending a legal read, so
-// only the settled parts are here: the model, the hours, the term and notice.
+// pf-service-description). pf-service-terms is approved (Louis, 2026-10-21;
+// no lawyer read yet). Here: the model, the hours, the response, the leave
+// line, the term, notice and exit, and the yearly price adjustment. The
+// daytime urgent callback stays in the quote, not on the site (no daytime
+// promise in public copy).
 
 const crumbs: [string, string][] = [
   ["Home", "/"],
@@ -66,12 +69,12 @@ const faqs = [
   {
     question: "Wat als ik wil stoppen?",
     answer:
-      "U zegt per mail op, met één maand opzeg. Uw Microsoft 365-omgeving en uw gegevens staan op uw naam en de documentatie heeft u al. Ik help bij een nette overdracht naar wie na mij komt.",
+      "U zegt per mail op, met één maand opzeg. Uw Microsoft 365-omgeving en uw gegevens staan op uw naam en de documentatie heeft u al. Binnen de opzegtermijn krijgt u op vraag een export van uw back-ups en de documentatie van uw omgeving, en ik help bij een nette overdracht naar wie na mij komt.",
   },
   {
     question: "Wat als u op verlof bent?",
     answer:
-      "Verlof kondig ik minstens twee weken vooraf aan. In die periode volg ik geen meldingen op, maar de bewaking van uw toestellen en accounts en uw back-ups blijven gewoon lopen. Meldingen die binnenkomen, bevestig ik op de eerste werkdag erna.",
+      "Verlof kondig ik minstens twee weken vooraf aan. In die periode nemen vaste collega's de opvolging over, binnen dezelfde uren en met toegang tot de documentatie van uw omgeving. De bewaking van uw toestellen en accounts en uw back-ups blijven gewoon lopen.",
   },
 ];
 
@@ -168,6 +171,7 @@ const jsonLd = [breadcrumbs(crumbs), faqPage(faqs)];
           <li><span class="check"><Icon name="check" size={14} /></span><span>Geen minimale looptijd: een beheercontract loopt per maand.</span></li>
           <li><span class="check"><Icon name="check" size={14} /></span><span>Opzeggen kan per mail, met één maand opzeg.</span></li>
           <li><span class="check"><Icon name="check" size={14} /></span><span>De overname is een apart project, dus u hoeft nergens aan vast te zitten om die terug te verdienen.</span></li>
+          <li><span class="check"><Icon name="check" size={14} /></span><span>De maandprijzen kunnen één keer per jaar aangepast worden, met minstens twee maanden kennisgeving. Prijsverhogingen van leveranciers, zoals Microsoft-licenties, hoort u minstens een maand vooraf, zodat u altijd kunt opzeggen voor ze ingaan.</span></li>
           <li><span class="check"><Icon name="check" size={14} /></span><span>Wat een dienst inhoudt, staat per dienst beschreven in de bijlage bij de offerte.</span></li>
         </ul>
       </Card>
