@@ -146,6 +146,11 @@ const formId = `lead-form-${source}`;
         // response is opaque. We optimistically show success; only a real
         // network failure rejects and reveals the error/mailto fallback.
         await fetch(endpoint, { method: "POST", mode: "no-cors", body: data });
+        // GA4 lead event, only when the visitor consented (gtag exists only
+        // then) and only after a real submission, never on the honeypot path.
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", { form: "blog", lead_source: source, campaign });
+        }
         showSuccess();
       } catch (err) {
         console.error("Lead-formulier versturen mislukt:", err);

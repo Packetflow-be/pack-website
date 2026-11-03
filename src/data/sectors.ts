@@ -259,7 +259,7 @@ export const sectors: Sector[] = [
       "Een netwerk dat seizoenspieken en volle zalen aankan.",
       "Na de installatie bewaakt met Packetflow Network.",
     ],
-    serviceSlugs: ["zakelijke-wifi-netwerken", "it-beheer-support"],
+    serviceSlugs: ["altijd-online", "zakelijke-wifi-netwerken", "it-beheer-support"],
     localSlugs: ["wifi-installatie-horeca-jabbeke", "gastennetwerk-bnb-brugse-ommeland"],
     faqs: [
       {

@@ -161,6 +161,11 @@ const odooEndpoint = `${site.odooBaseUrl}/website/form/crm.lead`;
         // (On Odoo.sh/self-hosted you can install packetflow_form_cors and
         // switch to a normal fetch to verify the response — see odoo/ in repo.)
         await fetch(endpoint, { method: "POST", mode: "no-cors", body: data });
+        // GA4 lead event, only when the visitor consented (gtag exists only
+        // then) and only after a real submission, never on the honeypot path.
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", { form: "contact" });
+        }
         showSuccess();
       } catch (err) {
         console.error("Contactformulier versturen mislukt:", err);
