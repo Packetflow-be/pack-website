@@ -83,7 +83,7 @@ export const praktijkZonderStilstand: OfferSection = {
     },
     {
       title: "Werken na de praktijkuren",
-      body: "'s Avonds of op zaterdag, als de wachtzaal leeg is.",
+      body: "Op een moment dat de praktijk dicht is: 's avonds of op zaterdag.",
     },
     {
       title: "Opvolging",

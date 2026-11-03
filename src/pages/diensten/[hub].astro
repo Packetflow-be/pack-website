@@ -122,8 +122,6 @@ const jsonLd = [
     </div>
   </section>
 
-  {offer && <OfferSection offer={offer} />}
-
   {
     hub.services && hub.services.length > 0 && (
       <section class="section">
@@ -241,6 +239,8 @@ const jsonLd = [
       </section>
     )
   }
+
+  {offer && <OfferSection offer={offer} />}
 
   {
     hub.locals.length > 0 && (

@@ -132,13 +132,15 @@ const jsonLd = [
   {
     sector.offerTeaser && (
       <section class="section offer-teaser">
-        <div class="container offer-teaser__in">
+        <div class="container">
           {sector.offerTeaser.offer.held && (
             <p class="offer-teaser__held">Concept, alleen op staging</p>
           )}
-          <Kicker>{sector.offerTeaser.offer.kicker}</Kicker>
-          <h2>{sector.offerTeaser.offer.title}</h2>
-          <p class="lead">{sector.offerTeaser.offer.intro}</p>
+          <div class="section-head offer-teaser__head">
+            <Kicker>{sector.offerTeaser.offer.kicker}</Kicker>
+            <h2>{sector.offerTeaser.offer.title}</h2>
+            <p class="lead">{sector.offerTeaser.offer.intro}</p>
+          </div>
           <div class="offer-teaser__actions">
             <Button href={`/diensten/${sector.offerTeaser.hubSlug}#${sector.offerTeaser.offer.id}`} variant="primary" iconRight="arrow-right">
               Zo werkt het
@@ -309,15 +311,12 @@ const jsonLd = [
     border-top: 3px solid var(--orange-600);
     border-bottom: 1px solid var(--border-soft);
   }
-  .offer-teaser__in {
-    max-width: var(--container-md);
-  }
-  .offer-teaser__in .lead {
-    margin-top: var(--space-4);
+  .offer-teaser__head .lead {
     max-width: 62ch;
   }
   .offer-teaser__held {
-    display: inline-block;
+    display: block;
+    width: fit-content;
     margin: 0 0 var(--space-4);
     padding: 6px 12px;
     border-radius: 999px;
