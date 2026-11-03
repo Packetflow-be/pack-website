@@ -108,7 +108,8 @@ export type ServiceHub = {
 // workflow pins SITE_URL; staging builds on GitHub Pages use their own
 // origin). Held hubs are dropped there, so no route, nav item, footer link or
 // sitemap entry exists for them on the live site.
-export const isProductionBuild = (import.meta.env.SITE ?? "").includes("www.packetflow.be");
+// Fails closed: a build that does not know its site counts as production.
+export const isProductionBuild = (import.meta.env.SITE ?? "https://www.packetflow.be").includes("www.packetflow.be");
 
 // The four steps every solution follows. Individual hubs override the third
 // step, where the actual work differs.
