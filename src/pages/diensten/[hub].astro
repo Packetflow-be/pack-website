@@ -204,7 +204,13 @@ const jsonLd = [
               <span class="note__icon"><Icon name="scale" size={18} /></span>
               <div>
                 <h2 class="note__title">{isBeheer ? "Wat er niet in zit" : "Eerlijk gezegd"}</h2>
-                <p>{hub.limits}</p>
+                {Array.isArray(hub.limits) ? (
+                  <ul class="note__list">
+                    {hub.limits.map((line) => <li>{line}</li>)}
+                  </ul>
+                ) : (
+                  <p>{hub.limits}</p>
+                )}
               </div>
             </div>
           )}
@@ -293,6 +299,22 @@ const jsonLd = [
     )
   }
 
+  {
+    hub.sources && hub.sources.length > 0 && (
+      <div class="container sources">
+        <p>
+          Bronnen:{" "}
+          {hub.sources.map((src, i) => (
+            <>
+              {i > 0 && " · "}
+              <a href={src.href} rel="noopener" target="_blank">{src.label}</a>
+            </>
+          ))}
+        </p>
+      </div>
+    )
+  }
+
   {pageFaqs.length > 0 && <Faq items={pageFaqs} title={named ? `Vragen over ${hub.navTitle}` : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" />}
 
   <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
@@ -301,6 +323,24 @@ const jsonLd = [
 <style>
   .page-hero :global(.badge) {
     margin-bottom: var(--space-4);
+  }
+
+  /* "Eerlijk gezegd" as a list when a hub has several limits */
+  .note__list {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 6px;
+  }
+
+  /* Sources for the facts on the page */
+  .sources p {
+    margin: var(--space-6) 0 0;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+  .sources a {
+    color: var(--text-link);
   }
 
   /* Staging-only marker on held pages */
