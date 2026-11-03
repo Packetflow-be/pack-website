@@ -101,15 +101,17 @@ export type ServiceHub = {
    * the vault (ref-website-copy) holds. Remove the flag to go live.
    */
   held?: boolean;
+  /** A named offer rendered as its own section after the features. */
+  offer?: OfferSection;
   locals: LocalPage[];
 };
 
-// Production is the build whose site is www.packetflow.be (the deploy
-// workflow pins SITE_URL; staging builds on GitHub Pages use their own
-// origin). Held hubs are dropped there, so no route, nav item, footer link or
-// sitemap entry exists for them on the live site.
-// Fails closed: a build that does not know its site counts as production.
-export const isProductionBuild = (import.meta.env.SITE ?? "https://www.packetflow.be").includes("www.packetflow.be");
+// Held hubs are dropped from production builds (src/lib/build.ts), so no
+// route, nav item, footer link or sitemap entry exists for them on the live
+// site.
+import { isProductionBuild } from "@/lib/build";
+import { praktijkZonderStilstand, type OfferSection } from "@/data/offers";
+export { isProductionBuild };
 
 // The four steps every solution follows. Individual hubs override the third
 // step, where the actual work differs.
@@ -422,6 +424,8 @@ const allServices: ServiceHub[] = [
   },
   {
     slug: "cloud-backup-beveiliging",
+    // Praktijk zonder stilstand (held section, vault: ref-website-copy 3a).
+    offer: praktijkZonderStilstand,
     navTitle: "Beveiliging & back-up",
     title: "Beveilig de praktijk",
     metaTitle: "Beveiliging en back-up voor praktijken en kantoren",

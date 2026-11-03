@@ -12,9 +12,16 @@
 //   - /sectoren                 -> overview of all sectors
 //   - /sectoren/[sector]        -> a sector hub
 
+import { showHeld } from "@/lib/build";
+import { praktijkZonderStilstand, praktijkSectorAdditions, type OfferSection } from "@/data/offers";
+
 export type Sector = {
   slug: string; // -> /sectoren/<slug>
   navTitle: string;
+  /** SEO <title> when it should differ from navTitle. */
+  metaTitle?: string;
+  /** A named offer that lives on a service hub: shown here as a short teaser. */
+  offerTeaser?: { offer: OfferSection; hubSlug: string };
   title: string;
   icon: string; // Lucide icon name
   tagline: string;
@@ -331,4 +338,20 @@ export const sectors: Sector[] = [
 
 export function getSector(slug: string): Sector | undefined {
   return sectors.find((s) => s.slug === slug);
+}
+
+// Praktijk zonder stilstand (vault: ref-website-copy 3b): held additions to
+// the medical sector page, merged only in builds that may show them.
+if (showHeld(praktijkZonderStilstand.held)) {
+  const med = sectors.find((x) => x.slug === "medische-praktijken");
+  if (med) {
+    const a = praktijkSectorAdditions;
+    med.metaTitle = a.metaTitle;
+    med.metaDescription = a.metaDescription;
+    med.pains = [...med.pains, a.pain];
+    med.approach = [...med.approach, ...a.approach];
+    med.serviceSlugs = [...med.serviceSlugs, a.serviceSlug];
+    med.faqs = [...(med.faqs ?? []), ...a.faqs];
+    med.offerTeaser = { offer: praktijkZonderStilstand, hubSlug: "cloud-backup-beveiliging" };
+  }
 }
