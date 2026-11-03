@@ -1,0 +1,684 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CtaSection from "@/components/CtaSection.astro";
+import Card from "@/components/Card.astro";
+import Badge from "@/components/Badge.astro";
+import Kicker from "@/components/Kicker.astro";
+import Icon from "@/components/Icon.astro";
+import Button from "@/components/Button.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Faq from "@/components/Faq.astro";
+import OfferSection from "@/components/OfferSection.astro";
+import { showHeld } from "@/lib/build";
+import { services, hubName, type ServiceHub } from "@/data/services";
+import { site } from "@/data/site";
+import { service, breadcrumbs, faqPage } from "@/lib/schema";
+import { url } from "@/lib/url";
+
+interface Props {
+  hub: ServiceHub;
+  /** Breadcrumb trail; defaults to Home / Diensten / <hub>. */
+  crumbs?: [string, string][];
+}
+const { hub } = Astro.props;
+const isBeheer = hub.slug === "it-beheer-support";
+// Named offer pages (N1, N3, ...) carry a kicker and lead with the customer's
+// own sentences in the hero; the older hubs keep their problem block.
+const named = Boolean(hub.kicker);
+const heroQuotes = (hub.symptoms?.length ?? 0) > 0;
+const showProblem = !(heroQuotes && !hub.problem.body);
+const offer = hub.offer && showHeld(hub.offer.held) ? hub.offer : undefined;
+// One FAQ block per page: the hub's own questions, then the offer's.
+const pageFaqs = [...(hub.faqs ?? []), ...(offer?.faqs ?? [])];
+
+const crumbs: [string, string][] = Astro.props.crumbs ?? [
+  ["Home", "/"],
+  ["Diensten", "/diensten"],
+  [hub.navTitle, `/diensten/${hub.slug}`],
+];
+// Related hubs that exist in this build (held hubs are absent in production,
+// so a link to them never appears there).
+const related = (hub.related ?? [])
+  .map((slug) => services.find((h) => h.slug === slug))
+  .filter((h): h is ServiceHub => Boolean(h));
+
+const jsonLd = [
+  service({ name: hub.solution, description: hub.description, serviceType: hub.navTitle }),
+  breadcrumbs(crumbs),
+  ...(pageFaqs.length > 0 ? [faqPage(pageFaqs)] : []),
+];
+---
+
+<BaseLayout title={hub.metaTitle ?? hub.title} description={hub.metaDescription ?? hub.description} jsonLd={jsonLd}>
+  {
+    hub.held && (
+      <div class="held-banner" role="note">
+        <div class="container">
+          <strong>Concept, alleen op staging.</strong> Deze pagina staat nog niet op packetflow.be: ze gaat live zodra haar publicatievoorwaarde in de vault vervuld is.
+        </div>
+      </div>
+    )
+  }
+  <section class="page-hero">
+    <div class={`container page-hero__in ${heroQuotes ? "hero-split" : ""}`}>
+      <div class="hero-split__main">
+        <Breadcrumbs items={crumbs} />
+        {hub.kicker ? <Kicker>{hub.kicker}</Kicker> : <Badge tone="blue">{hub.audience}</Badge>}
+        <h1>{hub.title}</h1>
+        <p class="lead page-hero__lead">{hub.tagline}</p>
+        <div class="page-hero__actions">
+          <Button href="/contact" variant="primary" iconRight="arrow-right">Plan een kennismaking</Button>
+          <Button href="/werkwijze" variant="secondary">Hoe ik werk</Button>
+        </div>
+      </div>
+      {
+        heroQuotes && (
+          <aside class="hero-quotes" aria-labelledby="herkenbaar">
+            <p class="hero-quotes__title" id="herkenbaar">Herkenbaar?</p>
+            <ul class="symptoms">
+              {hub.symptoms!.map((line) => (
+                <li class="symptom">
+                  <Icon name="quote" size={16} class="symptom__mark" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
+    </div>
+  </section>
+
+  {/* The problem, then the answer */}
+  {showProblem && (
+  <section class="section">
+    <div class="container problem">
+      <div>
+        <Kicker>Het probleem</Kicker>
+        <h2 class="problem__title">{hub.problem.title}</h2>
+        {hub.problem.body && <p class="problem__body">{hub.problem.body}</p>}
+      </div>
+      <div class="problem__answer">
+        <Kicker>{isBeheer ? "Wat Packetflow Beheer doet" : hub.solution}</Kicker>
+        <p>{hub.description}</p>
+      </div>
+    </div>
+  </section>
+  )}
+
+  <section class="section band">
+    <div class="container">
+      <div class="section-head">
+        <Kicker>{isBeheer ? "Altijd inbegrepen" : named ? hub.solution : "Wat ik voor u doe"}</Kicker>
+        <h2>{isBeheer ? "Wat er in elk beheercontract zit" : named ? "Wat u krijgt" : "Wat erin zit"}</h2>
+      </div>
+      <div class={`grid-cards ${hub.features.length >= 5 ? "grid-cards--3" : ""}`}>
+        {
+          hub.features.map((f) => (
+            <Card class="feature">
+              <span class="feature__icon"><Icon name={f.icon} size={20} /></span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    hub.story && (
+      <section class="section story">
+        <div class="container">
+          <div class="story__in">
+            <div class="section-head">
+              <Kicker>{hub.story.kicker}</Kicker>
+              <h2>{hub.story.title}</h2>
+            </div>
+            {hub.story.paragraphs.map((para) => <p class="story__p">{para}</p>)}
+            <p class="story__sign">Louis</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    hub.services && hub.services.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <Kicker>Diensten</Kicker>
+            <h2>Uit welke diensten u kiest</h2>
+            <p>
+              Elke dienst hoort bij één eenheid die u zelf kan tellen, en u betaalt per
+              eenheid per maand. Sommige diensten hebben twee plannen: BASIS houdt alles
+              draaiende en veilig, COMPLEET heeft daarnaast de vaste lijst aanvragen
+              inbegrepen. De prijzen staan in de offerte.
+            </p>
+          </div>
+          <ul class="svc-list">
+            {hub.services.map((s) => (
+              <li class="svc-item">
+                <div class="svc-item__head">
+                  <h3 class="svc-item__name">{s.name}</h3>
+                  <span class="svc-item__unit">{s.unit}</span>
+                </div>
+                <p class="svc-item__body">{s.body}</p>
+                {s.note && <p class="svc-item__note">{s.note}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    hub.steps && hub.steps.length > 0 && (
+      <section class={`section ${hub.services ? "band" : ""}`}>
+        <div class="container">
+          <div class="section-head">
+            <Kicker>Zo verloopt het</Kicker>
+            <h2>{named ? "Hoe het werkt" : "Van eerste gesprek tot beheer"}</h2>
+          </div>
+          <ol class="steps steps--4">
+            {hub.steps.map((step, i) => (
+              <li class="step">
+                <span class="step__num">{i + 1}</span>
+                <div>
+                  <h3 class="step__title">{step.title}</h3>
+                  <p class="step__body">{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    (hub.forWho || hub.requirement || hub.limits || hub.ongoing) && (
+      <section class="section notes-band">
+        <div class="container notes">
+          {hub.forWho && (
+            <div class="note">
+              <span class="note__icon"><Icon name="users" size={18} /></span>
+              <div>
+                <h2 class="note__title">Voor wie</h2>
+                <p>{hub.forWho}</p>
+              </div>
+            </div>
+          )}
+          {hub.requirement && (
+            <div class="note">
+              <span class="note__icon"><Icon name="badge-check" size={18} /></span>
+              <div>
+                <h2 class="note__title">Goed om te weten</h2>
+                <p>{hub.requirement}</p>
+              </div>
+            </div>
+          )}
+          {hub.limits && (
+            <div class="note">
+              <span class="note__icon"><Icon name="scale" size={18} /></span>
+              <div>
+                <h2 class="note__title">{isBeheer ? "Wat er niet in zit" : "Eerlijk gezegd"}</h2>
+                {Array.isArray(hub.limits) ? (
+                  <ul class="note__list">
+                    {hub.limits.map((line) => <li>{line}</li>)}
+                  </ul>
+                ) : (
+                  <p>{hub.limits}</p>
+                )}
+              </div>
+            </div>
+          )}
+          {hub.ongoing && (
+            <div class="note">
+              <span class="note__icon"><Icon name="radar" size={18} /></span>
+              <div>
+                <h2 class="note__title">Na de oplevering</h2>
+                <p>
+                  {hub.ongoing}{" "}
+                  <a href={url("/diensten/it-beheer-support")} class="text-link">Meer over het beheer</a>.
+                </p>
+              </div>
+            </div>
+          )}
+          {isBeheer && (
+            <div class="note">
+              <span class="note__icon"><Icon name="clock" size={18} /></span>
+              <div>
+                <h2 class="note__title">Wanneer u mij bereikt</h2>
+                <p>
+                  Klanten mailen naar <a href={`mailto:${site.supportEmail}`} class="text-link">{site.supportEmail}</a>.
+                  Elke melding wordt uiterlijk de volgende werkdag bevestigd, en ik werk
+                  {" "}{site.hours.phrase} ({site.hours.label}). Toestellen en
+                  Microsoft 365-accounts worden intussen dag en nacht bewaakt.{" "}
+                  <a href={url("/werkwijze")} class="text-link">Alles over de werkwijze</a>.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    related.length > 0 && (
+      <section class="section related">
+        <div class="container">
+          <div class="section-head">
+            <Kicker>Verwante oplossingen</Kicker>
+            <h2>Misschien zoekt u dit</h2>
+          </div>
+          <div class={`grid-cards ${related.length >= 3 ? "grid-cards--3" : ""}`}>
+            {related.map((r) => (
+              <a href={url(`/diensten/${r.slug}`)} class="related-link">
+                <Card class="feature">
+                  <span class="feature__icon"><Icon name={r.icon} size={20} /></span>
+                  <h3>{hubName(r)}</h3>
+                  <p>{r.relatedLine ?? r.tagline}</p>
+                  <span class="related-link__more">Lees meer <Icon name="arrow-right" size={15} /></span>
+                </Card>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {offer && <OfferSection offer={offer} />}
+
+  {
+    hub.locals.length > 0 && (
+      <section class="section band">
+        <div class="container">
+          <div class="section-head">
+            <Kicker>In uw regio</Kicker>
+            <h2>{hub.navTitle} dichtbij</h2>
+            <p>Lokale aanpak met een vast aanspreekpunt. Bekijk de pagina voor uw gemeente of regio.</p>
+          </div>
+          <div class="grid-cards">
+            {hub.locals.map((local) => (
+              <a href={url(`/${local.slug}`)} class="local-link">
+                <Card class="feature">
+                  <span class="feature__icon"><Icon name={local.icon} size={20} /></span>
+                  <h3>{local.title}</h3>
+                  <p>{local.intro}</p>
+                  <span class="local-link__more">Lees meer <Icon name="arrow-right" size={15} /></span>
+                </Card>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    hub.reading && hub.reading.length > 0 && (
+      <section class={`section ${hub.locals.length > 0 ? "" : "band"}`}>
+        <div class="container">
+          <div class="section-head">
+            <Kicker>Uit de blog</Kicker>
+            <h2>Verder lezen</h2>
+          </div>
+          <div class="grid-cards">
+            {hub.reading.map((r) => (
+              <a href={url(r.href)} class="reading-link">
+                <Card class="feature">
+                  <span class="feature__icon"><Icon name="book-open" size={20} /></span>
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
+                  <span class="reading-link__more">Lees het artikel <Icon name="arrow-right" size={15} /></span>
+                </Card>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {pageFaqs.length > 0 && <Faq items={pageFaqs} title={named ? "Veelgestelde vragen" : `Vragen over ${hub.navTitle.toLowerCase()}`} kicker="Vragen" sources={hub.sources} />}
+
+  <CtaSection title={hub.cta?.title} body={hub.cta?.body} />
+</BaseLayout>
+
+<style>
+  .page-hero :global(.badge) {
+    margin-bottom: var(--space-4);
+  }
+
+  /* The story behind the work (editorial, one column) */
+  .story {
+    background: var(--paper);
+    border-block: 1px solid var(--border-soft);
+  }
+  .story__in {
+    max-width: 68ch;
+    padding-left: var(--space-6);
+    border-left: 3px solid var(--orange-600);
+  }
+  .story__p {
+    font-family: var(--font-serif);
+    font-size: 1.1875rem;
+    line-height: 1.65;
+    color: var(--text-strong);
+    margin: 0 0 var(--space-4);
+  }
+  .story__sign {
+    margin: var(--space-5) 0 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .story__sign::before {
+    content: "\2014\00a0";
+  }
+
+  /* Related hubs */
+  .related-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .related-link :global(.feature) {
+    height: 100%;
+    transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .related-link:hover :global(.feature) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .related-link__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    color: var(--orange-800);
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  /* "Eerlijk gezegd" as a list when a hub has several limits */
+  .note__list {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 6px;
+  }
+
+  /* Staging-only marker on held pages */
+  .held-banner {
+    background: var(--warning-soft);
+    color: var(--orange-800);
+    border-bottom: 1px solid var(--orange-300);
+    font-size: 0.875rem;
+    padding: 10px 0;
+  }
+
+  /* Hero with the customer's own sentences beside it */
+  .hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+  .hero-quotes {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--orange-600);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6);
+  }
+  .hero-quotes__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  /* "Herkenbaar?": the customer's own sentences */
+  .symptoms {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+  .symptom {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    line-height: 1.45;
+    color: var(--text-strong);
+  }
+
+  /* Five or six features: three across on wide screens. A six-track grid
+     lets a short last row stretch instead of leaving a hole (5 = 3 + 2). */
+  .grid-cards--3 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid-cards--3 > :global(*) {
+    grid-column: span 2;
+  }
+  .grid-cards--3 > :global(*:nth-child(3n + 1):nth-last-child(2)),
+  .grid-cards--3 > :global(*:nth-child(3n + 2):last-child) {
+    grid-column: span 3;
+  }
+  .grid-cards--3 > :global(*:nth-child(3n + 1):last-child) {
+    grid-column: 1 / -1;
+  }
+  @media (max-width: 1100px) {
+    .grid-cards--3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-cards--3 > :global(*),
+    .grid-cards--3 > :global(*:nth-child(3n + 1):nth-last-child(2)),
+    .grid-cards--3 > :global(*:nth-child(3n + 2):last-child),
+    .grid-cards--3 > :global(*:nth-child(3n + 1):last-child) {
+      grid-column: auto;
+    }
+    .grid-cards--3 > :global(*:nth-child(odd):last-child) {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 880px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    .grid-cards--3 {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    .grid-cards--3 > :global(*:nth-child(odd):last-child) {
+      grid-column: auto;
+    }
+    /* Compact on phones: icon beside the title, text under the title. */
+    .grid-cards--3 > :global(.feature) {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      column-gap: 14px;
+      row-gap: 4px;
+      align-items: center;
+      padding: 18px;
+    }
+    .grid-cards--3 > :global(.feature) :global(.feature__icon) {
+      width: 40px;
+      height: 40px;
+      grid-row: span 1;
+    }
+    .grid-cards--3 > :global(.feature) :global(p) {
+      grid-column: 2;
+      margin: 0;
+    }
+  }
+  .symptom :global(.symptom__mark) {
+    flex: none;
+    margin-top: 4px;
+    color: var(--orange-600);
+  }
+
+  /* Problem → answer */
+  .problem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .problem__title {
+    font-size: var(--text-2xl);
+    margin: var(--space-3) 0 var(--space-4);
+  }
+  .problem__body {
+    color: var(--text-body);
+    line-height: var(--leading-relaxed);
+  }
+  .problem__answer {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--orange-500);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  .problem__answer p {
+    margin-top: var(--space-4);
+    color: var(--text-body);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Managed services list */
+  .svc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+  .svc-item {
+    padding: var(--space-5);
+    background: var(--surface-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+  }
+  .svc-item__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .svc-item__name {
+    font-size: var(--text-md);
+    margin: 0;
+  }
+  .svc-item__unit {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    color: var(--blue-700);
+    background: var(--blue-50);
+    border-radius: var(--radius-pill);
+    padding: 2px 10px;
+  }
+  .svc-item__body {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+  .svc-item__note {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  /* Notes: requirement, limits, what keeps it running. Always follows a
+     cream section (the services list or the steps), so it needs no top
+     padding of its own. */
+  .notes-band {
+    padding-top: 0;
+  }
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    align-items: start;
+    gap: var(--space-5);
+  }
+  .note {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    background: var(--paper);
+  }
+  .note__icon {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--orange-50);
+    color: var(--orange-700);
+    display: grid;
+    place-content: center;
+  }
+  .note__title {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    margin: 4px 0 6px;
+  }
+  .note p {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+
+  .local-link,
+  .reading-link {
+    display: block;
+  }
+  .local-link :global(.card),
+  .reading-link :global(.card) {
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+  .local-link:hover :global(.card),
+  .reading-link:hover :global(.card) {
+    border-color: var(--orange-300);
+    box-shadow: var(--shadow-md);
+  }
+  .local-link__more,
+  .reading-link__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-sm);
+    font-weight: var(--fw-medium);
+    color: var(--primary);
+  }
+
+  /* keep in sync with --container-md in global.css */
+  @media (max-width: 880px) {
+    .problem,
+    .svc-list,
+    .notes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

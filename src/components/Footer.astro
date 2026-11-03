@@ -2,6 +2,8 @@
 import { site } from "@/data/site";
 import { services, hubName } from "@/data/services";
 import { sectors } from "@/data/sectors";
+import { itFirmsPage } from "@/data/itfirms";
+import { showHeld } from "@/lib/build";
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
 import { url } from "@/lib/url";
@@ -50,6 +52,11 @@ const locals = services.flatMap((hub) => hub.locals);
             <a href={url(`/sectoren/${s.slug}`)}>{s.navTitle}</a>
           </li>
         ))}
+        {showHeld(itFirmsPage.held) && (
+          <li>
+            <a href={url(`/${itFirmsPage.slug}`)}>{itFirmsPage.navTitle}</a>
+          </li>
+        )}
       </ul>
     </nav>
 
