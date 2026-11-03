@@ -1,7 +1,8 @@
 # 301 redirect map for the Odoo → Astro migration.
-# Format: Netlify / Cloudflare Pages `_redirects`. The trailing `301!` forces
-# the redirect even if a file exists. Old paths below are the real indexed
-# Odoo URLs from Google Search Console (Pages export).
+# Format: Cloudflare Pages `_redirects`. Use a plain `301`: Cloudflare Pages
+# does not accept Netlify's forced `301!` and silently drops that rule (this is
+# why /pakket returned 404 until 2026-11-03). Old paths below are the real
+# indexed Odoo URLs from Google Search Console (Pages export).
 #
 # LAUNCH BLOCKER (only relevant once the site moves to packetflow.be): without
 # these, the ranking + backlink equity of the old URLs is lost.
@@ -11,7 +12,7 @@
 # is why /kmo-pakket stopped redirecting). Keep annotations above the rule.
 
 # ---- Canonical host: keep www (the host Odoo ranks on), 301 the apex ----
-https://packetflow.be/*   https://www.packetflow.be/:splat   301!
+https://packetflow.be/*   https://www.packetflow.be/:splat   301
 
 # ---- Old Odoo paths → new equivalents (from GSC) ----
 # /diensten/it-beheer — 493 impressions
@@ -20,7 +21,7 @@ https://packetflow.be/*   https://www.packetflow.be/:splat   301!
 # /prijzen page are both retired: no prices are published (2026-09-23). The
 # page that explains how a price is built is /werkwijze.
 /kmo-pakket                /werkwijze                            301
-/pakket                    /werkwijze                            301!
+/pakket                    /werkwijze                            301
 /diensten/wifi-netwerk     /diensten/zakelijke-wifi-netwerken    301
 /sectoren/vrije-beroepen   /sectoren/kantoren-vrije-beroepen     301
 /contactus                 /contact                              301

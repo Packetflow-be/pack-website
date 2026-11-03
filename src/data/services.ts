@@ -1085,6 +1085,21 @@ const allServices: ServiceHub[] = [
 /** The hubs this build publishes: held hubs only outside production. */
 export const services: ServiceHub[] = allServices.filter((hub) => !hub.held || !isProductionBuild);
 
+// Search Console (Aug-Oct 2026): "internet installatie restaurant" and similar
+// horeca internet queries land on the horeca wifi page at top positions. Once
+// Altijd online is live in this build, that page's one cross-reference points
+// there instead of the kassanetwerk blog post.
+if (services.some((h) => h.slug === "altijd-online")) {
+  const horeca = allServices.flatMap((h) => h.locals).find((l) => l.slug === "wifi-installatie-horeca-jabbeke");
+  if (horeca) {
+    horeca.related = {
+      href: "/diensten/altijd-online",
+      title: "Altijd online",
+      body: "Valt uw internet weg, dan neemt 4G of 5G vanzelf over. Uw kassa en betaalterminal werken door.",
+    };
+  }
+}
+
 /** How lists name a hub: the solution name for named offer pages (whose H1
  * is a sentence), the title for the older hubs. */
 export function hubName(hub: ServiceHub): string {
