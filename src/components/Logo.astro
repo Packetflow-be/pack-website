@@ -1,24 +1,21 @@
 ---
 // Packetflow logo — blue square with a flowing cut + orange quarter,
-// optionally with the "Packetflow" wordmark and tagline. Geometry matches
+// optionally with the "Packetflow" wordmark (no tagline since 2026-11). Geometry matches
 // the official logo SVG from the design system.
 interface Props {
   variant?: "full" | "mark" | "wordmark";
   size?: number;
-  tagline?: boolean;
   onDark?: boolean;
   class?: string;
 }
 const {
   variant = "full",
   size = 30,
-  tagline = false,
   onDark = false,
   class: className,
 } = Astro.props;
 
 const wordColor = onDark ? "var(--cream)" : "var(--ink)";
-const tagColor = onDark ? "var(--grey-300)" : "var(--grey-500)";
 ---
 
 <span
@@ -46,14 +43,6 @@ const tagColor = onDark ? "var(--grey-300)" : "var(--grey-500)";
         >
           Packetflow
         </span>
-        {tagline && (
-          <span
-            class="logo-tag"
-            style={`font-size:${size * 0.3}px;color:${tagColor}`}
-          >
-            Uw partner in IT
-          </span>
-        )}
       </span>
     )
   }
@@ -76,11 +65,5 @@ const tagColor = onDark ? "var(--grey-300)" : "var(--grey-500)";
     font-family: var(--font-sans);
     font-weight: var(--fw-semibold);
     letter-spacing: -0.01em;
-  }
-  .logo-tag {
-    font-family: var(--font-sans);
-    font-weight: var(--fw-regular);
-    letter-spacing: 0.02em;
-    margin-top: 2px;
   }
 </style>
