@@ -8,8 +8,6 @@ export const site = {
   name: "Packetflow",
   legalName: "Packetflow",
   owner: "Louis Declerck",
-  // Wordmark lockup tagline from the design system.
-  tagline: "Uw partner in IT",
   // Keyword-bearing homepage <title> (message + geo). Inner pages use the
   // "{title} | Packetflow" pattern instead — see BaseLayout.
   homeTitle: "IT waar stilstand geld kost · West-Vlaanderen | Packetflow",
